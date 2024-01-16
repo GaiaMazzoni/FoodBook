@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="well">
-                <center><h1 style="color: white">FoodBook</h1></center>
+                <center><img src="images/logo.png" alt="FoodBook" class="img-rounded" title="FoodBook logo" width="25%" height="25%"></center>
             </div>
         </div>
     </div>
@@ -20,13 +20,13 @@
         <div class="col-sm-12">
             <div class="main-content">
                 <div class="header">
-                    <h3><strong>Log in using your username and password!</strong></h3>
+                    <h3><strong>Log in</strong></h3>
                 </div>
                 <div class="l-part">
                     <form action="" method="post">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                            <input type="text" class="form-control" placeholder="Username" name="user_name">
+                            <input type="text" class="form-control" placeholder="Email or username" name="user_name">
                         </div>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
