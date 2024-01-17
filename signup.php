@@ -13,7 +13,7 @@
             var confirm_password = document.getElementById("confirm_password");
 
             if(password.value != confirm_password.value) {
-                confirm_password.setCustomValidity("Le password non corrispondono");
+                confirm_password.setCustomValidity("Passwords doesn't match");
             } else {
                 confirm_password.setCustomValidity('');
             }
@@ -45,7 +45,7 @@
     #login {
         text-align: right;
         color: #1E90FF;
-        padding: 1%;
+        padding: 2%;
     }
     #login a {
         color: inherit; 
@@ -70,21 +70,25 @@
             <div class="col-sm-12 col-md-6">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    <input type="text" class="form-control" placeholder="First Name" name="first_name" required>
+                    <input type="text" class="form-control" placeholder="First Name" name="first_name" id="first_name" required>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="text" class="form-control" placeholder="Surname" name="surname" required>
+                    <input type="text" class="form-control" placeholder="Surname" name="surname" id="surname" required>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="text" class="form-control" placeholder="Username" name="username" required>
+                    <input type="text" class="form-control" placeholder="Username" name="username" id="username" required>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    <input type="text" class="form-control" placeholder="Email" name="email" id="email" required>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                    <input type="date" class="form-control" name="birth_date" required>
+                    <input type="date" class="form-control" name="birth_date" id="birth_date" required>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
@@ -103,6 +107,7 @@
                 ?>
             </div>
             <center><button type="submit" class="btn btn-info w-50" name="signup" id="signup">Sign Up</button></center>
+            <?php include("insert_user.php"); ?>
         </form>
     </div>
 </body>
