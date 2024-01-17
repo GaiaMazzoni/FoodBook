@@ -12,8 +12,6 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    echo "Connected successfully";
-
     // Perform your database operations here
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {

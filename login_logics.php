@@ -6,11 +6,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     if (check_login($usernameOrEmail, $password, $conn)) {
-        echo 'login successfull';
+        echo "<script>window.open('home.php','_self')</script>";
         exit;
     } else {
-        echo 'login unsuccesfull';
-        exit;
+        echo "Incorrect username or password";
     }
 }
 
