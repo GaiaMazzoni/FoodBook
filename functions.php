@@ -20,7 +20,7 @@
 
     function check_login($usernameOrEmail, $password, $mysqli){
         $stmt = $mysqli->prepare("SELECT Username FROM users WHERE Username=? OR E_mail=? AND Password=?");
-        $stmt->bind_param("sss",$usernameOrEmail, $usernameOrEmail, $password);
+        $stmt->bind_param("sss", $usernameOrEmail, $usernameOrEmail, $password);
         $stmt->execute();
         $stmt->store_result();
         if($stmt->num_rows > 0 ){
@@ -28,18 +28,17 @@
         }else{
             return false;
         }
-        $stmt->close();
     }
 
-    function get_all_posts_from_user($username, $mysqli){
-        $stmt = $mysqli->prepare("SELECT * FROM users WHERE Username=?");
+    function add_post($username, $text, $mysqli){
+        $stmt = $mysqli->prepare("SELECT max(IdPost) FROM post WHERE Username=?");
         $stmt->bind_param("s",$username);
-        $stmt->execute();
-        $stmt->store_result();
-        return $stmt;
+        $IdPost = $stmt->fetch_assoc()["max(IdPost)"] + 1;
+        $dateAndTime = date('Y-m-d H:i:s');
+        $stmt = $mysqli->prepare("INSERT INTO post (`Username`, `IdPost`, `DateAndTime`, `Text`) VALUES ('?', '?', '?', ?);");
+        $stmt->bind_param("sisb",$username,$IdPost,$dateAndTime,$text);
+        $stmt->execute;
     }
-
-    
     
     // Close connection
     function close_connection($conn) {
