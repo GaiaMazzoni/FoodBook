@@ -12,14 +12,9 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Perform your database operations here
-
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Get form data
         $usernameOrEmail = $_POST["username"];
         $password = $_POST["password"];
-    
-        // Call the check_login function
         check_login($usernameOrEmail, $password, $conn);
     }
 
@@ -35,6 +30,16 @@
         }
         $stmt->close();
     }
+
+    function get_all_posts_from_user($username, $mysqli){
+        $stmt = $mysqli->prepare("SELECT * FROM users WHERE Username=?");
+        $stmt->bind_param("s",$username);
+        $stmt->execute();
+        $stmt->store_result();
+        return $stmt;
+    }
+
+    
     
     // Close connection
     function close_connection($conn) {
