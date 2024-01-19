@@ -1,4 +1,7 @@
 <?php
+session_start();
+include("includes/connection.php");
+
 include 'functions.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -6,7 +9,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     if (check_login($usernameOrEmail, $password, $conn)) {
-        echo "<script>window.open('home.php','_self')</script>";
+        $_SESSION['Username'] = $usernameOrEmail;
+        header("Location: profile.php");
         exit;
     } else {
         echo "Incorrect username or password";
