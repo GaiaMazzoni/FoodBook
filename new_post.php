@@ -64,23 +64,25 @@
                     <button id="close" class="close_button" name="close">X</button>
                     <h1>New Post</h1>
                     <button id="next" class="next_button" name="next">Next</button>
+                    <input type="file" id="imageSelection" class="form-control" name="image" accept="image/*">
+                    <textarea id="description" class="form-control" name="description" placeholder="Enter your post description"></textarea>
+
                 </form>
             </div>
-
-            <form>
-                <input type="file" id="imageSelection" class="form-control" name="image" accept="image/*">
-                <textarea id="description" class="form-control" name="description" placeholder="Enter your post description"></textarea>
-            </form>
-
+                
             <?php
                 include 'functions.php';
+                include ("includes/connection.php");
+
+                session_start();
 
                 if(isset($_POST['close'])){
                     echo "<script>window.open('home.php','_self')</script>";
                 }
 
-                if(isset($_POST['next'])){
-                    add_post($username, $_POST['description'],$conn);
+                if(isset($_POST['next']) && isset($_POST['description']) ){
+                    add_post($_SESSION['Username'], $_POST['description'],$con);
+                    echo "<script>window.open('tag_selection.php','_self')</script>";
                 }
             ?>
 

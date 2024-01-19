@@ -8,8 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usernameOrEmail = $_POST["username"];
     $password = $_POST["password"];
 
-    if (check_login($usernameOrEmail, $password, $conn)) {
-        $_SESSION['Username'] = $usernameOrEmail;
+    if (check_login($usernameOrEmail, $password, $con)) {
         header("Location: profile.php");
         exit;
     } else {
@@ -17,5 +16,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-close_connection($conn);
+close_connection($con);
 ?>
