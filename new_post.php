@@ -80,8 +80,9 @@
                     echo "<script>window.open('home.php','_self')</script>";
                 }
 
-                if(isset($_POST['next']) && isset($_POST['description']) ){
-                    add_post($_SESSION['Username'], $_POST['description'],$con);
+                if(isset($_POST['next']) && isset($_POST['description']) && $_POST['description']!='' && isset($_POST['image'])){
+                    $_SESSION['Description']=$_POST['description'];
+                    $_SESSION['Image']=$_POST['image'];
                     echo "<script>window.open('tag_selection.php','_self')</script>";
                 }
             ?>

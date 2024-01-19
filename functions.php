@@ -27,7 +27,7 @@
         $IdPost = $stmt->get_result()->fetch_assoc()["max(IdPost)"] + 1;
         $dateAndTime = date('Y-m-d H:i:s');
         $stmt = $mysqli->prepare("INSERT INTO post (`Username`, `IdPost`, `DateAndTime`, `Text`) VALUES (?, ?, ?, ?);");
-        $stmt->bind_param("sisb",$username,$IdPost,$dateAndTime,$text);
+        $stmt->bind_param("siss",$username,$IdPost,$dateAndTime,$text);
         $stmt->execute();
     }
     
