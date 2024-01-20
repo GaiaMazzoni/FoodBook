@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <style>
-    body{
-        position: relative;
-    }
     button{
         background-color: #fccf00;
     }
@@ -16,15 +16,21 @@
         background-color: #4f0484;
         position: fixed;
         bottom: 0;
-        width: 100%;
+        width: 99.8%;
         height: 5%;
+        padding: 0.2%;
+        margin: 0.1%;
     }
 </style>
 <body>
     <form method="post">
-    <div id="bottom_banner" class="bottom-banner">
-        <button class="new_post_button" name="new_post_button">NewPost</button>
-        <button class="profile_button" name="profile_button">Profile</button>
+    <div id="bottom_banner" class="bottom-banner row">
+        <div class="col-xs-6 text-left">
+            <button class="new_post_button" name="new_post_button">NewPost</button>
+        </div>
+        <div class="col-xs-6 text-right">
+            <button class="profile_button" name="profile_button">Profile</button>
+        </div>
     </div>
     </form>
 

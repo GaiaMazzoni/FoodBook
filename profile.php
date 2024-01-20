@@ -48,31 +48,59 @@ $num_following = mysqli_num_rows($run_following);
 </head>
 </head>
 <style>
+body{
+    margin: 0.1%;
+}
 body > div{
-    margin:0.5%;
+    margin:0.2%;
 }
 #p_profile {
-    margin: 1%;
+    margin: 0.2%;
 }
 </style>
 <body>
-<div class="row">
-    <div class="col-md-6 col-sm-12">
-        <img src="images/<?php echo $profile_picture; ?>" class="img-fluid rounded-circle mb-3" id="p_profile" alt="Immagine Profilo" style="width: 200px; height: 200px; object-fit: cover;">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col text-right">
+            <button id="edit_profile" class="btn btn-primary mt-3">Edit Profile</button>
+            <button id="logout" class="btn btn-primary mt-3">Logout</button>
+        </div>
     </div>
-    <div class="col-md-6 col-sm-12">
-        <h3 class="card-title"><?php echo $first_name . " " . $surname; ?></h3>
-        <p class="text-muted">@<?php echo $user; ?></p>
-        <p class="card-text">
-            <strong>Email:</strong> <?php echo $email; ?><br>
-            <strong>Data di nascita:</strong> <?php echo $birth_date; ?><br>
-            <strong>Bio:</strong> <?php echo $bio; ?><br>
-            <?php echo $num_posts; ?>
-            <?php echo $num_follower; ?>
-            <?php echo $num_following; ?><br>
-        </p>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6 col-md-3">
+            <img src="images/<?php echo $profile_picture; ?>" class="img-fluid rounded-circle mb-3" id="p_profile" alt="Immagine Profilo" style="width: 200px; height: 200px; object-fit: cover;">
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <h3 class="card-title"><?php echo $first_name . " " . $surname; ?></h3>
+            <p class="text-muted">@<?php echo $user; ?></p>
+            <p class="card-text">
+                <strong>Email:</strong> <?php echo $email; ?><br>
+                <strong>Data di nascita:</strong> <?php echo $birth_date; ?><br>
+            </p>
+            <div class="row">
+                <div class="col-xs-4 text-center">
+                    <?php echo $num_posts; ?>
+                    <p>post</p>
+                </div>
+                <div class="col-xs-4 text-center">
+                    <?php echo $num_follower; ?>
+                    <p>follower</p>
+                </div>
+                <div class="col-xs-4 text-center">
+                    <?php echo $num_following; ?>
+                    <p>following</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <p class="card-text">
+                <strong>Bio:</strong> <?php echo $bio; ?><br>
+            </p>
+        </div>
+    </div>
     
-    </div>
 </div>
 </body>
 </html>

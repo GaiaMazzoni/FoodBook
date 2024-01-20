@@ -35,4 +35,12 @@
     function close_connection($con) {
         $con->close();
     }
+
+
+    function get_img_profile($con,$username) {
+        $img_query = "SELECT ProfilePicture FROM users WHERE Username='$username'";
+        $img_result = mysqli_query($con, $img_query);
+        $img_row = mysqli_fetch_assoc($img_result);
+        return $img_row['ProfilePicture'];
+    }
 ?>
