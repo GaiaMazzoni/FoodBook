@@ -2,7 +2,7 @@
 session_start();
 include("includes/header.php");
 include("includes/connection.php");
-include 'functions.php';
+
 if (!isset($_SESSION['Username'])) {
     header("Location: login.php");
     exit();
@@ -59,7 +59,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
 
             <?php foreach($search_results as $username): ?>
                 <?php
-                    $profile_pic = get_img_profile($con,$username);
+                    $img_query = "SELECT ProfilePicture FROM users WHERE Username='$username'";
+                    $img_result = mysqli_query($con, $img_query);
+                    $img_row = mysqli_fetch_assoc($img_result);
+                    $profile_pic = $img_row['ProfilePicture'];
                 ?>
                 <div class="alert alert-info">
                     <img src="images/<?php echo $profile_pic; ?>" class="img-fluid rounded-circle mb-3" id="p_profile" alt="Immagine Profilo">
