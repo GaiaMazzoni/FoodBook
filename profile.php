@@ -47,17 +47,18 @@ $num_following = mysqli_num_rows($run_following);
     <title><?php echo "$user Profile"; ?></title>
 </head>
 </head>
-<style>
-body{
-    margin: 0.1%;
-}
-body > div{
-    margin:0.2%;
-}
-#p_profile {
-    margin: 0.2%;
-}
-</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var logoutLink = document.getElementById('logout');
+    logoutLink.addEventListener('click', function(event) {
+        event.preventDefault();
+        var confirmLogout = confirm("Are you sure you want to log out?");
+        if (confirmLogout) {
+            window.location.href = 'logout.php';
+        }
+    });
+});
+</script>
 <body>
 <div class="container-fluid">
     <div class="row">

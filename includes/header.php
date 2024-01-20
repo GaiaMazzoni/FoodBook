@@ -18,12 +18,12 @@
         z-index: 1000;
         top: 0;
         width: 99.8%;
-        height: 5%;
+        height: 30px;
         padding: 0.2%;
         margin: 0.1%;
     }
     body {
-        padding-top: 5%;
+        padding-top: 32px;
     }
 </style>
 <body>

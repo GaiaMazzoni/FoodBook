@@ -17,7 +17,7 @@
         position: fixed;
         bottom: 0;
         width: 99.8%;
-        height: 5%;
+        height: 30px;
         padding: 0.2%;
         margin: 0.1%;
     }
