@@ -70,19 +70,19 @@
             <div class="col-sm-12 col-md-6">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    <input type="text" class="form-control" placeholder="First Name" name="first_name" id="first_name" required>
+                    <input type="text" class="form-control" placeholder="First Name" name="first_name" id="first_name" maxlength="20" required>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="text" class="form-control" placeholder="Surname" name="surname" id="surname" required>
+                    <input type="text" class="form-control" placeholder="Surname" name="surname" id="surname" maxlength="20" required>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="text" class="form-control" placeholder="Username" name="username" id="username" required>
+                    <input type="text" class="form-control" placeholder="Username" name="username" id="username" maxlength="20" required>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                    <input type="text" class="form-control" placeholder="Email" name="email" id="email" required>
+                    <input type="email" class="form-control" placeholder="Email" name="email" id="email" maxlength="30" required>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6">
@@ -92,11 +92,11 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input type="password" id="password" class="form-control" placeholder="Password" name="password" onkeyup="validatePassword();" required>
+                    <input type="password" id="password" class="form-control" placeholder="Password" name="password" maxlength="20" onkeyup="validatePassword();" required>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input type="password" id="confirm_password" class="form-control" placeholder="Confirm Password" name="confirm_password" onkeyup="validatePassword();" required>
+                    <input type="password" id="confirm_password" class="form-control" placeholder="Confirm Password"  maxlength="20" name="confirm_password" onkeyup="validatePassword();" required>
                 </div>
                 <p id="login"><a href="login.php">Already have an account?</a></p>
                 <?php
