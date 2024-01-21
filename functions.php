@@ -43,4 +43,32 @@
         $img_row = mysqli_fetch_assoc($img_result);
         return $img_row['ProfilePicture'];
     }
+
+    function update_profile($con, $username, $type, $new_element) {
+        $query = $con->prepare("UPDATE users SET $type = ? WHERE Username = ?");
+        $query->bind_param("ss", $new_element, $username);
+        $run_query = $query->execute();
+        if($run_query){
+            echo "Profile updated successfully.";
+        } else {
+            echo "Error updating profile: " . $con->error;
+        }
+    }
+    
+    function generateForm($type, $label, $name, $maxLength = null) {
+        $inputType = $type === 'image' ? 'file' : 'text';
+        $inputType = $type === 'birthdate' ? 'date' : $inputType;
+        $maxLengthAttr = $maxLength ? "maxlength='$maxLength'" : '';
+        $formExtra = $type === 'image' ? " enctype='multipart/form-data'" : '';
+    
+        echo "<div class='form text-center' style='display: none;' id='change_{$type}_form'>";
+        echo "<a href='profile.php' class='close-btn' id='close_{$type}_form'>X</a>";
+        echo "<p>New $label</p>";
+        echo "<form action='edit_profile.php' method='post' $formExtra>";
+        echo "<input type='hidden' name='update_type' value='$name'>";
+        echo "<input type='$inputType' name='new_data' $maxLengthAttr required>";
+        echo "<input type='submit' value='invia'>";
+        echo "</form>";
+        echo "</div>";
+    }
 ?>
