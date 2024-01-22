@@ -43,4 +43,8 @@
         $img_row = mysqli_fetch_assoc($img_result);
         return $img_row['ProfilePicture'];
     }
+
+    function select_tag($allows_multiple, $con){
+        
+    }
 ?>

@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    </style>
-    <title>Responsive Interface</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <style>
     h1{
@@ -78,30 +79,43 @@
         </div>
     </div>
     <form method="post">
-    <div id="Food Types" class="category_field">
-        <button class="Appetizer" name="Appetizer">Appetizer</button>
-        <button class="Cocktail" name="Cocktail">Cocktail</button>
-        <button class="Dessert" name="Dessert">Dessert</button>
+    <div id="Food Types" class="btn-group">
+        <button class="btn btn-primary" name="Appetizer">Appetizer</button>
+        <button class="btn btn-primary" name="Cocktail">Cocktail</button>
+        <button class="btn btn-primary" name="Dessert">Dessert</button>
+        <button class="btn btn-primary" name="Drink">Drink</button>
+        <button class="btn btn-primary" name="Fish">Fish</button>
+        <button class="btn btn-primary" name="Main course">Main course</button>
+        <button class="btn btn-primary" name="Meat">Meat</button>
+        <button class="btn btn-primary" name="Salad">Salad</button>
+        <button class="btn btn-primary" name="Snack">Snack</button>
+        <button class="btn btn-primary" name="Soup">Soup</button>
     </div>
 
-    <div id="Time" class="category_field">
-        <button class="15min" name="15min">15min</button>
-        <button class="30min" name="30min">30min</button>
+    <div id="Time" class="btn-group">
+        <button class="btn btn-primary" name="15min">15min</button>
+        <button class="btn btn-primary" name="30min">30min</button>
+        <button class="btn btn-primary" name="45min">45min</button>
+        <button class="btn btn-primary" name="1h+">>1h+</button>
     </div>
 
-    <div id="Diet" class="category_field">
-        <button class="Gluten-free" name="Gluten-free">Gluten-free</button>
-        <button class="Pescetarian" name="Pescetarian">Pescetarian</button>
+    <div id="Diet" class="btn-group">
+        <button class="btn btn-primary" name="Gluten-free">Gluten-free</button>
+        <button class="btn btn-primary" name="Pescetarian">Pescetarian</button>
+        <button class="btn btn-primary" name="Vegan">Vegan</button>
+        <button class="btn btn-primary" name="Vegetarian">Vegetarian</button>
     </div>
 
-    <div id="Difficutly" class="category_field">
-        <button class="Beginner" name="Beginner">Beginner</button>
-        <button class="Expert" name="Expert">Expert</button>
+    <div id="Difficutly" class="btn-group">
+        <button class="btn btn-primary" name="Beginner">Beginner</button>
+        <button class="btn btn-primary" name="Intermediate">Intermediate</button>
+        <button class="btn btn-primary" name="Expert">Expert</button>
     </div>
 
-    <div id="Budget" class="category_field">
-        <button class="$" name="$">$</button>
-        <button class="$$" name="$$">$$</button>
+    <div id="Budget" class="btn-group">
+        <button class="btn btn-primary" name="$">$</button>
+        <button class="btn btn-primary" name="$$">$$</button>
+        <button class="btn btn-primary" name="$$$">$$$</button>
     </div>
     </form>
 </body>
