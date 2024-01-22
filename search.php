@@ -12,9 +12,10 @@ $search_results = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
     $search_term = mysqli_real_escape_string($con, $_POST['friend_search']);
-
-    $query = "SELECT Username FROM users WHERE Username LIKE '%$search_term%' OR Name LIKE '%$search_term%' OR 
-        Surname LIKE '%$search_term%' OR E_mail LIKE '%$search_term%'";
+    $session_user = $_SESSION['Username'];
+    
+    $query = "SELECT Username FROM users WHERE (Username LIKE '%$search_term%' OR Name LIKE '%$search_term%' OR 
+        Surname LIKE '%$search_term%' OR E_mail LIKE '%$search_term%') AND Username != '$session_user'";
     $result = mysqli_query($con, $query);
 
     if (mysqli_num_rows($result) > 0) {
@@ -38,7 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search</title>
-
 </head>
 <style>
 
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
                     <input type="text" class="form-control" id="friend_search" name="friend_search" placeholder="...">
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary" id="search_button" name="search_button">Search</button>
+                    <button type="submit" class="btn btn-primary" id="s_button" name="s_button">Search</button>
                 </div>
             </form>
 
@@ -72,6 +72,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
         </div>
     </div>
 </div>
-
 </body>
 </html>
