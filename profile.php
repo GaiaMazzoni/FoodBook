@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("includes/connection.php");
+include 'functions.php';
 include("includes/header.php");
 include("includes/footer.php");
 
@@ -43,11 +43,20 @@ $num_following = mysqli_num_rows($run_following);
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+    <script src="functions.js"></script>
     <title><?php echo "$user Profile"; ?></title>
 </head>
-</head>
+
 <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    popUpFunction('change_bio_btn', 'change_bio_form');
+    popUpFunction('edit_profile','edit_menu');
+    popUpFunction('change_img_btn','change_image_form');
+    popUpFunction('change_birthdate_btn','change_birthdate_form');
+    popUpFunction('change_email_btn','change_email_form');
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     var logoutLink = document.getElementById('logout');
     logoutLink.addEventListener('click', function(event) {
@@ -58,15 +67,81 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
 </script>
+<style>
+.position-relative {
+    position: relative;
+}
+#edit_menu {
+    display: none;
+    position: absolute;
+    top: 100%; 
+    right: 75px;
+    background-color: white;
+    border: 1px solid #ddd;
+    z-index: 1000; 
+}
+
+#edit_menu > ul {
+    list-style-type: none;
+}
+#edit_menu > ul > li > a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+#edit_menu > ul > li > a:hover {
+    background-color: #f8f8f8;
+}
+.container_form {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.container_form > * {
+    background-color: red;
+    position: absolute;
+    z-index: 1001;
+    padding: 10px;
+}
+.close-btn {
+    position: absolute;
+    top: 1px;
+    right: 10px;
+    font-size: 20px;
+    color: #000;
+    text-decoration: none;
+}
+</style>
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col text-right">
+        <div class="col text-right position-relative">
             <button id="edit_profile" class="btn btn-primary mt-3">Edit Profile</button>
+            <div id="edit_menu" style="display: none;">
+                <ul>
+                    <li><a href="#" id="change_img_btn">Change Image</a></li>
+                    <li><a href="#" id="change_bio_btn">Change Bio</a></li>
+                    <li><a href="#" id="change_email_btn">Change Email</a></li>
+                    <li><a href="#" id="change_birthdate_btn">Change Birthdate</a></li>
+                    <li><a href="#" id="change_name">Change Name</a></li>
+                </ul>
+            </div>
             <button id="logout" class="btn btn-primary mt-3">Logout</button>
         </div>
     </div>
+</div>
+<div class="container_form">
+<?php
+    generateForm('bio', 'Bio', 'bio', 150);
+    generateForm('email', 'Email', 'email', 30);
+    generateForm('birthdate', 'BirthDate', 'birthdate');
+    generateForm('image', 'Image', 'image');
+    generateForm('name', 'First-Name', 'firstname', 20);
+?>
 </div>
 <div class="container">
     <div class="row">
@@ -101,6 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </p>
         </div>
     </div>
+    
     
 </div>
 </body>
