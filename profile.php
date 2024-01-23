@@ -9,7 +9,10 @@ if (!isset($_SESSION['Username'])) {
     exit();
 }
 
-$user = $_SESSION['Username'];
+$user = isset($_GET['user']) ? mysqli_real_escape_string($con, $_GET['user']) : '';
+
+$is_own_profile = ($_SESSION['Username'] == $user);
+
 $get_user = "select * from users where Username='$user'";
 $run_user = mysqli_query($con,$get_user);
 $row = mysqli_fetch_array($run_user);
@@ -72,27 +75,28 @@ $num_following = mysqli_num_rows($run_following);
 
 </style>
 <body>
-<div class="dropdown">
-    <button type="button" id="edit_profile" class="btn btn-primary btn-sm float-end mt-3dropdown-toggle" data-bs-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-  <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
-</svg> Edit Profile</button>
-    <ul class="dropdown-menu" id="edit_menu">
-        <li><button type="button" class="btn btn-primary dropdown-item" data-bs-toggle="modal" data-bs-target="#change_image_form" id="change_image_btn">Change Image</button></li>
-        <li><button type="button" class="btn btn-primary dropdown-item" data-bs-toggle="modal" data-bs-target="#change_bio_form" id="change_bio_btn">Change Bio</button></li>
-        <li><button type="button" class="btn btn-primary dropdown-item" data-bs-toggle="modal" data-bs-target="#change_email_form" id="change_email_btn">Change Email</button></li>
-        <li><button type="button" class="btn btn-primary dropdown-item" data-bs-toggle="modal" data-bs-target="#change_birthdate_form" id="change_birthdate_btn">Change BirthDate</button></li>
-        <li><button type="button" class="btn btn-primary dropdown-item" data-bs-toggle="modal" data-bs-target="#change_name_form" id="change_name_btn">Change Name</button></li>
-    </ul>
-</div>
+<?php if($is_own_profile): ?>
+    <div class="dropdown">
+        <button type="button" id="edit_profile" class="btn btn-primary btn-sm float-end mt-3dropdown-toggle" data-bs-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+    </svg> Edit Profile</button>
+        <ul class="dropdown-menu" id="edit_menu">
+            <li><button type="button" class="btn btn-primary dropdown-item" data-bs-toggle="modal" data-bs-target="#change_image_form" id="change_image_btn">Change Image</button></li>
+            <li><button type="button" class="btn btn-primary dropdown-item" data-bs-toggle="modal" data-bs-target="#change_bio_form" id="change_bio_btn">Change Bio</button></li>
+            <li><button type="button" class="btn btn-primary dropdown-item" data-bs-toggle="modal" data-bs-target="#change_email_form" id="change_email_btn">Change Email</button></li>
+            <li><button type="button" class="btn btn-primary dropdown-item" data-bs-toggle="modal" data-bs-target="#change_birthdate_form" id="change_birthdate_btn">Change BirthDate</button></li>
+            <li><button type="button" class="btn btn-primary dropdown-item" data-bs-toggle="modal" data-bs-target="#change_name_form" id="change_name_btn">Change Name</button></li>
+        </ul>
+    </div>
 
 
-<?php 
-echo generateModalForm('bio', 'Bio', 150);
-echo generateModalForm('email', 'Email', 30);
-echo generateModalForm('birthdate', 'BirthDate');
-echo generateModalForm('image', 'Image'); 
-?>
-
+    <?php 
+    echo generateModalForm('bio', 'Bio', 150);
+    echo generateModalForm('email', 'Email', 30);
+    echo generateModalForm('birthdate', 'BirthDate');
+    echo generateModalForm('image', 'Image'); 
+    ?>
+<?php endif; ?>
 <div class="container">
     <div class="row">
         <div class="col-12 col-md-3 text-center">

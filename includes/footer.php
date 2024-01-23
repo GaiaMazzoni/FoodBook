@@ -1,3 +1,8 @@
+<?php
+include("connection.php");
+$username = urlencode($_SESSION['Username']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +31,7 @@
 
 </style>
 <body>
+
     <form method="post">
         <div id="bottom_banner" class="clearfix">
             <button class="float-start" name="new_post_button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
@@ -42,8 +48,8 @@
         if(isset($_POST['new_post_button'])){
             echo "<script>window.open('new_post.php','_self')</script>";
         }
-        if(isset($_POST['profile_button'])){
-            echo "<script>window.open('profile.php','_self')</script>";
+        if (isset($_POST['profile_button'])) {
+            echo "<script>window.open('profile.php?user=$username','_self');</script>";
         }
     ?>
     

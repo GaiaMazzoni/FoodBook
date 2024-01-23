@@ -79,8 +79,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
                     $profile_pic = $img_row['ProfilePicture'];
                 ?>
                 <center><div class="alert alert-info">
-                    <img src="images/<?php echo $profile_pic; ?>" class="img-fluid rounded-circle mb-3" id="p_profile" alt="Immagine Profilo">
-                    <?php echo htmlspecialchars($username); ?>
+                    <a href="profile.php?user=<?php echo urlencode($username); ?>" style="text-decoration: none; color: inherit;">
+                        <img src="images/<?php echo $profile_pic; ?>" class="img-fluid rounded-circle mb-3" id="p_profile" alt="Immagine Profilo">
+                        <?php echo htmlspecialchars($username); ?>
+                    </a>
                 </div></center>
             <?php endforeach; ?>
         </div>
