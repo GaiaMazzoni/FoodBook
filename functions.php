@@ -65,20 +65,31 @@
         }
     }
     
-    function generateForm($type, $label, $name, $maxLength = null) {
-        $inputType = $type === 'image' ? 'file' : 'text';
-        $inputType = $type === 'birthdate' ? 'date' : $inputType;
-        $maxLengthAttr = $maxLength ? "maxlength='$maxLength'" : '';
-        $formExtra = $type === 'image' ? " enctype='multipart/form-data'" : '';
+    function generateModalForm($type, $label, $maxLength = null) {
+        $inputType = 'text';
+        if ($type === 'image') $inputType = 'file';
+        if ($type === 'email') $inputType = 'email';
+        if ($type === 'birthdate') $inputType = 'date';
+        
+        $maxLengthAttr = is_null($maxLength) ? '' : "maxlength='$maxLength'";
     
-        echo "<div class='form text-center' style='display: none;' id='change_{$type}_form'>";
-        echo "<a href='profile.php' class='close-btn' id='close_{$type}_form'>X</a>";
-        echo "<p>New $label</p>";
-        echo "<form action='edit_profile.php' method='post' $formExtra>";
-        echo "<input type='hidden' name='update_type' value='$name'>";
-        echo "<input type='$inputType' name='new_data' $maxLengthAttr required>";
-        echo "<input type='submit' value='invia'>";
-        echo "</form>";
-        echo "</div>";
+        return "
+        <div class='modal' id='change_{$type}_form'>
+            <div class='modal-dialog'>
+                <div class='modal-content'>
+                    <div class='modal-header'>
+                        <h4 class='modal-title'>Change $label</h4>
+                        <button type='button' class='btn-close' data-bs-dismiss='modal'></button>
+                    </div>
+                    <div class='modal-body'>
+                        <form method='post' action='edit_profile.php'>
+                            <input type='hidden' name='update_type' value='$type'>
+                            <input type='$inputType' name='new_data' $maxLengthAttr required>
+                            <input type='submit' value='Invia' name='submit'>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>";
     }
-?>
+    
