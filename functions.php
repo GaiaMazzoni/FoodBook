@@ -1,12 +1,6 @@
 <?php
     include ("includes/connection.php");
 
-    /*if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $usernameOrEmail = $_POST["username"];
-        $password = $_POST["password"];
-        check_login($usernameOrEmail, $password, $con);
-    }*/
-
     function check_login($usernameOrEmail, $password, $mysqli){
         $stmt = $mysqli->prepare("SELECT Username, E_mail FROM users WHERE Username=? OR E_mail=? AND Password=?");
         $stmt->bind_param("sss",$usernameOrEmail, $usernameOrEmail, $password);
@@ -30,7 +24,23 @@
         $stmt->bind_param("siss",$username,$IdPost,$dateAndTime,$text);
         $stmt->execute();
     }
-    
+
+    function get_last_post_id($username, $mysqli){
+        $stmt = $mysqli->prepare("SELECT max(IdPost) FROM post WHERE Username=?");
+        $stmt->bind_param("s",$username);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc()["max(IdPost)"];
+    }
+    function add_tag($categoryName, $idPost, $username, $mysqli){
+        $stmt = $mysqli->prepare("SELECT IdCategory FROM category WHERE Name=?");
+        $stmt->bind_param("s",$categoryName);
+        $stmt->execute();
+        $IdCategory = $stmt->get_result()->fetch_assoc()["IdCategory"];
+        $stmt = $mysqli->prepare("INSERT INTO belong (`IdCategory`, `Username`, `IdPost`) VALUES (?, ?, ?);");
+        $stmt->bind_param("isi", $IdCategory, $username, $idPost);
+        $stmt->execute();
+    }
+
     // Close connection
     function close_connection($con) {
         $con->close();
