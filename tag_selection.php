@@ -23,7 +23,7 @@
         $description = $_SESSION['Description'];
         add_post($username, $description, $con);
         $idPost = get_last_post_id($_SESSION['Username'],$con);
-        if (isset($_POST['Appetizer'])) {
+        /*if (isset($_POST['Appetizer'])) {
             echo "appetizer is set";
             add_tag("Appetizer",$idPost,$username,$con);
         }
@@ -105,7 +105,7 @@
         if (isset($_POST['$$$'])) {
             add_tag("$$$",$idPost,$username,$con);
         }
-        echo "<script>window.open('home.php','_self')</script>";
+        echo "<script>window.open('home.php','_self')</script>";*/
     }
 ?>
 <style>
@@ -158,7 +158,7 @@
                 <form method="post">
                     <button id="back" class="back_button" name="back">Back</button>
                     <h1>New Post</h1>
-                    <button id="publish" class="publish_button" name="publish">Publish</button>
+                    <button id="publish" type="button" onclick="print()" class="publish_button" name="publish">Publish</button>
                 </form>
             </div>
                 
@@ -207,7 +207,10 @@
 </body>
 </html>
 
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 <script>
+    
     function select(button){
         if(button.classList.contains('select')){
             button.classList.remove('select');
@@ -215,5 +218,22 @@
             button.classList.add('select');
         }
     }
+
+    function print() {
+        let cat = document.getElementsByClassName("select");
+        let formData = new FormData();
+        formData.append('num_cat', cat.length);
+        for (let i = 0; i < cat.length; i++) {
+            formData.append(i+1, cat[i].name);
+        }
+        formData.forEach((value, key) => { console.log(key, value); });
+        axios.post('category.php', formData).then(response => {
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    }
+        
 </script>
 
