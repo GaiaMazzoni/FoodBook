@@ -32,7 +32,7 @@
         return $stmt->get_result()->fetch_assoc()["max(IdPost)"];
     }
     function add_tag($categoryName, $idPost, $username, $mysqli){
-        $stmt = $mysqli->prepare("SELECT IdCategory FROM category WHERE Name=?");
+        $stmt = $mysqli->prepare("SELECT IdCategory FROM category WHERE CategoryName=?");
         $stmt->bind_param("s",$categoryName);
         $stmt->execute();
         $IdCategory = $stmt->get_result()->fetch_assoc()["IdCategory"];
@@ -45,7 +45,6 @@
     function close_connection($con) {
         $con->close();
     }
-
 
     function get_img_profile($con,$username) {
         $img_query = "SELECT ProfilePicture FROM users WHERE Username='$username'";
