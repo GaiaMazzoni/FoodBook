@@ -22,9 +22,9 @@
         $username = $_SESSION['Username'];
         $description = $_SESSION['Description'];
         add_post($username, $description, $con);
+        print_r("added post");
         $idPost = get_last_post_id($_SESSION['Username'],$con);
         if (isset($_POST['Appetizer'])) {
-            echo "appetizer is set";
             add_tag("Appetizer",$idPost,$username,$con);
         }
         if (isset($_POST['Cocktail'])) {
@@ -105,7 +105,7 @@
         if (isset($_POST['$$$'])) {
             add_tag("$$$",$idPost,$username,$con);
         }
-        echo "<script>window.open('home.php','_self')</script>";
+        //echo "<script>window.open('home.php','_self')</script>";
     }
 ?>
 <style>
@@ -166,7 +166,7 @@
     </div>
     <form method="post">
     <div id="FoodTypes" class="btn-group">
-        <button  class="btn btn-primary" name="Appetizer" onclick="select(this)">Appetizer</button>
+        <button type=button class="btn btn-primary" name="Appetizer" onclick="select(this)">Appetizer</button>
         <button type=button class="btn btn-primary" name="Cocktail" onclick="select(this)">Cocktail</button>
         <button type=button class="btn btn-primary" name="Dessert" onclick="select(this)">Dessert</button>
         <button type=button class="btn btn-primary" name="Drink" onclick="select(this)">Drink</button>
@@ -208,6 +208,7 @@
 </html>
 
 <script>
+
     function select(button){
         if(button.classList.contains('select')){
             button.classList.remove('select');
