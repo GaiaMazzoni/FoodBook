@@ -9,13 +9,17 @@
     <?php
     include("includes/header.php");
     include("includes/footer.php");
+    include("includes/connection.php");
+    session_start();
     ?>
 </head>
 <style>
 
 </style>
 <body>
-
-    
+    <?php
+        $username = $_SESSION['Username'];
+        $followers = get_all_followed($username, $mysqli);
+    ?>
 </body>
 </html>

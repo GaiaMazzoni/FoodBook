@@ -41,6 +41,51 @@
         $stmt->execute();
     }
 
+    //returns a query with all users followed. 
+    function get_all_followed($username, $mysqli){
+        $stmt = $mysqli->prepare("SELECT Username as followedUser FROM follow WHERE Follower_Username=?");
+        $stmt->bind_param("s",$username);
+        return $stmt->execute()['followedUser'];
+    }
+
+    function get_all_posts_from_followers($followedList, $mysqli){
+        foreach($followedList as $followed){
+            $stmt = $mysqli->prepare("SELECT * FROM post WHERE Username=?");
+            $stmt->bind_param("s", $followed);
+            /*TODO*/
+        }
+    }
+
+    function print_post($username, $postId, $mysqli){
+        $profilePicture = get_img_profile($mysqli, $username);
+        $imagePost = get_post_image($username, $postId, $mysqli);
+        return "
+                <div class='post-container'>
+                     <div class='profile-section'>
+                        <img class='profile-image' src='$profilePicture' alt=''>
+                        <div class='username'>$username</div>
+                    </div>
+                    <img class='post-image' src='$imagePost' alt=''>
+                    <div class='icon'>
+                        <div class='icon'>
+                            <img src='images/like-icon.png' alt='Like Icon'>
+                        </div>
+                        <div class='icon'>
+                            <img src='images/comment-icon.png' alt='Comment Icon'>
+                        </div>
+                    </div>
+                </div>
+                ";
+    }
+
+    function get_post_image($username, $postId, $mysqli){
+        $stmt = $mysqli->prepare("SELECT Images FROM image WHERE Username=? AND IdPost=?");
+        $stmt->bind_param("ss",$username, $postId);
+        return $stmt->execute()['Images'];
+    }
+
+
+
     // Close connection
     function close_connection($con) {
         $con->close();
