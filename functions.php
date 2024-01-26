@@ -196,4 +196,39 @@
             </div>
         </div>";
     }
+
+    function checkFollower($username, $follower_username, $con) {
+        $query = $con->prepare("SELECT * FROM follow WHERE Username = ? AND Follower_Username = ?");
+       /* if ($query === false) {
+            return "Error preparing statement: " . $con->error;
+        }*/
+    
+        $query->bind_param("ss", $username, $follower_username);
+        $query->execute();
+        return $query->get_result()->num_rows;
+        /*if (!$query->execute()) {
+            return "Error executing statement: " . $query->error;
+        }*/
+    
+        //$result = $query->get_result();
+       /* if ($result === false) {
+            return "Error in get_result: " . $query->error;
+        }*/
+    
+        //$count = $result->num_rows;
+        //return $count;
+    }
+    
+
+    function follow($username, $follower_username, $con) {
+        $query = $con->prepare("INSERT INTO follow(Follower_Username, Username) VALUES (?, ?)");
+        $query->bind_param("ss", $follower_username, $username);
+        $query->execute();
+    }
+
+    function unfollow($username, $follower_username, $con) {
+        $query = $con->prepare("DELETE FROM follow WHERE Follower_Username = ? AND Username = ?");
+        $query->bind_param("ss", $follower_username, $username);
+        $query->execute();
+    }
     

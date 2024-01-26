@@ -29,11 +29,11 @@ $user_posts = "select * from post where Username='$user'";
 $run_posts = mysqli_query($con,$user_posts);
 $num_posts = mysqli_num_rows($run_posts);
 
-$user_follower = "select * from follow where Username='$user'";
+$user_follower = "select * from follow where Follower_Username='$user'";
 $run_follower = mysqli_query($con,$user_follower);
 $num_follower = mysqli_num_rows($run_follower);
 
-$user_following = "select * from follow where Follower_Username='$user'";
+$user_following = "select * from follow where Username='$user'";
 $run_following = mysqli_query($con,$user_following);
 $num_following = mysqli_num_rows($run_following);
 
@@ -86,17 +86,57 @@ $num_following = mysqli_num_rows($run_following);
             <li><button type="button" class="btn btn-primary dropdown-item" data-bs-toggle="modal" data-bs-target="#change_email_form" id="change_email_btn">Change Email</button></li>
             <li><button type="button" class="btn btn-primary dropdown-item" data-bs-toggle="modal" data-bs-target="#change_birthdate_form" id="change_birthdate_btn">Change BirthDate</button></li>
             <li><button type="button" class="btn btn-primary dropdown-item" data-bs-toggle="modal" data-bs-target="#change_name_form" id="change_name_btn">Change Name</button></li>
+            <li><button type="button" class="btn btn-primary dropdown-item" data-bs-toggle="modal" data-bs-target="#change_password_form" id="change_password_btn">Change Password</button></li>
         </ul>
     </div>
 
 
     <?php 
-    echo generateModalForm('bio', 'Bio', 150);
-    echo generateModalForm('email', 'Email', 30);
-    echo generateModalForm('birthdate', 'BirthDate');
-    echo generateModalForm('image', 'Image'); 
+        echo generateModalForm('bio', 'Bio', 150);
+        echo generateModalForm('email', 'Email', 30);
+        echo generateModalForm('birthdate', 'BirthDate');
+        echo generateModalForm('image', 'Image'); 
     ?>
+    <div class='modal' id='change_name_form'>
+        <div class='modal-dialog'>
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <h4 class='modal-title'>Change Name</h4>
+                    <button type='button' class='btn-close' data-bs-dismiss='modal'></button>
+                </div>
+                <div class='modal-body'>
+                    <form method='post' action='edit_profile.php'>
+                        <input type='hidden' name='update_type' value='name'>
+                        <input type=text name='new_data' 20 required>
+                        <input type=text name='second_data' 20 required>
+                        <input type='submit' value='Invia' name='submit'>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='modal' id='change_password_form'>
+        <div class='modal-dialog'>
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <h4 class='modal-title'>Change Password</h4>
+                    <button type='button' class='btn-close' data-bs-dismiss='modal'></button>
+                </div>
+                <div class='modal-body'>
+                    <form method='post' action='edit_profile.php'>
+                        <input type='hidden' name='update_type' value='password'>
+                        Old Password:
+                        <input type=text name='new_data' 20 required>
+                        </br>New Password:
+                        <input type=text name='second_data' 20 required>
+                        <input type='submit' value='Invia' name='submit'>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 <?php endif; ?>
+
 <div class="container">
     <div class="row">
         <div class="col-12 col-md-3 text-center">
@@ -130,8 +170,45 @@ $num_following = mysqli_num_rows($run_following);
             </p>
         </div>
     </div>
-    
-    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <?php if (!$is_own_profile): ?>
+        <button id="followButton" class="" onclick="follow()">Follow</button>
+        <script>
+            function check_follow() {
+                var button = document.getElementById("followButton");
+                var username = "<?php echo addslashes($user); ?>";
+                let formData = new FormData();
+                formData.append('following', username);
+                axios.post('check_follow.php',formData).then(response => {
+                    if(response.data == 1) {
+                        if(!button.classList.contains("Follow")) {
+                            button.classList.add("Follow");
+                            button.innerHTML = "Unfollow";
+                        }
+                    } 
+                });                 
+            }
+
+            check_follow();
+
+            function follow() {
+                var button = document.getElementById("followButton");
+                var username = "<?php echo addslashes($user); ?>";
+                let formData = new FormData();
+                formData.append('following', username);
+                if (button.classList.contains("Follow")) {
+                    button.classList.remove("Follow");
+                    formData.append('remove', 1);
+                } else if (!button.classList.contains("Follow")) {
+                    button.classList.add("Follow");
+                    formData.append('remove', 0);
+                }
+                axios.post('follow_handler.php',formData).then(response => {
+                });  
+                location.reload();
+            }
+        </script>
+    <?php endif; ?>
 </div>
 </body>
 </html>
