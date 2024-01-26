@@ -69,7 +69,7 @@
                 <form method="post">
                     <button id="back" class="back_button" name="back">Back</button>
                     <h1>New Post</h1>
-                    <button id="publish" type="button" onclick="print()" class="publish_button" name="publish">Publish</button>
+                    <button id="publish" type="button" onclick="publish_post()" class="publish_button" name="publish">Publish</button>
                 </form>
             </div>
                 
@@ -128,11 +128,12 @@
         }
     }
 
-    function print() {
+    function publish_post() {
         let cat = document.getElementsByClassName("select");
         let formData = new FormData();
         formData.append('num_cat', cat.length);
         for (let i = 0; i < cat.length; i++) {
+            console.log(cat[i].name);
             formData.append(i+1, cat[i].name);
         }
         formData.forEach((value, key) => { console.log(key, value); });
@@ -142,7 +143,6 @@
         .catch(error => {
             console.error(error);
         });
-        echo "<script>window.open('home.php','_self')</script>";
     }
         
 </script>

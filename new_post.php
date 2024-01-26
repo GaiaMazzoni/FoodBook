@@ -14,7 +14,7 @@
 
     body {
         position: relative;
-        padding-top: 50px; /* Adjusted padding for top banner */
+        padding-top: 50px;
     }
 
     button {
@@ -27,7 +27,7 @@
         position: sticky;
         top: 0;
         width: 100%;
-        padding: 10px; /* Added padding */
+        padding: 10px;
         text-align: center;
         color: white;
     }
@@ -40,17 +40,17 @@
         width: 100%;
         height: 5%;
         text-align: center;
-        padding: 10px; /* Added padding */
+        padding: 10px; 
     }
 
     #description {
-        width: 100%; /* Make the textarea take up the full width */
-        height: 100px; /* Set an initial height for better appearance */
+        width: 100%;
+        height: 100px;
     }
 
     #imageSelection {
-        width: 100%; /* Make the image selection input take up the full width */
-        margin-bottom: 10px; /* Added margin for spacing */
+        width: 100%;
+        margin-bottom: 10px;
     }
 
 </style>
@@ -74,14 +74,15 @@
                 include ("includes/connection.php");
 
                 session_start();
-
+                
+                $username = $_SESSION['Username'];
                 if(isset($_POST['close'])){
                     echo "<script>window.open('home.php','_self')</script>";
                 }
 
                 if(isset($_POST['next']) && isset($_POST['description']) && $_POST['description']!='' && isset($_POST['image'])){
-                    $_SESSION['Description']=$_POST['description'];
-                    $_SESSION['Image']=$_POST['image'];
+                    add_post($username,$_POST['description'],$con);
+                    insert_post_image(get_last_post_id($username, $con),$_POST['image'], $con);
                     echo "<script>window.open('tag_selection.php','_self')</script>";
                 }
             ?>
