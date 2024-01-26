@@ -41,6 +41,13 @@
         $stmt->execute();
     }
 
+    function get_img_profile($con,$username) {
+        $img_query = "SELECT ProfilePicture FROM users WHERE Username='$username'";
+        $img_result = mysqli_query($con, $img_query);
+        $img_row = mysqli_fetch_assoc($img_result);
+        return $img_row['ProfilePicture'];
+    }
+
     //returns a query with all users followed. 
     function get_all_followed($username, $mysqli){
         $stmt = $mysqli->prepare("SELECT Username as followedUser FROM follow WHERE Follower_Username=?");
@@ -48,6 +55,85 @@
         return $stmt->execute()['followedUser'];
     }
 
+    function get_all_follower($username, $mysqli){
+        $stmt = $mysqli->prepare("SELECT * FROM follow WHERE Follower_Username = ?");
+        if ($stmt === false) {
+            // Errore nella preparazione della query
+            echo "Errore nella preparazione della query: " . $mysqli->error;
+            return [];
+        }
+        $stmt->bind_param("s", $username);
+        if (!$stmt->execute()) {
+            // Errore nell'esecuzione della query
+            echo "Errore nell'esecuzione della query: " . $stmt->error;
+            return [];
+        }
+        $result = $stmt->get_result();
+        $followers = [];
+        while ($row = $result->fetch_assoc()) {
+            $followers[] = $row['Username'];
+        }
+        return $followers;
+    }
+
+    function print_followed($username, $mysqli) {
+        $followed_users = get_all_follower($username, $mysqli);
+    
+        if ($followed_users) {
+            foreach ($followed_users as $user) {
+                $userPhoto = get_img_profile($mysqli, $user);
+                echo "<div class='dropdown-item alert alert-info'>";
+                echo "<a href='profile.php?user=" . htmlspecialchars($user) . "' style='text-decoration: none; color: inherit;'>";
+                echo "<img src='images/" . htmlspecialchars($userPhoto) . "' class='img-fluid rounded-circle mb-3' alt='Profile Image'>";
+                echo "<p>" . htmlspecialchars($user) . "</p>";
+                echo "</a>";
+                echo "</div>";
+            }
+        } else {
+            echo "Non stai seguendo nessuno.";
+        }
+    }
+
+    function get_all_following($username, $mysqli) {
+        $stmt = $mysqli->prepare("SELECT * FROM follow WHERE Username = ?");
+        if ($stmt === false) {
+            // Errore nella preparazione della query
+            echo "Errore nella preparazione della query: " . $mysqli->error;
+            return [];
+        }
+        $stmt->bind_param("s", $username);
+        if (!$stmt->execute()) {
+            // Errore nell'esecuzione della query
+            echo "Errore nell'esecuzione della query: " . $stmt->error;
+            return [];
+        }
+        $result = $stmt->get_result();
+        $followers = [];
+        while ($row = $result->fetch_assoc()) {
+            $followers[] = $row['Follower_Username'];
+        }
+        return $followers;
+    }
+
+    
+    function print_following($username, $mysqli) {
+        $followed_users = get_all_following($username, $mysqli);
+    
+        if ($followed_users) {
+            foreach ($followed_users as $user) {
+                $userPhoto = get_img_profile($mysqli, $user);
+                echo "<div class='dropdown-item alert alert-info'>";
+                echo "<a href='profile.php?user=" . htmlspecialchars($user) . "' style='text-decoration: none; color: inherit;'>";
+                echo "<img src='images/" . htmlspecialchars($userPhoto) . "' class='img-fluid rounded-circle mb-3' alt='Profile Image'>";
+                echo "<p>" . htmlspecialchars($user) . "</p>";
+                echo "</a>";
+                echo "</div>";
+            }
+        } else {
+            echo "Non stai seguendo nessuno.";
+        }
+    }
+    
     function get_all_posts_from_followers($followedList, $mysqli){
         foreach($followedList as $followed){
             $stmt = $mysqli->prepare("SELECT * FROM post WHERE Username=?");
@@ -89,13 +175,6 @@
     // Close connection
     function close_connection($con) {
         $con->close();
-    }
-
-    function get_img_profile($con,$username) {
-        $img_query = "SELECT ProfilePicture FROM users WHERE Username='$username'";
-        $img_result = mysqli_query($con, $img_query);
-        $img_row = mysqli_fetch_assoc($img_result);
-        return $img_row['ProfilePicture'];
     }
 
     function update_profile($con, $username, $type, $new_element) {

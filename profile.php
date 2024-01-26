@@ -72,7 +72,20 @@ $num_following = mysqli_num_rows($run_following);
     color: #000;
     text-decoration: none;
 }
-
+#followerButton, #followingButton {
+    background-color: transparent; 
+    border: none; 
+    box-shadow: none;
+    color: black;
+}
+#followerButton::after, #followingButton::after {
+    display: none;
+}
+.dropdown-menu {
+    max-height: 200px;
+    overflow-y: auto;
+    max-width: 200px;
+}
 </style>
 <body>
 <?php if($is_own_profile): ?>
@@ -154,13 +167,23 @@ $num_following = mysqli_num_rows($run_following);
                     <?php echo $num_posts; ?>
                     <p>post</p>
                 </div>
-                <div class="col-4 text-center">
-                    <?php echo $num_follower; ?>
-                    <p>follower</p>
+                <div class="dropdown col-4 text-center">
+                    <button type="button" id="followerButton" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                        <?php echo $num_follower; ?>
+                        <p>follower</p>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <?php print_followed($user, $con); ?>
+                    </ul>
                 </div>
-                <div class="col-4 text-center">
-                    <?php echo $num_following; ?>
-                    <p>following</p>
+                <div class="dropdown col-4 text-center">
+                    <button type="button" id="followingButton" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                        <?php echo $num_following; ?>
+                        <p>following</p>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <?php print_following($user, $con); ?>
+                    </ul>
                 </div>
             </div>
         </div>
