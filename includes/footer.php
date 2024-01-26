@@ -1,5 +1,6 @@
 <?php
 include("connection.php");
+session_start();
 $username = urlencode($_SESSION['Username']);
 ?>
 
