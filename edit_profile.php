@@ -2,10 +2,14 @@
 session_start();
 include("includes/connection.php"); // Includi la connessione al database
 include 'functions.php';
+$username = urlencode($_SESSION['Username']);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $update_type = $_POST['update_type'];
     $new_data = $_POST['new_data'];
+    if ($update_type=='name' || $update_type=='password') {
+        $second_data = $_POST['second_data'];
+    }
     $username = $_SESSION['Username']; 
     echo "l'update type è: '$update_type'<br>";
     if ($new_data == null) {
@@ -25,10 +29,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         case 'birthdate':
             update_profile($con, $username, 'BirthDate', $new_data);
             break;
+        case 'name':
+            update_profile($con, $username, 'Name', $new_data);
+            update_profile($con, $username, 'Surname', $second_data);
+            break;
+        case 'password':
+            if(check_login($username, $new_data, $con)) {
+                update_profile($con, $username, 'Password', $second_data);
+            }
         default:
             break;
     }
 
-    //echo "<script>window.open('profile.php','_self')</script>";
+    echo "<script>window.open('profile.php?user=$username','_self');</script>";
 }
 
