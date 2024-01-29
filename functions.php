@@ -219,6 +219,13 @@
         
     }
 
+    function get_all_post_ids_of_user($username, $mysqli){
+        $stmt = $mysqli->prepare("SELECT IdPost FROM post WHERE Username=?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
     function insert_post_image($postId, $image, $mysqli){
         $username = $_SESSION['Username'];
         $stmt = $mysqli->prepare("INSERT INTO image (`Username`, `IdPost`, `Images`) VALUES (?, ?, ?);");
