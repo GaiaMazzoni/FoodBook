@@ -82,6 +82,7 @@
         .post-description{
             padding: 10px;
         }
+        
     </style>
 </style>
 <body>

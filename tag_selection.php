@@ -143,6 +143,8 @@
         .catch(error => {
             console.error(error);
         });
+        window.open('home.php','_self');
+
     }
         
 </script>

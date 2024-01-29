@@ -224,7 +224,6 @@
         $stmt->execute();
     }
 
-
     function get_post_image($username, $postId, $mysqli){
         $stmt = $mysqli->prepare("SELECT Images FROM image WHERE Username=? AND IdPost=?");
         $stmt->bind_param("ss",$username, $postId);
@@ -274,6 +273,15 @@
                 </div>
             </div>
         </div>";
+    }
+
+    //Returns an array of all the images from the posts made by the user
+    function print_post_image($username, $mysqli){
+        $stmt = $mysqli->prepare("SELECT Images FROM image WHERE Username=?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $images = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $images;
     }
 
     function checkFollower($username, $follower_username, $con) {

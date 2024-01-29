@@ -63,7 +63,7 @@
                     <button id="close" class="close_button" name="close">X</button>
                     <h1>New Post</h1>
                     <button id="next" class="next_button" name="next">Next</button>
-                    <input type="file" id="imageSelection" class="form-control" name="image" accept="image/*">
+                    <input type="file" id="imageSelection" class="form-control" name="image" accept="image/*" multiple>
                     <textarea id="description" class="form-control" name="description" placeholder="Enter your post description"></textarea>
 
                 </form>
