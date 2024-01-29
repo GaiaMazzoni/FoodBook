@@ -31,6 +31,7 @@
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc()["max(IdPost)"];
     }
+
     function add_tag($categoryName, $idPost, $username, $mysqli){
         $stmt = $mysqli->prepare("SELECT IdCategory FROM category WHERE CategoryName=?");
         $stmt->bind_param("s",$categoryName);
@@ -176,9 +177,10 @@
                     <img class='post-image' src='images/$imagePost' alt=''>
                     <div class='icon'>
                         <div class='icon'>
+                            <button class='like' id='$username' value='$postId'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-heart' viewBox='0 0 16 16'>
                                 <path d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15'/>
-                            </svg>
+                            </svg></button>
                         </div>
                         <div class='icon'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-chat' viewBox='0 0 16 16'>
@@ -286,24 +288,9 @@
 
     function checkFollower($username, $follower_username, $con) {
         $query = $con->prepare("SELECT * FROM follow WHERE Username = ? AND Follower_Username = ?");
-       /* if ($query === false) {
-            return "Error preparing statement: " . $con->error;
-        }*/
-    
         $query->bind_param("ss", $username, $follower_username);
         $query->execute();
         return $query->get_result()->num_rows;
-        /*if (!$query->execute()) {
-            return "Error executing statement: " . $query->error;
-        }*/
-    
-        //$result = $query->get_result();
-       /* if ($result === false) {
-            return "Error in get_result: " . $query->error;
-        }*/
-    
-        //$count = $result->num_rows;
-        //return $count;
     }
     
 
