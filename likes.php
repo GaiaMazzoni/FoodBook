@@ -4,28 +4,6 @@ session_start();
 include("includes/connection.php");
 include("functions.php");
 
-function get_last_interaction_id($username, $post_id, $mysqli){
-    $stmt = $mysqli->prepare("SELECT max(idInteraction) FROM interaction WHERE Post_Publisher=? AND Published_Post_Id=?");
-    $stmt->bind_param("si",$username,$post_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($row = $result->fetch_assoc()) {
-        return $row['max(idInteraction)'];
-    } else {
-        return null;
-    }
-}
-function get_last_notification_id($username, $post_id, $mysqli){
-    $stmt = $mysqli->prepare("SELECT max(IdNotification) FROM interaction");
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($row = $result->fetch_assoc()) {
-        return $row['max(IdNotification)'];
-    } else {
-        return null;
-    }
-}
-
 function get_id_interaction($username, $post_id, $user_who_liked, $mysqli) {
     $stmt = $mysqli->prepare("SELECT idInteraction FROM likes WHERE Post_Publisher=? AND Published_Post_Id=? AND UsernameWhoLiked = ?");
     $stmt->bind_param("sis", $username, $post_id, $user_who_liked);
