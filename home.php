@@ -85,6 +85,24 @@
     </style>
 </style>
 <body>
+    <div class="offcanvas offcanvas-bottom" id="comment">
+        <div class="offcanvas-header">
+            <h1 class="offcanvas-title">Comments:</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class='offcanvas-body'>
+        <?php 
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['post_publisher']) && isset($_POST['post_id'])) {
+                echo print_comments($_POST['post_publisher'], $_POST['post_id'], $mysqli);
+                exit;
+            } 
+        ?>
+            <form id='comment_form' method='post'>
+                <textarea id='commentText' name='commentText' rows='1' cols='30'></textarea></br>
+                <input id='publish_comment' type='submit' class='$post_publisher' value='publish'>
+            </form>";
+        </div>
+    </div>
     <?php
         $username = $_SESSION['Username'];
         $followers = get_all_followed($username, $con);
@@ -119,8 +137,8 @@
     
     window.onload = check_like;
 
-    var bottons = document.querySelectorAll('.like');
-    bottons.forEach(function(button) {
+    var like_bottons = document.querySelectorAll('.like');
+    like_bottons.forEach(function(button) {
         button.addEventListener('click', function() {
             var post_publisher = button.id;
             var post_id = button.value;
@@ -140,6 +158,36 @@
             });
             location.reload(true);
         });
+    });
+
+    var post_publisher_comment = null;
+    var post_id_comment = null;
+    var comment_buttons = document.querySelectorAll('.comment');
+    comment_buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            post_publisher_comment = button.getAttribute('data-username');;
+            post_id_comment = button.id;
+            let formData = new FormData();
+            formData.append('post_publisher', post_publisher_comment);
+            formData.append('post_id', post_id_comment);
+            axios.post("home.php", formData).then(response => {
+                console.log(response.data);
+            });
+            console.log("il post value è: ", post_publisher_comment);
+        });
+    });
+
+    document.getElementById('comment_form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var comment = document.getElementById('commentText').value;
+        let formData = new FormData();
+        formData.append('post_publisher', post_publisher_comment);
+        formData.append('post_id', post_id_comment);
+        formData.append('text', comment);
+        axios.post("comment.php", formData).then(response => {
+            console.log(response.data);
+        });
+        location.reload(true);
     });
 
 </script>
