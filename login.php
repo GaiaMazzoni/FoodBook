@@ -68,5 +68,8 @@
             <center><button type="submit" class="btn btn-info w-50" name="login" id="login">Log In</button></center>
         </form>
     </div>
+    <script>
+        
+    </script>
 </body>
 </html>
