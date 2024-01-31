@@ -344,18 +344,6 @@
     }
     
 
-    function follow($username, $follower_username, $con) {
-        $query = $con->prepare("INSERT INTO follow(Follower_Username, Username) VALUES (?, ?)");
-        $query->bind_param("ss", $follower_username, $username);
-        $query->execute();
-    }
-
-    function unfollow($username, $follower_username, $con) {
-        $query = $con->prepare("DELETE FROM follow WHERE Follower_Username = ? AND Username = ?");
-        $query->bind_param("ss", $follower_username, $username);
-        $query->execute();
-    }
-
     function get_last_interaction_id($username, $post_id, $mysqli){
         $stmt = $mysqli->prepare("SELECT max(idInteraction) FROM interaction WHERE Post_Publisher=? AND Published_Post_Id=?");
         $stmt->bind_param("si",$username,$post_id);

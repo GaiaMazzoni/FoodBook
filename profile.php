@@ -297,7 +297,7 @@ $num_following = mysqli_num_rows($run_following);
                         if(!button.classList.contains("Follow")) {
                             button.classList.add("Follow");
                             button.innerHTML = "Unfollow";
-                        }
+                        } 
                     } 
                 });                 
             }
@@ -317,6 +317,7 @@ $num_following = mysqli_num_rows($run_following);
                     formData.append('remove', 0);
                 }
                 axios.post('follow_handler.php',formData).then(response => {
+                    console.log(response.data);
                 });  
                 location.reload();
             }

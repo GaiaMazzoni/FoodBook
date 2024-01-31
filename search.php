@@ -74,16 +74,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <div class="container mt-3">
-                <h2>Simple Collapsible</h2>
-                <p>Click on the button to toggle between showing and hiding content.</p>
-                <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#demo">Simple collapsible</button>
-                <div id="demo" class="collapse">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-            </div>
             <center><div class="btn-group">
                 <button type="button" id="show_friends_form" class="btn btn-primary">friends</button>
                 <button type="button" id="show_post_form" class="btn btn-primary">post</button>
@@ -164,6 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
         </div>
     </div>
 </div>
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
@@ -185,7 +176,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
             console.log(cat[i].name);
             formData.append(i+1, cat[i].name);
         }
-        formData.forEach((value, key) => { console.log(key, value); });
         axios.post('search_by_category.php', formData).then(response => {
             console.log(response.data);
         });

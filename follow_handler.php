@@ -8,6 +8,23 @@ if (!isset($_SESSION['Username'])) {
     exit();
 }
 
+function follow($username, $follower_username, $con) {
+    $current_date_time = date("Y-m-d H:i:s");
+    $queryNotify = $con->prepare("INSERT INTO notification(UsernameTo, UsernameFrom, Type, DateAndTime) VALUES (?, ?, ?, ?)");
+    $notificationType = 3;
+    $queryNotify -> bind_param("ssis", $follower_username, $username, $notificationType, $current_date_time);
+    $queryNotify -> execute();
+    $query = $con->prepare("INSERT INTO follow(Follower_Username, Username) VALUES (?, ?)");
+    $query->bind_param("ss", $follower_username, $username);
+    $query->execute();
+}
+
+function unfollow($username, $follower_username, $con) {
+    $query = $con->prepare("DELETE FROM follow WHERE Follower_Username = ? AND Username = ?");
+    $query->bind_param("ss", $follower_username, $username);
+    $query->execute();
+}
+
 $username = $_SESSION['Username'];
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -15,11 +32,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['following'];
 
     if($remove == 1) {
-        unfollow($username, $_SESSION['Username'], $con);
-        echo "ho eseguito l'unfollow";
+        echo unfollow($username, $_SESSION['Username'], $con);
     } else {
-        follow($username, $_SESSION['Username'], $con);
-        echo "Ho eseguito il follow amo";
+        echo follow($username, $_SESSION['Username'], $con);
     }
     
 }

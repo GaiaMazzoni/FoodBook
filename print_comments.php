@@ -3,7 +3,7 @@ include("includes/connection.php");
 
 function get_all_comments($username, $id_post, $mysqli) {
     $comments = [];
-    $stmt = $mysqli->prepare("SELECT * FROM comment WHERE Post_Publisher = ? AND Published_Post_Id = ?");
+    $stmt = $mysqli->prepare("SELECT * FROM comment WHERE Post_Publisher = ? AND IdPost = ?");
     $stmt->bind_param("si", $username, $id_post);
     $stmt->execute();
     $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -20,8 +20,8 @@ function print_comments($username, $post_id, $mysqli) {
     $comments = get_all_comments($username, $post_id, $mysqli);
     $output = "";
     foreach ($comments as $comment) {
-        $user_who_commented = $comment['UsernameWhoLiked'];
-        $text = $comment['CommentText'];
+        $user_who_commented = $comment['Username_Who_Commented'];
+        $text = $comment['Comment_Text'];
 
         $output .= "<div class='alert alert-info'>";
         $output .= "<a href='profile.php?user=" . urlencode($user_who_commented) . "'>";
