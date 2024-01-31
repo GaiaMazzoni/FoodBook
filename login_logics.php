@@ -12,9 +12,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: profile.php");
         exit;
     } else {
-        echo "Incorrect username or password";
+        $_SESSION['login_error'] = 'incorrect username, e-mail or password';
+        header("Location: login.php");
+        exit;
     }
 }
 
 close_connection($con);
-?>

@@ -26,6 +26,7 @@ $profile_picture = $row['ProfilePicture'];
 $bio = $row['Bio'];
 $password = $row['Password'];
 
+
 $user_posts = "select * from post where Username='$user'";
 $run_posts = mysqli_query($con,$user_posts);
 $num_posts = mysqli_num_rows($run_posts);

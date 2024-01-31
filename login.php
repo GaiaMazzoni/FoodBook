@@ -7,6 +7,14 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
+<?php
+    session_start();
+    include("includes/connection.php");
+    if(isset($_SESSION['login_error'])){
+        echo '<div class="alert alert-danger">' . $_SESSION['login_error'] . '</div>';
+        unset($_SESSION['login_error']);
+    }
+?>
 <style>
     head + body {
         border: 2px solid black;
@@ -68,8 +76,5 @@
             <center><button type="submit" class="btn btn-info w-50" name="login" id="login">Log In</button></center>
         </form>
     </div>
-    <script>
-        
-    </script>
 </body>
 </html>
