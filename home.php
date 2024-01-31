@@ -6,9 +6,9 @@
     
     <title>Responsive Interface</title>
     <?php
+    include("includes/connection.php");
     include("includes/header.php");
     include("includes/footer.php");
-    include("includes/connection.php");
     include("functions.php");
     ?>
 </head>
@@ -78,10 +78,43 @@
         color: inherit;
     }
 
-        .post-description{
-            padding: 10px;
-        }
-    </style>
+    .post-description{
+        padding: 10px;
+    }
+
+    .collapsible-tags-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border-top: 1px solid #eee;
+    }
+
+    .tags-button {
+        background-color: transparent;
+        border: none;
+        color: #4f0484;
+        cursor: pointer;
+    }
+
+    .tags-button:focus {
+        outline: none;
+    }
+
+    .tags-collapse {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .tag-pill {
+        margin-right: 5px;
+        margin-bottom: 5px;
+        padding: 5px 10px;
+        background-color: #4f0484;
+        color: #fff;
+        border-radius: 20px;
+        cursor: pointer;
+    }
 </style>
 <body>
     <div class="offcanvas offcanvas-bottom" id="comment">
@@ -174,35 +207,6 @@
             console.log("il post value è: ", post_publisher_comment);
         });
     });
-
-    document.getElementById('comment_form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        var comment = document.getElementById('commentText').value;
-        let formData = new FormData();
-        formData.append('post_publisher', post_publisher_comment);
-        formData.append('post_id', post_id_comment);
-        formData.append('text', comment);
-        axios.post("comment.php", formData).then(response => {
-            console.log(response.data);
-        });
-        location.reload(true);
-    });
-
-    document.querySelectorAll('.tags-button').forEach(function(button) {
-        button.addEventListener('click', function() {
-            var postId = button.id.split('_')[1];
-            var collapseId = 'tagsCollapse_' + postId;
-            var collapse = document.getElementById(collapseId);
-            
-            var isCollapsed = collapse.classList.contains('show');
-            if (isCollapsed) {
-                collapse.classList.remove('show');
-            } else {
-                collapse.classList.add('show');
-            }
-        });
-    });
-
 </script>
 
 </html>

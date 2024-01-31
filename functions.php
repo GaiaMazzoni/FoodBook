@@ -194,10 +194,10 @@
                         </div>
                     </div>
                     <div class='collapsible-tags-container'>
-                        <button class='tags-button' type='button' data-bs-toggle='collapse' data-bs-target='#tagsCollapse_$postId' aria-expanded='false' aria-controls='tagsCollapse_$postId'>
+                        <button class='tags-button' role='button' data-bs-toggle='collapse' data-bs-target='#tagsCollapse_$postId' aria-expanded='false' aria-controls='tagsCollapse_$postId'>
                             Show Tags
                         </button>
-                        <div class='collapse tags-collapse' id='tagsCollapse_$postId'>
+                        <div class='collapse' id='tagsCollapse_$postId'>
                             $tagPills
                         </div>
                     </div>
@@ -226,10 +226,10 @@
                             </svg>
                         </div>
                         <div class='collapsible-tags-container'>
-                            <button class='tags-button' type='button' data-bs-toggle='collapse' data-bs-target='#tagsCollapse_$postId' aria-expanded='false' aria-controls='tagsCollapse_$postId'>
+                            <button class='tags-button' role='button' data-bs-toggle='collapse' data-bs-target='#tagsCollapse_$postId' aria-expanded='false' aria-controls='tagsCollapse_$postId'>
                                 Show Tags
                             </button>
-                            <div class='collapse tags-collapse' id='tagsCollapse_$postId'>
+                            <div class='collapse' id='tagsCollapse_$postId'>
                                 $tagPills
                             </div>
                         </div>
