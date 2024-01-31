@@ -83,24 +83,20 @@
             padding: 10px;
         }
     </style>
-</style>
 <body>
     <div class="offcanvas offcanvas-bottom" id="comment">
         <div class="offcanvas-header">
             <h1 class="offcanvas-title">Comments:</h1>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
+        
         <div class='offcanvas-body'>
-        <?php 
-            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['post_publisher']) && isset($_POST['post_id'])) {
-                echo print_comments($_POST['post_publisher'], $_POST['post_id'], $mysqli);
-                exit;
-            } 
-        ?>
+            <div id=print_comments> 
+            </div>  
             <form id='comment_form' method='post'>
                 <textarea id='commentText' name='commentText' rows='1' cols='30'></textarea></br>
                 <input id='publish_comment' type='submit' class='$post_publisher' value='publish'>
-            </form>";
+            </form>
         </div>
     </div>
     <?php
@@ -108,7 +104,8 @@
         $followers = get_all_followed($username, $con);
         $posts = get_all_posts_from_followers($followers, $con);
         foreach($posts as $post){
-            echo print_post($post['Username'], $post['IdPost'], $con);
+            echo print_post($post['Username'], $post['IdPost'], $con)
+            ;
         }
     ?>
 </body>
@@ -170,8 +167,9 @@
             let formData = new FormData();
             formData.append('post_publisher', post_publisher_comment);
             formData.append('post_id', post_id_comment);
-            axios.post("home.php", formData).then(response => {
-                console.log(response.data);
+            axios.post("print_comments.php", formData).then(response => {
+                const commentsContainer = document.getElementById("print_comments");
+                commentsContainer.innerHTML = response.data;
             });
             console.log("il post value è: ", post_publisher_comment);
         });
