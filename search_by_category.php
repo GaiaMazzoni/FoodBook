@@ -1,7 +1,7 @@
 <?php
 
-include("includes/connection.php");
-include("functions.php");
+include_once("includes/connection.php");
+include_once("functions.php");
 
 function get_posts_from_category($cat_list, $num_cat, $mysqli) {
     $placeholders = implode(',', array_fill(0, $num_cat, '?'));

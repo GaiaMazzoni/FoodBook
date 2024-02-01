@@ -6,10 +6,10 @@
     
     <title>Responsive Interface</title>
     <?php
-    include("includes/connection.php");
-    include("includes/header.php");
-    include("includes/footer.php");
-    include("functions.php");
+    include_once("includes/connection.php");
+    include_once("includes/header.php");
+    include_once("includes/footer.php");
+    include_once("functions.php");
     ?>
 </head>
 <style>

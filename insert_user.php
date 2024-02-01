@@ -1,5 +1,5 @@
 <?php
-include("includes/connection.php");
+include_once("includes/connection.php");
     if(isset($_POST['signup'])){
         $first_name = htmlentities(mysqli_real_escape_string($con,$_POST['first_name']));
         $surname = htmlentities(mysqli_real_escape_string($con,$_POST['surname']));

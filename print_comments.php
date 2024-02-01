@@ -1,5 +1,5 @@
 <?php 
-include("includes/connection.php");
+include_once("includes/connection.php");
 
 function get_all_comments($username, $id_post, $mysqli) {
     $comments = [];

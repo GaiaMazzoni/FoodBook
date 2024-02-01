@@ -1,8 +1,8 @@
 <?php
 
 session_start();
-include("includes/connection.php");
-include("functions.php");
+include_once("includes/connection.php");
+include_once("functions.php");
 
 function likes($post_publisher, $post_id, $user_who_liked, $mysqli) {
     $current_date_time = date("Y-m-d H:i:s");

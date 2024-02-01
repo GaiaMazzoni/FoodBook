@@ -1,5 +1,5 @@
 <?php
-    include ("includes/connection.php");
+    include_once ("includes/connection.php");
 
     function check_login($usernameOrEmail, $password, $mysqli){
         $stmt = $mysqli->prepare("SELECT Username, E_mail FROM users WHERE Username=? OR E_mail=? AND Password=?");
@@ -278,7 +278,7 @@
 
     function get_post_image($username, $postId, $mysqli){
         $stmt = $mysqli->prepare("SELECT Images FROM image WHERE Username=? AND IdPost=?");
-        $stmt->bind_param("ss",$username, $postId);
+        $stmt->bind_param("si",$username, $postId);
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc()['Images'];
     }
@@ -365,4 +365,82 @@
             return null;
         }
     }
+
+    function addNotification($usernameTo, $usernameFrom, $idPost, $type, $dateAndTime, $mysqli){
+        $stmt = $mysqli->prepare("INSERT INTO notification(UsernameTo, UsernameFrom, Type, DateAndTime, IdPost) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssisi", $usernameTo, $usernameFrom, $type, $dateAndTime, $idPost);
+        $stmt->execute();
+    }
+
+    function printFollowNotification($usernameFrom){
+        $notificationMessage = "$usernameFrom now follows you!";
+        return "<div class='rectangle'>
+                    <div class='content'>
+                        <p>$notificationMessage</p>
+                    </div>
+                </div>";
+    }
+
+    function printCommentNotification($usernameFrom, $usernameTo, $idPost, $commentText, $mysqli){
+        $notificationMessage = "$usernameFrom commented under your post: $commentText";
+        $postImg = get_post_image($usernameTo, $idPost, $mysqli);
+        return "<div class='rectangle'>
+                    <div class='content'>
+                        <p>$notificationMessage</p>
+                        <img src='images/$postImg' alt=''>
+                    </div>
+                </div>";
+    }
+
+    function printLikeNotification($usernameTo, $usernameFrom, $idPost, $mysqli){
+        $postImg = get_post_image($usernameTo, $idPost, $mysqli);
+        $notificationMessage = "$usernameFrom liked your post.";
+        return "<div class='rectangle'>
+                    <div class='content'>
+                        <p>$notificationMessage</p>
+                        <img src='images/$postImg' alt=''>
+                    </div>
+                </div>";
+    }
+
+    function get_all_notifications_for_user($usernameTo, $mysqli){
+        $stmt = $mysqli->prepare("SELECT * FROM notification WHERE UsernameTo=?");
+        $stmt->bind_param("s", $usernameTo);
+        $stmt->execute();
+        $allNotifications = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        usort($allNotifications, function($notif1, $notif2){
+            return strtotime($notif1['DateAndTime']) - strtotime($notif2['DateAndTime']);
+        });
+
+        return $allNotifications;
+    }
+
+    function get_comment_text_from_notification($notification, $mysqli){
+        $usernameTo = $notification['UsernameTo'];
+        $usernameFrom = $notification['UsernameFrom'];
+        $dateAndTime = $notification['DateAndTime'];
+        $idPost = $notification['IdPost'];
+        $stmt = $mysqli->prepare("SELECT Comment_Text FROM comment WHERE Post_Publisher=? AND Username_Who_Commented=? AND DateAndTime=? AND IdPost=?");
+        $stmt->bind_param("sssi", $usernameTo, $usernameFrom, $dateAndTime, $idPost);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc()['Comment_Text']; 
+    }
+
+    function print_notifications_of_user($usernameTo, $mysqli){
+        $notifications = get_all_notifications_for_user($usernameTo, $mysqli);
+        $notificationsMessage = "";
+        foreach($notifications as $notif){
+            if($notif['Type'] == "1"){
+                $notificationsMessage .= printLikeNotification($notif['UsernameTo'],$notif['UsernameFrom'], $notif['IdPost'], $mysqli);
+            }else if($notif['Type'] == "2"){
+                $commentText = get_comment_text_from_notification($notif, $mysqli);
+                $notificationsMessage .= printCommentNotification($notif['UsernameFrom'], $notif['UsernameTo'], $notif['IdPost'], $commentText, $mysqli);
+            }else{
+                $notificationsMessage .= printFollowNotification($notif['UsernameFrom']);
+            }
+        }
+        return $notificationsMessage;
+    }
+
     

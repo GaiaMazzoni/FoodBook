@@ -1,7 +1,7 @@
 <?php
 session_start();
-include("includes/connection.php"); // Includi la connessione al database
-include 'functions.php';
+include_once("includes/connection.php"); // Includi la connessione al database
+include_once 'functions.php';
 $username = urlencode($_SESSION['Username']);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
