@@ -207,6 +207,19 @@
             console.log("il post value è: ", post_publisher_comment);
         });
     });
+
+    document.getElementById('comment_form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var comment = document.getElementById('commentText').value;
+        let formData = new FormData();
+        formData.append('post_publisher', post_publisher_comment);
+        formData.append('post_id', post_id_comment);
+        formData.append('text', comment);
+        axios.post("comment.php", formData).then(response => {
+            console.log(response.data);
+        });
+        location.reload(true);
+    });
 </script>
 
 </html>
