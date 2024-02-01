@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,10 +9,10 @@
     
     <title>Responsive Interface</title>
     <?php
-    include("includes/connection.php");
-    include("includes/header.php");
-    include("includes/footer.php");
-    include("functions.php");
+    include_once("includes/connection.php");
+    include_once("includes/header.php");
+    include_once("includes/footer.php");
+    include_once("functions.php");
     ?>
 </head>
 <style>
@@ -137,8 +140,7 @@
         $followers = get_all_followed($username, $con);
         $posts = get_all_posts_from_followers($followers, $con);
         foreach($posts as $post){
-            echo print_post($post['Username'], $post['IdPost'], $con)
-            ;
+            echo print_post($post['Username'], $post['IdPost'], $con);
         }
     ?>
 </body>

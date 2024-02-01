@@ -1,7 +1,7 @@
 <?php
-include 'functions.php';
-include("includes/connection.php");
 session_start();
+include_once 'functions.php';
+include_once("includes/connection.php");
 
 if(isset($_GET['user'])){
     $user = $_GET['user'];

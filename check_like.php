@@ -1,8 +1,8 @@
 <?php
 
 session_start();
-include("includes/connection.php");
-include("functions.php");
+include_once("includes/connection.php");
+include_once("functions.php");
 
 function check_likes($post_publisher, $post_id, $user_who_liked, $mysqli) {
     $query = $mysqli->prepare("SELECT * FROM likes WHERE Post_Publisher=? AND IdPost = ? AND Username_Who_Liked = ?");

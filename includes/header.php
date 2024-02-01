@@ -1,3 +1,8 @@
+<?php
+    //session_start();
+    include_once "functions.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,6 +43,32 @@ document.addEventListener('DOMContentLoaded', function() {
     body {
         padding-top: 32px;
     }
+
+    .rectangle {
+        background-color: #e0e0e0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        padding: 10px;
+        max-width: 400px; 
+    }
+
+    .content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .content p {
+        margin: 0;
+        padding-right: 10px;
+    }
+
+    .content img {
+        max-width: 100px; 
+        max-height: 100px;
+        border-radius: 8px;
+    }
 </style>
 <body>
     <form method="post">
@@ -53,11 +84,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 <path d="M8.538 1.02a.5.5 0 1 0-.076.998 6 6 0 1 1-6.445 6.444.5.5 0 0 0-.997.076A7 7 0 1 0 8.538 1.02"/>
                 <path d="M7.096 7.828a.5.5 0 0 0 .707-.707L2.707 2.025h2.768a.5.5 0 1 0 0-1H1.5a.5.5 0 0 0-.5.5V5.5a.5.5 0 0 0 1 0V2.732z"/>
                 </svg> Logout</button>
-            <button class="float-end" name="notification_button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                <button class="float-end" type="button" name="notification_button" data-bs-toggle="offcanvas" data-bs-target="#notifications"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
                 <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
-                </svg></button>
+                </svg>
+            </button>
         </div>
-    </form>
+        <div class="offcanvas offcanvas-end" id="notifications">
+            <div class="offcanvas-header">
+                <h1 class="offcanvas-title">All Notifications</h1>
+            </div>
+            <div class="offcanvas-body">
+                <?php
+                    echo print_notifications_of_user($_SESSION['Username'], $con);
+                ?>
+            </div>
+        </div>
     <?php
         if(isset($_POST['home_button'])){
             echo "<script>window.open('home.php','_self')</script>";

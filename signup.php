@@ -106,7 +106,7 @@
                 ?>
             </div>
             <center><button type="submit" class="btn btn-info w-50" name="signup" id="signup">Sign Up</button></center>
-            <?php include("insert_user.php"); ?>
+            <?php include_once("insert_user.php"); ?>
         </form>
     </div>
 </body>

@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    include_once 'functions.php';
+    include_once 'includes/connection.php';
+
+    if (isset($_POST['back'])) {
+        echo "<script>window.open('new_post.php','_self')</script>";
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,16 +18,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
-<?php
-    include 'functions.php';
-    include 'includes/connection.php';
- 
-    session_start();
 
-    if (isset($_POST['back'])) {
-        echo "<script>window.open('new_post.php','_self')</script>";
-    }
-?>
 <style>
     h1{
         margin: 0;

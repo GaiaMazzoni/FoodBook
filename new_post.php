@@ -1,3 +1,8 @@
+<?php
+session_start();
+include_once 'functions.php';
+include_once ("includes/connection.php");
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,11 +75,6 @@
             </div>
                 
             <?php
-                include 'functions.php';
-                include ("includes/connection.php");
-
-                session_start();
-                
                 $username = $_SESSION['Username'];
                 if(isset($_POST['close'])){
                     echo "<script>window.open('home.php','_self')</script>";

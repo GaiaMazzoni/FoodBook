@@ -1,9 +1,8 @@
 <?php
-include("connection.php");
-session_start();
+//session_start();
+//include "functions.php";
 $username = urlencode($_SESSION['Username']);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

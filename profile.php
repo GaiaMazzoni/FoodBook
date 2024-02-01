@@ -1,9 +1,9 @@
 <?php
 session_start();
-include 'functions.php';
-include("includes/header.php");
-include("includes/footer.php");
-include("includes/connection.php");
+include_once 'functions.php';
+include_once("includes/header.php");
+include_once("includes/footer.php");
+include_once("includes/connection.php");
 
 if (!isset($_SESSION['Username'])) {
     header("Location: login.php");
