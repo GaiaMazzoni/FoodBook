@@ -1,3 +1,8 @@
+<?php
+    //session_start();
+    include_once "functions.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,8 +95,6 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             <div class="offcanvas-body">
                 <?php
-                    include_once "functions.php";
-                    session_start();
                     echo print_notifications_of_user($_SESSION['Username'], $con);
                 ?>
             </div>

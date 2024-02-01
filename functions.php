@@ -1,4 +1,5 @@
 <?php
+    //session_start();
     include_once ("includes/connection.php");
 
     function check_login($usernameOrEmail, $password, $mysqli){
@@ -9,6 +10,7 @@
         if(!$row){
             return false;
         }else{
+            echo "sto per inserire in sessione";
             $row["Username"] == $usernameOrEmail ? $_SESSION["Username"]=$row["Username"] : $_SESSION["Username"]=$row["Username"];
             return true;
         }

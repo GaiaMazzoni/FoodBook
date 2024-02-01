@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -137,8 +140,7 @@
         $followers = get_all_followed($username, $con);
         $posts = get_all_posts_from_followers($followers, $con);
         foreach($posts as $post){
-            echo print_post($post['Username'], $post['IdPost'], $con)
-            ;
+            echo print_post($post['Username'], $post['IdPost'], $con);
         }
     ?>
 </body>

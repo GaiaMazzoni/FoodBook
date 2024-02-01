@@ -1,7 +1,8 @@
 <?php
+session_start();
 include_once("includes/connection.php");
 include_once "functions.php";
-session_start();
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $num_cat = $_POST['num_cat'];
