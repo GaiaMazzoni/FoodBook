@@ -14,9 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $queryNotify = $con->prepare("INSERT INTO notification(UsernameTo, UsernameFrom, Type, DateAndTime, IdPost) VALUES (?, ?, ?, ?, ?)");
     $notificationType = 2;
     $queryNotify -> bind_param("ssisi", $post_publisher, $user_who_commented, $notificationType, $current_date_time, $post_id);
-    if (!($queryNotify -> execute())) {
-        return $con -> errno;
-    }
+    $queryNotify -> execute();
 
     echo "voglio aggiungere un commento";
     $query = $con->prepare("INSERT INTO comment(Post_Publisher, IdPost, Username_Who_Commented, DateAndTime, Comment_Text) VALUES (?,?,?,?,?)");

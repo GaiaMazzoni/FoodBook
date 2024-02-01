@@ -48,6 +48,110 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
         background-color: #000;
     }
 </style>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .post-container {
+        max-width: 600px;
+        margin: 20px auto;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .profile-section {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .profile-image {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .username {
+        font-weight: bold;
+    }
+
+    .post-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .interaction-icons {
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #eee;
+    }
+
+    .icon {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .icon img {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+    }
+
+    .profile-section a {
+        display: flex; 
+        align-items: center; 
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .post-description{
+        padding: 10px;
+    }
+
+    .collapsible-tags-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border-top: 1px solid #eee;
+    }
+
+    .tags-button {
+        background-color: transparent;
+        border: none;
+        color: #4f0484;
+        cursor: pointer;
+    }
+
+    .tags-button:focus {
+        outline: none;
+    }
+
+    .tags-collapse {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .tag-pill {
+        margin-right: 5px;
+        margin-bottom: 5px;
+        padding: 5px 10px;
+        background-color: #4f0484;
+        color: #fff;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+</style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -148,6 +252,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
                     <div class="text-center">
                         <button type="" class="btn btn-primary" id="category_s_button" name="category_s_button" onclick="search_category(event)">Search</button>
                     </div>
+                    <div id="print_result"></div>
                 </form>    
             </div>
 
@@ -163,7 +268,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
             button.classList.remove('select');
         }else{
             button.classList.add('select');
-            console.log(button.name);
         }
     }
 
@@ -173,11 +277,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
         let formData = new FormData();
         formData.append('num_cat', cat.length);
         for (let i = 0; i < cat.length; i++) {
-            console.log(cat[i].name);
             formData.append(i+1, cat[i].name);
         }
         axios.post('search_by_category.php', formData).then(response => {
-            console.log(response.data);
+            const postContainer = document.getElementById("print_result");
+            postContainer.innerHTML = response.data;
         });
     }
 
