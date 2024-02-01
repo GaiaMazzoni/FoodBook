@@ -12,6 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $username = $_SESSION['Username']; 
     echo "l'update type è: '$update_type'<br>";
+    echo "il new_data è: '$new_data'<br>";
     if ($new_data == null) {
         echo "newdata e null<br>";
     }
@@ -21,6 +22,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             update_profile($con, $username, 'E_mail', $new_data);
             break;
         case 'image':
+            $result = upload_image("images/", $new_data);
+            if ($result[0] == 1) {
+                echo "Caricamento dell'immagine avvenuto con successo. Nome del file: " . $result[1];
+            } else {
+                echo "Errore durante il caricamento dell'immagine: " . $result[1];
+            }
             update_profile($con, $username, 'ProfilePicture', $new_data);
             break;
         case 'bio':
