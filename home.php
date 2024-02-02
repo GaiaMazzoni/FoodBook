@@ -1,19 +1,19 @@
 <?php
 session_start();
+include_once("includes/connection.php");
+include_once("includes/header.php");
+include_once("includes/footer.php");
+include_once("functions.php");
+include_once("comment_form.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="./home.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Responsive Interface</title>
-    <?php
-    include_once("includes/connection.php");
-    include_once("includes/header.php");
-    include_once("includes/footer.php");
-    include_once("functions.php");
-    ?>
+    <title>FoodBook Home</title>
+
 </head>
 <style>
     body {
@@ -120,21 +120,6 @@ session_start();
     }
 </style>
 <body>
-    <div class="offcanvas offcanvas-bottom" id="comment">
-        <div class="offcanvas-header">
-            <h1 class="offcanvas-title">Comments:</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-        </div>
-        
-        <div class='offcanvas-body'>
-            <div id=print_comments> 
-            </div>  
-            <form id='comment_form' method='post'>
-                <textarea id='commentText' name='commentText' rows='1' cols='30'></textarea></br>
-                <input id='publish_comment' type='submit' class='$post_publisher' value='publish'>
-            </form>
-        </div>
-    </div>
     <?php
         $username = $_SESSION['Username'];
         $followers = get_all_followed($username, $con);
@@ -222,7 +207,6 @@ session_start();
         });
         location.reload(true);
     });
-
 </script>
 
 </html>

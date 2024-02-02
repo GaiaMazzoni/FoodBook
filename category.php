@@ -12,6 +12,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $cat = $_POST[$i];
         add_tag($cat, $id, $username, $con);
     }
-} else {
-    echo "Non è una richiesta POST";
-}
+} 

@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $print = "<?php";
 
     foreach($result as $post) {
-        $print .= print_post($post['Username'],$post['IdPost'],$con);
+        $print .= print_base_post($post['Username'],$post['IdPost'],$con);
         $print .= ";";
     }
 

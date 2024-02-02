@@ -166,6 +166,59 @@
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc()['Text'];
     }
+
+    function print_base_post($username, $postId, $mysqli) {
+        $profilePicture = get_img_profile($mysqli, $username);
+        $imagePost = get_post_image($username, $postId, $mysqli);
+        $postDescription = get_post_description($username, $postId, $mysqli);
+        $tags = get_tags_of_post($username, $postId, $mysqli);
+        $tagPills = print_tags_of_post($tags, $mysqli);
+        if($imagePost != NULL){
+            return "
+                <div class='post-container'>
+                    <div class='profile-section'>
+                        <a href='profile.php?user=$username' style='text-decoration: none; color: inherit;'>
+                            <img class='profile-image' src='images/$profilePicture' alt=''>
+                            <div class='username'>$username</div>
+                        </a>
+                    </div>
+                    <img class='post-image' src='images/$imagePost' alt=''>
+                    <div class='collapsible-tags-container'>
+                        <button class='tags-button' role='button' data-bs-toggle='collapse' data-bs-target='#tagsCollapse_$postId' aria-expanded='true' aria-controls='tagsCollapse_$postId' disabled>
+                            Show Tags
+                        </button>
+                        <div class='collapse show' id='tagsCollapse_$postId'>
+                            $tagPills
+                        </div>
+                    </div>
+
+                    <div class='post-description'>$postDescription</div>
+                </div>
+                ";
+        }else{
+            return "
+                <div class='post-container'>
+                    <div class='profile-section'>
+                        <a href='profile.php?user=$username' style='text-decoration: none; color: inherit;'>
+                            <img class='profile-image' src='images/$profilePicture' alt=''>
+                            <div class='username'>$username</div>
+                        </a>
+                    </div>
+                    <div class='collapsible-tags-container'>
+                        <button class='tags-button' role='button' data-bs-toggle='collapse' data-bs-target='#tagsCollapse_$postId' aria-expanded='true' aria-controls='tagsCollapse_$postId' disabled>
+                            Show Tags
+                        </button>
+                        <div class='collapse show' id='tagsCollapse_$postId'>
+                            $tagPills
+                        </div>
+                    </div>
+                    <div>
+                        <div class='post-description'>$postDescription</div>
+                    </div>
+                </div>
+                ";
+    }
+}
     function print_post($username, $postId, $mysqli){
         $profilePicture = get_img_profile($mysqli, $username);
         $imagePost = get_post_image($username, $postId, $mysqli);
