@@ -49,6 +49,39 @@ $num_following = mysqli_num_rows($run_following);
     <title><?php echo "$user Profile"; ?></title>
 </head>
 <style>
+    .collapsible-tags-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border-top: 1px solid #eee;
+    }
+
+    .tags-button {
+        background-color: transparent;
+        border: none;
+        color: #4f0484;
+        cursor: pointer;
+    }
+
+    .tags-button:focus {
+        outline: none;
+    }
+
+    .tags-collapse {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .tag-pill {
+        margin-right: 5px;
+        margin-bottom: 5px;
+        padding: 5px 10px;
+        background-color: #4f0484;
+        color: #fff;
+        border-radius: 20px;
+        cursor: pointer;
+    }
 .position-relative {
     position: relative;
 }
@@ -197,6 +230,11 @@ $num_following = mysqli_num_rows($run_following);
         echo generateModalForm('birthdate', 'BirthDate');
         echo generateModalForm('image', 'Image'); 
     ?>
+    <form method='post' action=''  enctype='multipart/form-data'>
+        <input type='hidden' name='update_type' value='ema'>
+        <input type='file' name='new_data' id="image" required>
+        <input type='submit' value='Invia' onclick="uploadImage()" name='submit' id="image_form">
+    </form>
     <div class='modal' id='change_name_form'>
         <div class='modal-dialog'>
             <div class='modal-content'>
@@ -387,5 +425,17 @@ $num_following = mysqli_num_rows($run_following);
             xhr.send();
         }
     }
+
+    function uploadImage() {
+        event.preventDefault();
+        const formDataImage = new FormData();
+        console.log("ciao");
+        formDataImage.append("image", document.querySelector("image").files[0]);
+        console.log(document.querySelector("#image").files[0]);
+        axios.post('edit_image.php', formDataImage).then(response => {
+            console.log(response.data);
+        });
+
+    };
 
 </script>

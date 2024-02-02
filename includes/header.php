@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 <style>
-    button {
+    #top_banner > button {
         background-color: transparent;
         border: none;
         color: #fccf00;
