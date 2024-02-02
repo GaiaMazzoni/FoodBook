@@ -222,6 +222,7 @@ session_start();
         });
         location.reload(true);
     });
+
 </script>
 
 </html>
