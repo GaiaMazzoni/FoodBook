@@ -318,7 +318,7 @@
                         <button type='button' class='btn-close' data-bs-dismiss='modal'></button>
                     </div>
                     <div class='modal-body'>
-                        <form method='post' action='edit_profile.php'>
+                        <form method='post' action='edit_profile.php'  enctype='multipart/form-data'>
                             <input type='hidden' name='update_type' value='$type'>
                             <input type='$inputType' name='new_data' $maxLengthAttr required>
                             <input type='submit' value='Invia' name='submit'>
@@ -461,4 +461,49 @@
         $stmt->execute();
         $stmt->get_result();
     }
+    
+    function upload_image($path, $image){
+        $imageName = basename($image["name"]);
+        $fullPath = $path.$imageName;
         
+        $maxKB = 500;
+        $acceptedExtensions = array("jpg", "jpeg", "png", "gif");
+        $result = 0;
+        $msg = "";
+        $imageSize = getimagesize($image["tmp_name"]);
+
+        if($imageSize === false) {
+            $msg .= "File caricato non è un'immagine! ";
+        }
+
+        if ($image["size"] > $maxKB * 1024) {
+            $msg .= "File caricato pesa troppo! Dimensione massima è $maxKB KB. ";
+        }
+        $imageFileType = strtolower(pathinfo($fullPath, PATHINFO_EXTENSION));
+
+        if(!in_array($imageFileType, $acceptedExtensions)){
+            $msg .= "Accettate solo le seguenti estensioni: ".implode(",", $acceptedExtensions);
+        }
+
+        if (file_exists($fullPath)) {
+            $i = 1;
+            do{
+                $i++;
+                $imageName = pathinfo(basename($image["name"]), PATHINFO_FILENAME)."_$i.".$imageFileType;
+            }
+            while(file_exists($path.$imageName));
+            $fullPath = $path.$imageName;
+        }
+
+        if(strlen($msg)==0){
+            if(!move_uploaded_file($image["tmp_name"], $fullPath)){
+                $msg.= "Errore nel caricamento dell'immagine.";
+            }
+            else{
+                $result = 1;
+                $msg = $imageName;
+            }
+        }
+        return array($result, $msg);
+    }
+    
