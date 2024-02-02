@@ -498,7 +498,23 @@
         return $notificationsMessage;
     }
 
+    function get_all_unread_notifications($usernameTo, $mysqli){
+        $isNotRead = 0;
+        $stmt = $mysqli->prepare("SELECT * FROM notification WHERE UsernameTo=? AND IsRead=?");
+        $stmt->bind_param("si", $usernameTo, $isNotRead);
+        $stmt->execute();
+        $allUnread = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $allUnread;
+    }
 
+    function read_notification($notification, $mysqli){
+        $isRead = 1;
+        $stmt = $mysqli->prepare("UPDATE notification SET IsRead=? WHERE UsernameTo=? AND UsernameFrom=? AND DateAndTime=?");
+        $stmt->bind_param("isss", $isRead, $notification['UsernameTo'], $notification['UsernameFrom'], $notification['DateAndTime']);
+        $stmt->execute();
+        $stmt->get_result();
+    }
+    
     function upload_image($path, $image){
         $imageName = basename($image["name"]);
         $fullPath = $path.$imageName;
