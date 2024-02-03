@@ -2,14 +2,14 @@
 include_once ("connection.php");
 
 function check_login($usernameOrEmail, $password, $mysqli){
-    $stmt = $mysqli->prepare("SELECT Username, E_mail FROM users WHERE Username=? OR E_mail=? AND Password=?");
+    $stmt = $mysqli->prepare("SELECT Username, E_mail FROM users WHERE (Username=? OR E_mail=?) AND Password=?");
     $stmt->bind_param("sss",$usernameOrEmail, $usernameOrEmail, $password);
     $stmt->execute();
     $row = $stmt->get_result()->fetch_assoc();
-    if(!$row){
+    if($row['Username'] == NULL){
         return false;
     }else{
-        $row["Username"] == $usernameOrEmail ? $_SESSION["Username"]=$row["Username"] : $_SESSION["Username"]=$row["Username"];
+        $_SESSION['Username'] = $row['Username'];
         return true;
     }
 }
@@ -418,7 +418,7 @@ function printCommentNotification($usernameFrom, $usernameTo, $idPost, $commentT
     return "<div class='rectangle'>
                 <div class='content'>
                     <p>$notificationMessage</p>
-                    <img src='images/$postImg' alt=''>
+                    <img src='../images/$postImg' alt=''>
                 </div>
             </div>";
 }
@@ -429,7 +429,7 @@ function printLikeNotification($usernameTo, $usernameFrom, $idPost, $mysqli){
     return "<div class='rectangle'>
                 <div class='content'>
                     <p>$notificationMessage</p>
-                    <img src='images/$postImg' alt=''>
+                    <img src='../images/$postImg' alt=''>
                 </div>
             </div>";
 }

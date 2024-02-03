@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('#tag_form').load('../tags.php');
+    $('#tag_form').load('../view/tags.php');
 });
 
 function publish_post() {

@@ -58,7 +58,7 @@
 <body>
     <div class="row">
         <div class="col-12 text-center">
-            <img src="images/logo.png" alt="FoodBook" class="img-rounded" title="FoodBook logo" width="100px" 
+            <img src="../images/logo.png" alt="FoodBook" class="img-rounded" title="FoodBook logo" width="100px" 
                 height="100px" id = "logo">
             <h1>FoodBook</h1>
             <h4>SignUp</h4>
@@ -106,7 +106,7 @@
                 ?>
             </div>
             <center><button type="submit" class="btn btn-info w-50" name="signup" id="signup">Sign Up</button></center>
-            <?php include_once("insert_user.php"); ?>
+            <?php include_once("../api/insert_user.php"); ?>
         </form>
     </div>
 </body>

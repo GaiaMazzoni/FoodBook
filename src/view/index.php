@@ -36,7 +36,7 @@ include_once("../includes/functions.php");
 <body>
     <div class="row">
        <div class="col-sm-12 text-center">
-            <img src="images/logo.png" alt="FoodBook" class="img-rounded" title="FoodBook logo" width="200px" 
+            <img src="../images/logo.png" alt="FoodBook" class="img-rounded" title="FoodBook logo" width="200px" 
             height="200px" id = "logo">
             <h1>FoodBook</h1>
             <p>Join us</p>
