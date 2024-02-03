@@ -9,6 +9,7 @@ include_once("comment_form.php");
 <html lang="en">
 <head>
     <script src="../js/home.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FoodBook Home</title>
@@ -128,5 +129,4 @@ include_once("comment_form.php");
         }
     ?>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </html>

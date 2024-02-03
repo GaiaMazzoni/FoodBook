@@ -3,21 +3,11 @@
 <head>
     <title>Sign Up</title>
     <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function validatePassword(){
-            var password = document.getElementById("password");
-            var confirm_password = document.getElementById("confirm_password");
-
-            if(password.value != confirm_password.value) {
-                confirm_password.setCustomValidity("Passwords doesn't match");
-            } else {
-                confirm_password.setCustomValidity('');
-            }
-        }
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/signup.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <style>
     head + body {
@@ -58,7 +48,7 @@
 <body>
     <div class="row">
         <div class="col-12 text-center">
-            <img src="images/logo.png" alt="FoodBook" class="img-rounded" title="FoodBook logo" width="100px" 
+            <img src="../images/logo.png" alt="FoodBook" class="img-rounded" title="FoodBook logo" width="100px" 
                 height="100px" id = "logo">
             <h1>FoodBook</h1>
             <h4>SignUp</h4>
@@ -91,11 +81,11 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input type="password" id="password" class="form-control" placeholder="Password" name="password" maxlength="20" onkeyup="validatePassword();" required>
+                    <input type="password" id="password" class="form-control" placeholder="Password" name="password" minlength="8" maxlength="20" required>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input type="password" id="confirm_password" class="form-control" placeholder="Confirm Password"  maxlength="20" name="confirm_password" onkeyup="validatePassword();" required>
+                    <input type="password" id="confirm_password" class="form-control" placeholder="Confirm Password" minlength="8" maxlength="20" name="confirm_password" required>
                 </div>
                 <p id="login"><a href="login.php">Already have an account?</a></p>
                 <?php
@@ -105,8 +95,7 @@
                     }
                 ?>
             </div>
-            <center><button type="submit" class="btn btn-info w-50" name="signup" id="signup">Sign Up</button></center>
-            <?php include_once("insert_user.php"); ?>
+            <center><button type="" class="btn btn-info w-50" name="signup" id="signup">Sign Up</button></center>
         </form>
     </div>
 </body>

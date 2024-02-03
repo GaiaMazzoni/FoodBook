@@ -2,8 +2,8 @@ function check_like() {
     var buttons = document.getElementsByClassName("like");
     if(buttons.length > 0) {
         Array.from(buttons).forEach(element => {
-            var post_publisher = element.id;
-            var post_id = element.value;
+            let post_publisher = element.id;
+            let post_id = element.value;
             let formData = new FormData();
             formData.append('post_publisher', post_publisher);
             formData.append('post_id', post_id);
@@ -24,8 +24,8 @@ window.onload = check_like;
 var like_bottons = document.querySelectorAll('.like');
 like_bottons.forEach(function(button) {
     button.addEventListener('click', function() {
-        var post_publisher = button.id;
-        var post_id = button.value;
+        let post_publisher = button.id;
+        let post_id = button.value;
         let formData = new FormData();
         formData.append('post_publisher', post_publisher);
         formData.append('post_id', post_id);
@@ -63,7 +63,7 @@ comment_buttons.forEach(function(button) {
 });
 
 document.getElementById('comment_form').addEventListener('submit', function(event) {
-    var comment = document.getElementById('commentText').value;
+    let comment = document.getElementById('commentText').value;
     let formData = new FormData();
     formData.append('post_publisher', post_publisher_comment);
     formData.append('post_id', post_id_comment);

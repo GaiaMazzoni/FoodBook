@@ -127,7 +127,7 @@ function print_following($username, $mysqli) {
             $userPhoto = get_img_profile($mysqli, $user);
             echo "<div class='dropdown-item alert alert-info'>";
             echo "<a href='../view/profile.php?user=" . htmlspecialchars($user) . "' style='text-decoration: none; color: inherit;'>";
-            echo "<img src='images/" . htmlspecialchars($userPhoto) . "' class='img-fluid rounded-circle mb-3' alt='Profile Image'>";
+            echo "<img src='../images/" . htmlspecialchars($userPhoto) . "' class='img-fluid rounded-circle mb-3' alt='Profile Image'>";
             echo "<p>" . htmlspecialchars($user) . "</p>";
             echo "</a>";
             echo "</div>";
@@ -418,7 +418,7 @@ function printCommentNotification($usernameFrom, $usernameTo, $idPost, $commentT
     return "<div class='rectangle'>
                 <div class='content'>
                     <p>$notificationMessage</p>
-                    <img src='images/$postImg' alt=''>
+                    <img src='../images/$postImg' alt=''>
                 </div>
             </div>";
 }
@@ -429,7 +429,7 @@ function printLikeNotification($usernameTo, $usernameFrom, $idPost, $mysqli){
     return "<div class='rectangle'>
                 <div class='content'>
                     <p>$notificationMessage</p>
-                    <img src='images/$postImg' alt=''>
+                    <img src='../images/$postImg' alt=''>
                 </div>
             </div>";
 }

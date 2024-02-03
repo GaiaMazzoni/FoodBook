@@ -54,7 +54,7 @@
 <body>
     <div class="row">
         <div class="col-12 text-center">
-            <img src="images/logo.png" alt="FoodBook" class="img-rounded" title="FoodBook logo" width="100px" 
+            <img src="../images/logo.png" alt="FoodBook" class="img-rounded" title="FoodBook logo" width="100px" 
                 height="100px" id = "logo">
             <h1>FoodBook</h1>
             <h4>LogIn</h4>
