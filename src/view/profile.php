@@ -43,8 +43,7 @@ $num_following = mysqli_num_rows($run_following);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-  
+<script src="../js/profile.js" defer></script>
     <title><?php echo "$user Profile"; ?></title>
 </head>
 <style>
@@ -281,7 +280,7 @@ $num_following = mysqli_num_rows($run_following);
         </div>
         <div class="col-12 col-md-3 text-center">
             <h3 class="card-title"><?php echo $first_name . " " . $surname; ?></h3>
-            <p class="text-muted">@<?php echo $user; ?></p>
+            <p id="username" class="text-muted"><?php echo $user; ?></p>
             <p class="card-text">
                 <strong>Email:</strong> <?php echo $email; ?><br>
                 <strong>Data di nascita:</strong> <?php echo $birth_date; ?><br>
@@ -320,42 +319,6 @@ $num_following = mysqli_num_rows($run_following);
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <?php if (!$is_own_profile): ?>
         <button id="followButton" class="" onclick="follow()">Follow</button>
-        <script>
-            function check_follow() {
-                var button = document.getElementById("followButton");
-                var username = "<?php echo addslashes($user); ?>";
-                let formData = new FormData();
-                formData.append('following', username);
-                axios.post('../api/check_follow.php',formData).then(response => {
-                    if(response.data == 1) {
-                        if(!button.classList.contains("Follow")) {
-                            button.classList.add("Follow");
-                            button.innerHTML = "Unfollow";
-                        } 
-                    } 
-                });                 
-            }
-
-            check_follow();
-
-            function follow() {
-                var button = document.getElementById("followButton");
-                var username = "<?php echo addslashes($user); ?>";
-                let formData = new FormData();
-                formData.append('following', username);
-                if (button.classList.contains("Follow")) {
-                    button.classList.remove("Follow");
-                    formData.append('remove', 1);
-                } else if (!button.classList.contains("Follow")) {
-                    button.classList.add("Follow");
-                    formData.append('remove', 0);
-                }
-                axios.post('../api/follow_handler.php',formData).then(response => {
-                    console.log(response.data);
-                });  
-                location.reload();
-            }
-        </script>
     <?php endif; ?>
 </div>
 <div class="button-container">
@@ -384,57 +347,3 @@ $num_following = mysqli_num_rows($run_following);
     </div>
 </body>
 </html>
-<script>
-    let user = "<?php echo addslashes($user); ?>";
-    function select(button){
-        if(!button.classList.contains('select')){
-            Array.from(document.getElementsByClassName('select')).forEach(element => {
-                element.classList.remove('select');
-            });
-            button.classList.add('select');
-        }
-        let hor = document.getElementsByClassName('hor')[0];
-        if(!hor.classList.contains('select')){
-            let imageContainer = document.querySelector('.image-container');
-            while (imageContainer.firstChild) {
-                imageContainer.removeChild(imageContainer.firstChild);
-            }
-
-            let xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    imageContainer.innerHTML = xhr.responseText;
-                }
-            };
-            xhr.open("GET", `../api/load_posts_ver.php?user=${user}`, true);
-            xhr.send();
-        }else{
-            let imageContainer = document.querySelector('.image-container');
-            while (imageContainer.firstChild) {
-                imageContainer.removeChild(imageContainer.firstChild);
-            }
-
-            let xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    imageContainer.innerHTML = xhr.responseText;
-                }
-            };
-            xhr.open("GET", `../api/load_posts_hor.php?user=${user}`, true);
-            xhr.send();
-        }
-    }
-
-    function uploadImage() {
-        event.preventDefault();
-        const formDataImage = new FormData();
-        console.log("ciao");
-        formDataImage.append("image", document.querySelector("image").files[0]);
-        console.log(document.querySelector("#image").files[0]);
-        axios.post('../api/edit_image.php', formDataImage).then(response => {
-            console.log(response.data);
-        });
-
-    };
-
-</script>

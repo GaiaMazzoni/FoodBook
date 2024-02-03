@@ -63,7 +63,6 @@ comment_buttons.forEach(function(button) {
 });
 
 document.getElementById('comment_form').addEventListener('submit', function(event) {
-    event.preventDefault();
     var comment = document.getElementById('commentText').value;
     let formData = new FormData();
     formData.append('post_publisher', post_publisher_comment);

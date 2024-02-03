@@ -126,7 +126,7 @@ function print_following($username, $mysqli) {
         foreach ($followed_users as $user) {
             $userPhoto = get_img_profile($mysqli, $user);
             echo "<div class='dropdown-item alert alert-info'>";
-            echo "<a href='profile.php?user=" . htmlspecialchars($user) . "' style='text-decoration: none; color: inherit;'>";
+            echo "<a href='../view/profile.php?user=" . htmlspecialchars($user) . "' style='text-decoration: none; color: inherit;'>";
             echo "<img src='images/" . htmlspecialchars($userPhoto) . "' class='img-fluid rounded-circle mb-3' alt='Profile Image'>";
             echo "<p>" . htmlspecialchars($user) . "</p>";
             echo "</a>";
@@ -215,8 +215,9 @@ function print_base_post($username, $postId, $mysqli) {
                 </div>
             </div>
             ";
+    }
 }
-}
+
 function print_post($username, $postId, $mysqli){
     $profilePicture = get_img_profile($mysqli, $username);
     $imagePost = get_post_image($username, $postId, $mysqli);
@@ -394,29 +395,6 @@ function checkFollower($username, $follower_username, $con) {
     $query->bind_param("ss", $username, $follower_username);
     $query->execute();
     return $query->get_result()->num_rows;
-}
-
-
-function get_last_interaction_id($username, $post_id, $mysqli){
-    $stmt = $mysqli->prepare("SELECT max(idInteraction) FROM interaction WHERE Post_Publisher=? AND Published_Post_Id=?");
-    $stmt->bind_param("si",$username,$post_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($row = $result->fetch_assoc()) {
-        return $row['max(idInteraction)'];
-    } else {
-        return null;
-    }
-}
-function get_last_notification_id($username, $post_id, $mysqli){
-    $stmt = $mysqli->prepare("SELECT max(IdNotification) FROM interaction");
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($row = $result->fetch_assoc()) {
-        return $row['max(IdNotification)'];
-    } else {
-        return null;
-    }
 }
 
 function addNotification($usernameTo, $usernameFrom, $idPost, $type, $dateAndTime, $mysqli){
