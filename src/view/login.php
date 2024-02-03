@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    include_once("../includes/connection.php");
+    if(isset($_SESSION['login_error'])){
+        echo '<div class="alert alert-danger">' . $_SESSION['login_error'] . '</div>';
+        unset($_SESSION['login_error']);
+    }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,14 +15,6 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<?php
-    session_start();
-    include_once("../includes/connection.php");
-    if(isset($_SESSION['login_error'])){
-        echo '<div class="alert alert-danger">' . $_SESSION['login_error'] . '</div>';
-        unset($_SESSION['login_error']);
-    }
-?>
 <style>
     head + body {
         border: 2px solid black;
@@ -65,7 +65,7 @@
             <div class="col-sm-12">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    <input type="text" class="form-control" placeholder="Username or e-mail" name="username" required>
+                    <input type="text" class="form-control" placeholder="Username or e-mail" name="usernameoremail" required>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>

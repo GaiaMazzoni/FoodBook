@@ -95,7 +95,8 @@
                     }
                 ?>
             </div>
-            <center><button type="" class="btn btn-info w-50" name="signup" id="signup">Sign Up</button></center>
+            <center><button type="submit" class="btn btn-info w-50" name="signup" id="signup">Sign Up</button></center>
+        
         </form>
     </div>
 </body>

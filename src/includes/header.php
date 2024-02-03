@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         let formData = new FormData();
         formData.append('usernameTo', usernameTo);
-        axios.post("./api/read_notifications.php", formData).then(response => {
+        axios.post("../api/read_notifications.php", formData).then(response => {
         });
         
     });
