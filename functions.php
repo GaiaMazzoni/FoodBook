@@ -222,6 +222,8 @@
     function print_post($username, $postId, $mysqli){
         $profilePicture = get_img_profile($mysqli, $username);
         $imagePost = get_post_image($username, $postId, $mysqli);
+        $images = get_post_images($username, $postId, $mysqli);
+        $carousel = print_images_carousel($images, $mysqli);
         $postDescription = get_post_description($username, $postId, $mysqli);
         $tags = get_tags_of_post($username, $postId, $mysqli);
         $tagPills = print_tags_of_post($tags, $mysqli);
@@ -234,7 +236,7 @@
                             <div class='username'>$username</div>
                         </a>
                     </div>
-                    <img class='post-image' src='images/$imagePost' alt=''>
+                    $carousel
                     <div class='icon'>
                         <div class='icon'>
                             <button class='like' id='$username' value='$postId'>
@@ -326,9 +328,11 @@
 
     function insert_post_image($postId, $image, $mysqli){
         $username = $_SESSION['Username'];
-        $stmt = $mysqli->prepare("INSERT INTO image (`Username`, `IdPost`, `Images`) VALUES (?, ?, ?);");
-        $stmt->bind_param("sis", $username, $postId, $image);
-        $stmt->execute();
+        foreach($image as $img){
+            $stmt = $mysqli->prepare("INSERT INTO image (`Username`, `IdPost`, `Images`) VALUES (?, ?, ?);");
+            $stmt->bind_param("sis", $username, $postId, $img['name']);
+            $stmt->execute();
+        }
     }
 
     function get_post_image($username, $postId, $mysqli){
@@ -336,6 +340,42 @@
         $stmt->bind_param("si",$username, $postId);
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc()['Images'];
+    }
+
+    function get_post_images($username, $postId, $mysqli){
+        $stmt = $mysqli->prepare("SELECT Images FROM image WHERE Username=? AND IdPost=?");
+        $stmt->bind_param("si",$username, $postId);
+        $stmt->execute();
+        $images = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $images;
+    }
+
+    function print_images_carousel($images, $mysqli){
+        $carousel = "<div id='carousel' class='carousel slide'>
+                        <div class='carousel-inner'>";
+        foreach($images as $img){
+            $imgName = $img['Images'];
+            if($images[0] == $img){
+                $carousel .= "<div class='carousel-item active'>
+                                <img src='images/$imgName' class='d-block w-100'>
+                              </div>";
+            }else{
+                $carousel .= "<div class='carousel-item'>
+                                <img src='images/$imgName' class='d-block w-100'>
+                              </div>";
+            }
+        $carousel .=    "</div>
+                        <button class='carousel-control-prev' type='button' data-bs-target='#carousel' data-bs-slide='prev'>
+                            <span class='carousel-control-prev-icon' aria-hidden='true'></span>
+                            <span class='visually-hidden'>Previous</span>
+                        </button>
+                        <button class='carousel-control-next' type='button' data-bs-target='#carousel' data-bs-slide='next'>
+                            <span class='carousel-control-next-icon' aria-hidden='true'></span>
+                            <span class='visually-hidden'>Next</span>
+                        </button>
+                    </div>";
+        }
+        return $carousel;
     }
 
     // Close connection

@@ -60,18 +60,6 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 });
 
-/*document.addEventListener('DOMContentLoaded', function() {
-    
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    notificationsButton = document.getElementById('notification-button');
-    notificationicon = document.getElementById('notificationIcon');
-    notificationPath = document.getElementById('notificationPath');
-    usernameTo = '<?php echo $_SESSION['Username']?>';
-    
-});*/
-
 </script>
 <style>
     #top_banner > button {

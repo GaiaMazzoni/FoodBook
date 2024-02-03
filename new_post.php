@@ -82,7 +82,7 @@ include_once ("includes/connection.php");
 
                 if(isset($_POST['next']) && isset($_POST['description']) && $_POST['description']!='' && isset($_POST['image'])){
                     add_post($username,$_POST['description'],$con);
-                    insert_post_image(get_last_post_id($username, $con),$_POST['image'], $con);
+                    insert_post_image(get_last_post_id($username, $con),$_FILES['image'], $con);
                     echo "<script>window.open('tag_selection.php','_self')</script>";
                 }
             ?>
