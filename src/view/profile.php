@@ -3,6 +3,7 @@ include_once("../includes/header.php");
 include_once("../includes/footer.php");
 include_once("../includes/connection.php");
 include_once("../includes/functions.php");
+include_once("../includes/database.php");
 
 if (!isset($_SESSION['Username'])) {
     header("Location: login.php");
@@ -22,6 +23,9 @@ $email = $row['E_mail'];
 $surname = $row['Surname'];
 $birth_date = $row['BirthDate'];
 $profile_picture = $row['ProfilePicture'];
+if ($profile_picture == null) {
+    $profile_picture = 'null_profile.png';
+}
 $bio = $row['Bio'];
 $password = $row['Password'];
 
@@ -228,11 +232,6 @@ $num_following = mysqli_num_rows($run_following);
         echo generateModalForm('birthdate', 'BirthDate');
         echo generateModalForm('image', 'Image'); 
     ?>
-    <form method='post' action=''  enctype='multipart/form-data'>
-        <input type='hidden' name='update_type' value='ema'>
-        <input type='file' name='new_data' id="image" required>
-        <input type='submit' value='Invia' onclick="uploadImage()" name='submit' id="image_form">
-    </form>
     <div class='modal' id='change_name_form'>
         <div class='modal-dialog'>
             <div class='modal-content'>
@@ -335,7 +334,6 @@ $num_following = mysqli_num_rows($run_following);
     </button>
 
 </div>
-
     <div class="image-container">
         <?php
             $images = print_post_image($user,$con); 

@@ -11,7 +11,7 @@ function publish_post() {
     }
     formData.forEach((value, key) => { console.log(key, value); });
     axios.post('../api/category.php', formData).then(response => {
-        console.log(response.data);
+        //console.log(response.data);
     })
     .catch(error => {
         console.error(error);

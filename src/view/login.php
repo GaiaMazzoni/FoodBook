@@ -37,7 +37,7 @@
         color: #4f0484;
         padding: 1 1.5%;
     }
-    #signup {
+    #signup_button {
         text-align: right;
         color: #1E90FF;
         padding: 1%;
@@ -69,9 +69,9 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    <input type="text" class="form-control" placeholder="Password" name="password" required>
+                    <input type="password" class="form-control" placeholder="Password" name="password" required>
                 </div>
-                <p id="signup"><a href="signup.php">Don't have an account?</a></p>
+                <p id="signup_button"><a href="signup.php">Don't have an account?</a></p>
             </div>
             <center><button type="submit" class="btn btn-info w-50" name="login" id="login">Log In</button></center>
         </form>

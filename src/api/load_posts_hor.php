@@ -2,6 +2,7 @@
 session_start();
 include_once("../includes/connection.php");
 include_once("../includes/functions.php");
+include_once("../includes/database.php");
 
 if(isset($_GET['user'])){
     $user = $_GET['user'];

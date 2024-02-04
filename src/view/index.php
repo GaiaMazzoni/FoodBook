@@ -15,14 +15,14 @@ include_once("../includes/functions.php");
     body{
         overflow-x: hidden;
     }
-    #signup{
+    #signup_button{
         width: 200px;
         border-radius: 30px;
         background-color: #fccf00;
         border: 1px solid #4f0484;
         color: #4f0484;
     }
-    #login{
+    #login_button{
         width: 200px;
         border-radius: 30px;
         background-color: #4f0484;
@@ -41,16 +41,16 @@ include_once("../includes/functions.php");
             <h1>FoodBook</h1>
             <p>Join us</p>
             <form method="post" action="">
-                <button id="signup" class="btn btn-info btn-lg" name="signup">Sign up</button></br></br>
+                <button id="signup_button" class="btn btn-info btn-lg" name="signup_button">Sign up</button></br></br>
                 <?php
-                    if(isset($_POST['signup'])){
-                        echo "<script>window.open('signup.php','_self')</script>";
+                    if(isset($_POST['signup_button'])){
+                        echo "<script>window.open('./signup.php','_self')</script>";
                     }
                 ?>
-                <button id="login" class="btn btn-info btn-lg" name="login">Log in</button></br></br>
+                <button id="login_button" class="btn btn-info btn-lg" name="login_button">Log in</button></br></br>
                 <?php
-                    if(isset($_POST['login'])){
-                        echo "<script>window.open('login.php','_self')</script>";
+                    if(isset($_POST['login_button'])){
+                        echo "<script>window.open('./login.php','_self')</script>";
                     }
                 ?>
             </form>
