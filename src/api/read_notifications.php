@@ -1,6 +1,7 @@
 <?php
-include 'functions.php';
-include 'includes/connection.php';
+include '../includes/functions.php';
+include '../includes/connection.php';
+include '../includes/database.php';
 
 echo "reading";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -2,6 +2,7 @@
 session_start();
 include_once("../includes/connection.php");
 include_once("../includes/functions.php");
+include_once("../includes/database.php");
 $username = urlencode($_SESSION['Username']);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -22,13 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             update_profile($con, $username, 'E_mail', $new_data);
             break;
         case 'image':
-            $result = upload_image("../images/", $_FILES($image));
-            if ($result[0] == 1) {
-                echo "Caricamento dell'immagine avvenuto con successo. Nome del file: " . $result[1];
-            } else {
-                echo "Errore durante il caricamento dell'immagine: " . $result[1];
-            }
-            update_profile($con, $username, 'ProfilePicture', $result[1]);
+            update_profile($con, $username, 'ProfilePicture', $new_data);
             break;
         case 'bio':
             update_profile($con, $username, 'Bio', $new_data);

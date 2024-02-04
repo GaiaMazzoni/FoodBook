@@ -49,7 +49,7 @@ var post_id_comment = null;
 var comment_buttons = document.querySelectorAll('.comment');
 comment_buttons.forEach(function(button) {
     button.addEventListener('click', function() {
-        post_publisher_comment = button.getAttribute('data-username');;
+        post_publisher_comment = button.getAttribute('data-username');
         post_id_comment = button.id;
         let formData = new FormData();
         formData.append('post_publisher', post_publisher_comment);

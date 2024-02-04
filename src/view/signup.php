@@ -87,7 +87,7 @@
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                     <input type="password" id="confirm_password" class="form-control" placeholder="Confirm Password" minlength="8" maxlength="20" name="confirm_password" required>
                 </div>
-                <p><a href="login.php">Already have an account?</a></p>
+                <p id=login_button><a href="login.php">Already have an account?</a></p>
             </div>
             <center><button type="submit" class="btn btn-info w-50" name="signup" id="signup">Sign Up</button></center>
         

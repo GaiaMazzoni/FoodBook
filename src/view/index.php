@@ -15,14 +15,14 @@ include_once("../includes/functions.php");
     body{
         overflow-x: hidden;
     }
-    #signup{
+    #signup_button{
         width: 200px;
         border-radius: 30px;
         background-color: #fccf00;
         border: 1px solid #4f0484;
         color: #4f0484;
     }
-    #login{
+    #login_button{
         width: 200px;
         border-radius: 30px;
         background-color: #4f0484;
