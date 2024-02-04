@@ -10,13 +10,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (check_login($usernameOrEmail, "passcripto", $con) == true) {
         $username = $_SESSION['Username'];
-        echo "<script>window.open('../view/profile.php?user=$username','_self');</script>";
-        exit;
+        $result = "<script>window.open('../view/profile.php?user=$username','_self');</script>";
     } else {
         $_SESSION['login_error'] = 'incorrect username, e-mail or password';
-        header("Location: ../view/login.php");
-        exit;
+        $result = "<script>window.open('../view/profile.php?user=$username','_self');</script>";
+        close_connection($con);
     }
+
+    header('Content-Type: application/json');
+    echo json_encode($result);
 }
 
-close_connection($con);

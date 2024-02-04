@@ -12,11 +12,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $second_data = $_POST['second_data'];
     }
     $username = $_SESSION['Username']; 
-    echo "l'update type è: '$update_type'<br>";
-    echo "il new_data è: '$new_data'<br>";
-    if ($new_data == null) {
-        echo "newdata e null<br>";
-    }
 
     switch ($update_type) {
         case 'email':
@@ -43,6 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
     }
 
-    //echo "<script>window.open('profile.php?user=$username','_self');</script>";
+    echo "<script>window.open('profile.php?user=$username','_self');</script>";
 }
 

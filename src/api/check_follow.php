@@ -8,5 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['following'];
     $follower_username = $_SESSION['Username'];
     $var = checkFollower($username, $follower_username, $con);
-    echo $var;
+
+    header('Content-Type: application/json');
+    echo json_encode($var);
 }
