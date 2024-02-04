@@ -85,3 +85,5 @@ function uploadImage() {
     });
 
 };
+
+document.getElementById('followButton').addEventListener('click', follow());

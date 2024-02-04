@@ -10,7 +10,7 @@ if(isset($_GET['user'])){
     $idList = get_all_post_ids_of_user($user, $con);
     $idList = array_reverse($idList);
     foreach ($idList as $id) {
-        echo print_base_post($user, $id['IdPost'], $con);
+        echo print_post($user, $id['IdPost'], $con);
     }
 }
 
