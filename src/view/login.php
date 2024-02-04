@@ -71,7 +71,7 @@
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                     <input type="text" class="form-control" placeholder="Password" name="password" required>
                 </div>
-                <p id="signup"><a href="signup.php">Don't have an account?</a></p>
+                <p><a href="signup.php">Don't have an account?</a></p>
             </div>
             <center><button type="submit" class="btn btn-info w-50" name="login" id="login">Log In</button></center>
         </form>
