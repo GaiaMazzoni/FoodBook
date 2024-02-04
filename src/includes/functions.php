@@ -2,13 +2,13 @@
 include_once ("connection.php");
 
 function check_login($usernameOrEmail, $password, $mysqli){
-    $stmt = $mysqli->prepare("SELECT Username, E_mail FROM users WHERE (Username=? OR E_mail=?) AND Password=?");
-    $stmt->bind_param("sss",$usernameOrEmail, $usernameOrEmail, $password);
+    $stmt = $mysqli->prepare("SELECT Username, E_mail, Password FROM users WHERE (Username=? OR E_mail=?)");
+    $stmt->bind_param("ss",$usernameOrEmail, $usernameOrEmail);
     $stmt->execute();
     $row = $stmt->get_result()->fetch_assoc();
-    if($row['Username'] == NULL){
+    if($row['Password'] == NULL /*|| !(password_verify($password, $row['Password']))*/){
         return false;
-    }else{
+    } else {
         $_SESSION['Username'] = $row['Username'];
         return true;
     }

@@ -1,0 +1,14 @@
+il check dello user ha dato risultato 0
+il check delle email ha dato risultato 0
+il run insert è andato a buon fine
+il check dello user ha dato risultato 1
+il check dello user ha dato risultato 0
+il check delle email ha dato risultato 0
+il run insert è andato a buon fine
+il check dello user ha dato risultato 0
+il check delle email ha dato risultato 1
+il check dello user ha dato risultato 0
+il check delle email ha dato risultato 1
+il check dello user ha dato risultato 0
+il check delle email ha dato risultato 0
+il run insert è andato a buon fine

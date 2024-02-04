@@ -36,7 +36,7 @@ else if($rand==2)
 else if($rand==3)
     $profile_picture = "profile_veg.png";
 
-//$password = password_hash($password, PASSWORD_DEFAULT);
+$password = password_hash($password, PASSWORD_DEFAULT);
 
 $insert = "insert into users(Name,Surname,Username,E_mail,BirthDate,Password,ProfilePicture,Bio)
 values('$first_name','$surname','$username','$email','$birthdate','$password','$profile_picture','My bio...')";

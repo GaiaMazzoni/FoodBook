@@ -69,7 +69,7 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    <input type="text" class="form-control" placeholder="Password" name="password" required>
+                    <input type="password" class="form-control" placeholder="Password" name="password" required>
                 </div>
                 <p><a href="signup.php">Don't have an account?</a></p>
             </div>
