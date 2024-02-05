@@ -31,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             update_profile($con, $username, 'Surname', $second_data);
             break;
         case 'password':
+            $second_data = password_hash($second_data, PASSWORD_DEFAULT);
             if(check_login($username, $new_data, $con)) {
                 update_profile($con, $username, 'Password', $second_data);
             }
