@@ -46,133 +46,144 @@ function print_following($username, $mysqli) {
 }
 
 function print_base_post($username, $postId, $mysqli) {
-    $profilePicture = get_img_profile($mysqli, $username);
-    $imagePost = get_post_image($username, $postId, $mysqli);
-    $postDescription = get_post_description($username, $postId, $mysqli);
-    $tags = get_tags_of_post($username, $postId, $mysqli);
-    $tagPills = print_tags_of_post($tags, $mysqli);
-    if($imagePost != NULL){
-        return "
+        $profilePicture = get_img_profile($mysqli, $username);
+        $imagePost = get_post_image($username, $postId, $mysqli);
+        $postDescription = get_post_description($username, $postId, $mysqli);
+        $tags = get_tags_of_post($username, $postId, $mysqli);
+        $tagPills = print_tags_of_post($tags, $mysqli);
+       
+        $result = "
             <div class='post-container'>
                 <div class='profile-section'>
                     <a href='profile.php?user=$username' style='text-decoration: none; color: inherit;'>
                         <img class='profile-image' src='../images/$profilePicture' alt=''>
                         <div class='username'>$username</div>
                     </a>
-                </div>
-                <img class='post-image' src='../images/$imagePost' alt=''>
-                <div class='collapsible-tags-container'>
-                    <button class='tags-button' role='button' data-bs-toggle='collapse' data-bs-target='#tagsCollapse_$postId' aria-expanded='true' aria-controls='tagsCollapse_$postId' disabled>
-                        Show Tags
-                    </button>
-                    <div class='collapse show' id='tagsCollapse_$postId'>
-                        $tagPills
-                    </div>
-                </div>
-
-                <div class='post-description'>$postDescription</div>
-            </div>
-            ";
-    }else{
-        return "
-            <div class='post-container'>
-                <div class='profile-section'>
-                    <a href='profile.php?user=$username' style='text-decoration: none; color: inherit;'>
-                        <img class='profile-image' src='../images/$profilePicture' alt=''>
-                        <div class='username'>$username</div>
-                    </a>
-                </div>
-                <div class='collapsible-tags-container'>
-                    <button class='tags-button' role='button' data-bs-toggle='collapse' data-bs-target='#tagsCollapse_$postId' aria-expanded='true' aria-controls='tagsCollapse_$postId' disabled>
-                        Show Tags
-                    </button>
-                    <div class='collapse show' id='tagsCollapse_$postId'>
-                        $tagPills
-                    </div>
-                </div>
-                <div>
-                    <div class='post-description'>$postDescription</div>
-                </div>
-            </div>
-            ";
-    }
-}
-
-function print_post($username, $postId, $mysqli){
-    $profilePicture = get_img_profile($mysqli, $username);
-    $imagePost = get_post_image($username, $postId, $mysqli);
-    $postDescription = get_post_description($username, $postId, $mysqli);
-    $tags = get_tags_of_post($username, $postId, $mysqli);
-    $tagPills = print_tags_of_post($tags, $mysqli);
-    if($imagePost != NULL){
-        return "
-            <div class='post-container'>
-                <div class='profile-section'>
-                    <a href='profile.php?user=$username' style='text-decoration: none; color: inherit;'>
-                        <img class='profile-image' src='../images/$profilePicture' alt=''>
-                        <div class='username'>$username</div>
-                    </a>
-                </div>
-                <img class='post-image' src='../images/$imagePost' alt=''>
-                <div class='icon'>
-                    <div class='icon'>
-                        <button class='like' id='$username' value='$postId'>
-                        <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-heart' viewBox='0 0 16 16'>
-                            <path d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15'/>
-                        </svg></button>
-                    </div>
-                    <div class='comment btn btn-primary' type='button' id='$postId' data-username='$username'  data-bs-toggle='offcanvas' data-bs-target='#comment'>
-                        <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-chat' viewBox='0 0 16 16'>
-                            <path d='M2.678 11.894a1 1 0 0 1 .287.801 11 11 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8 8 0 0 0 8 14c3.996 0 7-2.807 7-6s-3.004-6-7-6-7 2.808-7 6c0 1.468.617 2.83 1.678 3.894m-.493 3.905a22 22 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a10 10 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105'/>
-                        </svg>
-                    </div>
-                </div>
-                <div class='collapsible-tags-container'>
-                    <button class='tags-button' role='button' data-bs-toggle='collapse' data-bs-target='#tagsCollapse_$postId' aria-expanded='false' aria-controls='tagsCollapse_$postId'>
-                        Show Tags
-                    </button>
-                    <div class='collapse' id='tagsCollapse_$postId'>
-                        $tagPills
-                    </div>
-                </div>
-                <div class='post-description'>$postDescription</div>
-            </div>
-            ";
-    }else{
-        return "
-            <div class='post-container'>
-                <div class='profile-section'>
-                    <a href='profile.php?user=$username' style='text-decoration: none; color: inherit;'>
-                        <img class='profile-image' src='../images/$profilePicture' alt=''>
-                        <div class='username'>$username</div>
-                    </a>
-                </div>
-                <div class='icon'>
-                    <div class='icon'>
-                        <button class='like' id='$username' value='$postId'>
-                            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-heart' viewBox='0 0 16 16'>
-                                <path d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15'/>
-                            </svg></button>
-                    </div>
-                    <div class='comment btn btn-primary' type='button' id='$postId' data-username='$username'  data-bs-toggle='offcanvas' data-bs-target='#comment'>
-                        <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-chat' viewBox='0 0 16 16'>
-                            <path d='M2.678 11.894a1 1 0 0 1 .287.801 11 11 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8 8 0 0 0 8 14c3.996 0 7-2.807 7-6s-3.004-6-7-6-7 2.808-7 6c0 1.468.617 2.83 1.678 3.894m-.493 3.905a22 22 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a10 10 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105'/>
-                        </svg>
-                    </div>
-                    <div class='collapsible-tags-container'>
-                        <button class='tags-button' role='button' data-bs-toggle='collapse' data-bs-target='#tagsCollapse_$postId' aria-expanded='false' aria-controls='tagsCollapse_$postId'>
-                            Show Tags
-                        </button>
-                        <div class='collapse' id='tagsCollapse_$postId'>
-                            $tagPills
+                </div>";
+        if($imagePost != NULL){
+                $result .= "<div id='images_$username$postId' class='carousel slide' data-bs-ride='carousel'>
+                                <div class='carousel-indicators'>";
+                $active = "class='active'";
+                for($i = 0; $i < count($imagePost); $i++) {
+                    $result .= "<button type='button' data-bs-target='#images_$username$postId' data-bs-slide-to='$i' $active</button>";
+                    $active = '';
+                }
+                $result .= "
                         </div>
-                    </div>
-                    <div class='post-description'>$postDescription</div>
+                        <div class='carousel-inner'>";
+                        $active = "active";
+                        foreach($imagePost as $image) {
+                            $result .= "
+                                <div class='carousel-item $active'>
+                                    <img src='../images/$image' alt='' class='d-block' style='width:100%'>
+                                </div>
+                            ";
+                            $active = '';
+                        }
+                $result .= "
+                        </div>
+                        <button class='carousel-control-prev' type='button' data-bs-target='#images_$username$postId' data-bs-slide='prev'>
+                            <span class='carousel-control-prev-icon'></span>
+                        </button>
+                        <button class='carousel-control-next' type='button' data-bs-target='#images_$username$postId' data-bs-slide='next'>
+                            <span class='carousel-control-next-icon'></span>
+                        </button>
+                        </div>";
+        }
+    
+        $result .= "
+            <div class='collapsible-tags-container'>
+                <button class='tags-button' role='button' data-bs-toggle='collapse' data-bs-target='#tagsCollapse_$username$postId' aria-expanded='true' aria-controls='tagsCollapse_$username$postId' disable>
+                    Show Tags
+                </button>
+                <div class='collapse' id='tagsCollapse_$username$postId'>
+                    $tagPills
                 </div>
             </div>
-            ";
+            <div class='post-description'>$postDescription</div>
+        </div>";
+    
+        return $result;
     }
     
+
+function print_post($username, $postId, $mysqli, $type){
+    $profilePicture = get_img_profile($mysqli, $username);
+    $imagePost = get_post_image($username, $postId, $mysqli);
+    $postDescription = get_post_description($username, $postId, $mysqli);
+    $tags = get_tags_of_post($username, $postId, $mysqli);
+    $tagPills = print_tags_of_post($tags, $mysqli);
+   
+    $result = "
+        <div class='post-container'>
+            <div class='profile-section'>
+                <a href='profile.php?user=$username' style='text-decoration: none; color: inherit;'>
+                    <img class='profile-image' src='../images/$profilePicture' alt=''>
+                    <div class='username'>$username</div>
+                </a>
+            </div>";
+    if($imagePost != NULL){
+            $result .= "<div id='images_$username$postId' class='carousel slide' data-bs-ride='carousel'>
+                            <div class='carousel-indicators'>";
+            $active = "class='active'";
+            for($i = 0; $i < count($imagePost); $i++) {
+                $result .= "<button type='button' data-bs-target='#images_$username$postId' data-bs-slide-to='$i' $active</button>";
+                $active = '';
+            }
+            $result .= "
+                    </div>
+                    <div class='carousel-inner'>";
+                    $active = "active";
+                    foreach($imagePost as $image) {
+                        $result .= "
+                            <div class='carousel-item $active'>
+                                <img src='../images/$image' alt='' class='d-block' style='width:100%'>
+                            </div>
+                        ";
+                        $active = '';
+                    }
+            $result .= "
+                    </div>
+                    <button class='carousel-control-prev' type='button' data-bs-target='#images_$username$postId' data-bs-slide='prev'>
+                        <span class='carousel-control-prev-icon'></span>
+                    </button>
+                    <button class='carousel-control-next' type='button' data-bs-target='#images_$username$postId' data-bs-slide='next'>
+                        <span class='carousel-control-next-icon'></span>
+                    </button>
+                    </div>";
+    }
+
+    if($type != "base") {
+        $result .= "<div class='icon'>
+        <div class='icon'>
+            <button class='like' id='$username' value='$postId'>
+            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-heart' viewBox='0 0 16 16'>
+                <path d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15'/>
+            </svg></button>
+        </div>
+        <div class='comment btn btn-primary' type='button' id='$postId' data-username='$username'  data-bs-toggle='offcanvas' data-bs-target='#comment'>
+            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-chat' viewBox='0 0 16 16'>
+                <path d='M2.678 11.894a1 1 0 0 1 .287.801 11 11 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8 8 0 0 0 8 14c3.996 0 7-2.807 7-6s-3.004-6-7-6-7 2.808-7 6c0 1.468.617 2.83 1.678 3.894m-.493 3.905a22 22 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a10 10 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105'/>
+            </svg>
+        </div>
+        </div>";
+        $aria_expanded = "false";
+        $disable = '';
+    } 
+
+    $result .= "
+        <div class='collapsible-tags-container'>
+            <button class='tags-button' role='button' data-bs-toggle='collapse' data-bs-target='#tagsCollapse_$username$postId' aria-expanded='true' aria-controls='tagsCollapse_$username$postId' disable>
+                Show Tags
+            </button>
+            <div class='collapse' id='tagsCollapse_$username$postId'>
+                $tagPills
+            </div>
+        </div>
+        <div class='post-description'>$postDescription</div>
+    </div>";
+
+    return $result;
 }
 
 function print_tags_of_post($tags, $mysqli){
@@ -222,13 +233,6 @@ function generateModalForm($type, $label, $maxLength = null) {
         </div>
     </div>";
 }
-
-
-
-
-
-
-
 function printFollowNotification($usernameFrom){
     $notificationMessage = "$usernameFrom now follows you!";
     return "<div class='rectangle'>
@@ -274,6 +278,24 @@ function print_notifications_of_user($usernameTo, $mysqli){
         }
     }
     return $notificationsMessage;
+}
+
+function print_comments($username, $post_id, $mysqli) {
+    $comments = get_all_comments($username, $post_id, $mysqli);
+    $output = "";
+    foreach ($comments as $comment) {
+        $user_who_commented = $comment['Username_Who_Commented'];
+        $text = $comment['Comment_Text'];
+
+        $output .= "<div class='alert alert-info'>";
+        $output .= "<a href='profile.php?user=" . urlencode($user_who_commented) . "'>";
+        $output .= htmlspecialchars($user_who_commented);
+        $output .= "</a>";
+        $output .= "<p>" . htmlspecialchars($text) . "</p>";
+        $output .= "</div>";
+        
+    }
+    return $output;
 }
 
 

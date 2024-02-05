@@ -323,12 +323,7 @@
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    function insert_post_image($postId, $image, $mysqli){
-        $username = $_SESSION['Username'];
-        $stmt = $mysqli->prepare("INSERT INTO image (`Username`, `IdPost`, `Images`) VALUES (?, ?, ?);");
-        $stmt->bind_param("sis", $username, $postId, $image);
-        $stmt->execute();
-    }
+    
 
     function get_post_image($username, $postId, $mysqli){
         $stmt = $mysqli->prepare("SELECT Images FROM image WHERE Username=? AND IdPost=?");

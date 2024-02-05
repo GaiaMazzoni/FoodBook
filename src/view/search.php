@@ -156,7 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-    <script src="./search.js" defer></script>
+    <script src="../js/search.js" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Search</title>
 </head>
@@ -191,16 +191,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
                         <button type="submit" class="btn btn-primary" id="s_button" name="s_button">Search</button>
                     </div>
                 </form>
-                <?php foreach($search_results as $username): 
-                        $img_query = "SELECT ProfilePicture FROM users WHERE Username='$username'";
-                        $img_result = mysqli_query($con, $img_query);
-                        $img_row = mysqli_fetch_assoc($img_result);
-                        $profile_pic = $img_row['ProfilePicture'];
-                    ?>
+                <?php foreach($search_results as $user): 
+                    $profile_pic = get_img_profile($con, $user); ?>
                     <center><div class="alert alert-info">
-                        <a href="profile.php?user=<?php echo urlencode($username); ?>" style="text-decoration: none; color: inherit;">
-                            <img src="images/<?php echo $profile_pic; ?>" class="img-fluid rounded-circle mb-3" id="p_profile" alt="Immagine Profilo">
-                            <?php echo htmlspecialchars($username); ?>
+                        <a href="profile.php?user=<?php echo urlencode($user); ?>" style="text-decoration: none; color: inherit;">
+                            <img src="../images/<?php echo $profile_pic; ?>" class="img-fluid rounded-circle mb-3" id="p_profile" alt="Profile Image">
+                            <?php echo htmlspecialchars($user); ?>
                         </a>
                     </div></center>
                 <?php endforeach; ?>
