@@ -15,8 +15,7 @@ function handleImageUpload(postId) {
             formDataImage.append(i, fileInput.files[i].name);
             console.log(fileInput.files[i].name);
         }
-        const uploadPromise = axios.post('../api/upload_image.php', formDataImage)
-        .then(response => {
+        axios.post('../api/upload_image.php', formDataImage).then(response => {
             window.open('./tag_selection.php','_self');
         });
     }

@@ -1,7 +1,3 @@
-document.addEventListener('DOMContentLoaded', functio(){
-    let horizontalButton = 
-})
-
 window.addEventListener('load', check_follow);
 function check_follow() {
     var button = document.getElementById("followButton");
@@ -19,6 +15,10 @@ function check_follow() {
     });                 
 }
 
+document.getElementById("followButton").addEventListener("click",function() {
+    follow();
+});
+
 function follow() {
     var button = document.getElementById("followButton");
     var username = document.getElementById("username").textContent;
@@ -32,7 +32,7 @@ function follow() {
         formData.append('remove', 0);
     }
     axios.post('../api/follow_handler.php',formData).then(response => {
-        //console.log(response.data);
+        console.log(response.data);
     });  
     location.reload();
 }
