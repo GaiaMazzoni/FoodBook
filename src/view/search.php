@@ -203,10 +203,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
                 </div>
 
             <div id="post_form" style="display: none;">
-                <div id="tag_form"></div>
-                <div class="text-center">
-                    <button type="" class="btn btn-primary" id="category_s_button" name="category_s_button" onclick="search_category(event)">Search</button>
+            <div class="text-center">
+                    <button type="" class="btn btn-primary" id="category_s_button" name="category_s_button">Search</button>
                 </div>
+                <div id="tag_form"></div>
                 <div id="print_result"></div>
             </div>
         </div>

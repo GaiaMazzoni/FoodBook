@@ -52,17 +52,10 @@ function print_base_post($username, $postId, $mysqli) {
         $tags = get_tags_of_post($username, $postId, $mysqli);
         $tagPills = print_tags_of_post($tags, $mysqli);
        
-        $result = "
-            <div class='post-container'>
-                <div class='profile-section'>
-                    <a href='profile.php?user=$username' style='text-decoration: none; color: inherit;'>
-                        <img class='profile-image' src='../images/$profilePicture' alt=''>
-                        <div class='username'>$username</div>
-                    </a>
-                </div>";
+        $result = "<div class='post-container'><div class='profile-section'><a href='profile.php?user=$username' style='text-decoration: none; color: inherit;'><img class='profile-image' src='../images/$profilePicture' alt=''><div class='username'>$username</div></a></div>";
         if($imagePost != NULL){
                 $result .= "<div id='images_$username$postId' class='carousel slide' data-bs-ride='carousel'>
-                                <div class='carousel-indicators'>";
+                <div class='carousel-indicators'>";
                 $active = "class='active'";
                 for($i = 0; $i < count($imagePost); $i++) {
                     $result .= "<button type='button' data-bs-target='#images_$username$postId' data-bs-slide-to='$i' $active</button>";
@@ -76,8 +69,7 @@ function print_base_post($username, $postId, $mysqli) {
                             $result .= "
                                 <div class='carousel-item $active'>
                                     <img src='../images/$image' alt='' class='d-block' style='width:100%'>
-                                </div>
-                            ";
+                                </div>";
                             $active = '';
                         }
                 $result .= "
