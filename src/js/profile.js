@@ -1,3 +1,5 @@
+let user = "<?php echo addslashes($user); ?>";
+window.addEventListener('load', check_follow());
 function check_follow() {
     var button = document.getElementById("followButton");
     var username = document.getElementById("username").textContent;
@@ -13,8 +15,6 @@ function check_follow() {
         } 
     });                 
 }
-
-window.addEventListener('load', check_follow());
 
 function follow() {
     var button = document.getElementById("followButton");
@@ -34,8 +34,6 @@ function follow() {
     location.reload();
 }
 
-
-let user = "<?php echo addslashes($user); ?>";
 function select(button){
     if(!button.classList.contains('select')){
         Array.from(document.getElementsByClassName('select')).forEach(element => {

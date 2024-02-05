@@ -191,8 +191,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
                         <button type="submit" class="btn btn-primary" id="s_button" name="s_button">Search</button>
                     </div>
                 </form>
-                <?php foreach($search_results as $username): ?>
-                    <?php
+                <?php foreach($search_results as $username): 
                         $img_query = "SELECT ProfilePicture FROM users WHERE Username='$username'";
                         $img_result = mysqli_query($con, $img_query);
                         $img_row = mysqli_fetch_assoc($img_result);

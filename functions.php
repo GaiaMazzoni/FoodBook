@@ -1,7 +1,4 @@
 <?php
-    //session_start();
-    include_once ("includes/connection.php");
-
     function check_login($usernameOrEmail, $password, $mysqli){
         $stmt = $mysqli->prepare("SELECT Username, E_mail FROM users WHERE Username=? OR E_mail=? AND Password=?");
         $stmt->bind_param("sss",$usernameOrEmail, $usernameOrEmail, $password);

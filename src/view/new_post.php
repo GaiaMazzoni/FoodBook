@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once("../includes/connection.php");
-include_once("../includes/functions.php");
+include_once("../functions.php");
 include_once("../includes/database.php");
 ?>
 <!DOCTYPE html>
@@ -65,29 +65,14 @@ include_once("../includes/database.php");
     <div class="row">
         <div class="col-sm-12 text-center">
             <div id="top_banner">
-                <form method="post">
+                <form method="post" action="../api/new_post_logics.php">
                     <button id="close" class="close_button" name="close">X</button>
                     <h1>New Post</h1>
                     <button id="next" class="next_button" name="next">Next</button>
                     <input type="file" id="imageSelection" class="form-control" name="image" accept="image/*" multiple>
                     <textarea id="description" class="form-control" name="description" placeholder="Enter your post description"></textarea>
-
                 </form>
             </div>
-                
-            <?php
-                $username = $_SESSION['Username'];
-                if(isset($_POST['close'])){
-                    echo "<script>window.open('home.php','_self')</script>";
-                }
-
-                if(isset($_POST['next']) && isset($_POST['description']) && $_POST['description']!='' && isset($_POST['image'])){
-                    add_post($username,$_POST['description'],$con);
-                    insert_post_image(get_last_post_id($username, $con),$_POST['image'], $con);
-                    echo "<script>window.open('tag_selection.php','_self')</script>";
-                }
-            ?>
-
         </div>
     </div>
 </body>

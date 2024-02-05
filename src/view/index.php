@@ -1,6 +1,6 @@
 <?php
 include_once("../includes/connection.php");
-include_once("../includes/functions.php");
+include_once("../functions.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,17 +42,6 @@ include_once("../includes/functions.php");
             <p>Join us</p>
             <form method="post" action="">
                 <button id="signup_button" class="btn btn-info btn-lg" name="signup_button">Sign up</button></br></br>
-                <?php
-                    if(isset($_POST['signup_button'])){
-                        echo "<script>window.open('./signup.php','_self')</script>";
-                    }
-                ?>
-                <button id="login_button" class="btn btn-info btn-lg" name="login_button">Log in</button></br></br>
-                <?php
-                    if(isset($_POST['login_button'])){
-                        echo "<script>window.open('./login.php','_self')</script>";
-                    }
-                ?>
             </form>
        </div> 
     </div>
