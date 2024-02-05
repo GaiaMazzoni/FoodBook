@@ -1,8 +1,3 @@
-<?php
-    include_once 'functions.php';
-    include_once '../api/footer_logics.php';
-    session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

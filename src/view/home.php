@@ -2,7 +2,7 @@
 include_once("../includes/connection.php");
 include_once("../includes/header.php");
 include_once("../includes/footer.php");
-include_once("../functions.php");
+include_once("../includes/functions.php");
 include_once("../includes/database.php");
 include_once("comment_form.php");
 ?>
