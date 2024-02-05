@@ -9,6 +9,8 @@ if(isset($_GET['user'])){
     $images = print_post_image($user,$con); 
     foreach ($images as $img){
         $img = $img['Images'];
-        echo "<img class='img' src='images/$img' alt=''>";
+        $result = "<img class='img' src='images/$img' alt=''>";
     }
+    header('Content-Type: application/json');
+    echo json_encode($result);
 }

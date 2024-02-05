@@ -16,36 +16,33 @@ $run_email = mysqli_query($con,$check_email_query);
 $check = mysqli_num_rows($run_username);
 
 if($check == 1){
-    echo "USER";
-    exit();
+    $result = "USER";
+} else {
+    $check = mysqli_num_rows($run_email);
+    if($check == 1){
+        $result = "EMAIL";
+    } else {
+        $rand=rand(1,3);
+        if($rand==1)
+            $profile_picture = "profile_pizza.png";
+        else if($rand==2)
+            $profile_picture = "profile_cake.png";
+        else if($rand==3)
+            $profile_picture = "profile_veg.png";
+
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $insert = "insert into users(Name,Surname,Username,E_mail,BirthDate,Password,ProfilePicture,Bio)
+        values('$first_name','$surname','$username','$email','$birthdate','$password','$profile_picture','My bio...')";
+        $run_insert = mysqli_query($con,$insert);
+        if($run_insert){
+            $result = "OK";
+        }
+        else {
+            $result = "FAIL";
+        }
+    }
 }
 
-$check = mysqli_num_rows($run_email);
+header('Content-Type: application/json');
+echo json_encode($result);
 
-if($check == 1){
-    echo "EMAIL";
-    exit();
-}
-
-$rand=rand(1,3);
-
-if($rand==1)
-    $profile_picture = "profile_pizza.png";
-else if($rand==2)
-    $profile_picture = "profile_cake.png";
-else if($rand==3)
-    $profile_picture = "profile_veg.png";
-
-$password = password_hash($password, PASSWORD_DEFAULT);
-
-$insert = "insert into users(Name,Surname,Username,E_mail,BirthDate,Password,ProfilePicture,Bio)
-values('$first_name','$surname','$username','$email','$birthdate','$password','$profile_picture','My bio...')";
-$run_insert = mysqli_query($con,$insert);
-
-if($run_insert){
-    echo "OK";
-}
-else {
-    echo "FAIL";
-    exit();
-}

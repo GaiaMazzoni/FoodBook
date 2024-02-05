@@ -325,11 +325,9 @@
 
     function insert_post_image($postId, $image, $mysqli){
         $username = $_SESSION['Username'];
-        foreach($image as $img){
-            $stmt = $mysqli->prepare("INSERT INTO image (`Username`, `IdPost`, `Images`) VALUES (?, ?, ?);");
-            $stmt->bind_param("sis", $username, $postId, $img['name']);
-            $stmt->execute();
-        }
+        $stmt = $mysqli->prepare("INSERT INTO image (`Username`, `IdPost`, `Images`) VALUES (?, ?, ?);");
+        $stmt->bind_param("sis", $username, $postId, $image);
+        $stmt->execute();
     }
 
     function get_post_image($username, $postId, $mysqli){

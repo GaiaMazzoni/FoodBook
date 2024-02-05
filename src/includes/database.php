@@ -208,3 +208,78 @@ function read_notification($notification, $mysqli){
     $stmt->execute();
     $stmt->get_result();
 }
+
+function check_likes($post_publisher, $post_id, $user_who_liked, $mysqli) {
+    $query = $mysqli->prepare("SELECT * FROM likes WHERE Post_Publisher=? AND IdPost = ? AND Username_Who_Liked = ?");
+    $query->bind_param("sis", $post_publisher, $post_id, $user_who_liked);
+    $query->execute();
+    return $query->get_result()->num_rows;
+}
+
+function follow($username, $follower_username, $con) {
+    $current_date_time = date("Y-m-d H:i:s");
+    $queryNotify = $con->prepare("INSERT INTO notification(UsernameTo, UsernameFrom, Type, DateAndTime) VALUES (?, ?, ?, ?)");
+    $notificationType = 3;
+    $queryNotify -> bind_param("ssis", $follower_username, $username, $notificationType, $current_date_time);
+    $queryNotify -> execute();
+    $query = $con->prepare("INSERT INTO follow(Follower_Username, Username) VALUES (?, ?)");
+    $query->bind_param("ss", $follower_username, $username);
+    $query->execute();
+}
+
+function unfollow($username, $follower_username, $con) {
+    $query = $con->prepare("DELETE FROM follow WHERE Follower_Username = ? AND Username = ?");
+    $query->bind_param("ss", $follower_username, $username);
+    $query->execute();
+}
+
+function likes($post_publisher, $post_id, $user_who_liked, $mysqli) {
+    $current_date_time = date("Y-m-d H:i:s");
+    $queryNotify = $mysqli->prepare("INSERT INTO notification(UsernameTo, UsernameFrom, Type, DateAndTime, IdPost) VALUES (?, ?, ?, ?, ?)");
+    $notificationType = 1;
+    $queryNotify -> bind_param("ssisi", $post_publisher, $user_who_liked, $notificationType, $current_date_time, $post_id);
+    $queryNotify -> execute();
+    $query = $mysqli->prepare("INSERT INTO likes(Post_Publisher, IdPost, Username_Who_Liked) VALUES(?,?,?)");
+    $query->bind_param("sis", $post_publisher, $post_id, $user_who_liked);
+    $query->execute();
+}
+
+function remove_likes($post_publisher, $post_id, $user_who_liked, $mysqli) {
+    $query = $mysqli->prepare("DELETE FROM likes WHERE Post_Publisher = ? AND IdPost = ? AND Username_Who_Liked = ?");
+    $query->bind_param("sis", $post_publisher, $post_id, $user_who_liked);
+    $query->execute();
+}
+
+function get_all_comments($username, $id_post, $mysqli) {
+    $comments = [];
+    $stmt = $mysqli->prepare("SELECT * FROM comment WHERE Post_Publisher = ? AND IdPost = ?");
+    $stmt->bind_param("si", $username, $id_post);
+    $stmt->execute();
+    $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $comments = $result;
+
+    usort($comments, function($comment1, $comment2){
+        return strtotime($comment2['DateAndTime']) - strtotime($comment1['DateAndTime']);
+    });
+
+    return $comments;
+}
+
+function get_posts_from_category($cat_list, $num_cat, $mysqli) {
+    $placeholders = implode(',', array_fill(0, $num_cat, '?'));
+    $stmt = $mysqli->prepare("SELECT Username, IdPost FROM belong WHERE IdCategory IN ($placeholders) GROUP BY Username, IdPost HAVING COUNT(DISTINCT IdCategory) = ?");
+    $params = array_merge($cat_list, array($num_cat));
+    $types = str_repeat('s', count($cat_list)) . 'i';
+    $stmt -> bind_param($types, ...$params);
+    call_user_func_array(array($stmt, 'bind_param'), array_merge(array($types), $params));
+    $stmt->execute();
+    $post = $stmt->get_result();
+    return $post;
+}
+
+function get_id_category($category_name, $mysqli) {
+    $stmt = $mysqli->prepare("SELECT IdCategory FROM category WHERE CategoryName=?");
+    $stmt -> bind_param('s', $category_name);
+    $stmt -> execute();
+    return $stmt -> get_result() -> fetch_assoc()['IdCategory'];
+}
