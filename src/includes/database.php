@@ -9,7 +9,7 @@ function check_login($usernameOrEmail, $password, $mysqli){
     error_log($row['Password'] . PHP_EOL, 3, "log.txt");
     error_log($password . PHP_EOL, 3, "log.txt");
 
-    if($row['Password'] == NULL /*|| !(password_verify($password, password_hash("passcripto", PASSWORD_DEFAULT)))*/){
+    if($row['Password'] == NULL /*|| !(password_verify($password, $row['Password']))*/){
         return false;
     } else {
         $_SESSION['Username'] = $row['Username'];
@@ -45,11 +45,15 @@ function add_tag($categoryName, $idPost, $username, $mysqli){
     $stmt->execute();
 }
 
-function get_img_profile($con,$username) {
+function get_img_profile($con, $username) {
     $img_query = "SELECT ProfilePicture FROM users WHERE Username='$username'";
     $img_result = mysqli_query($con, $img_query);
     $img_row = mysqli_fetch_assoc($img_result);
-    return $img_row['ProfilePicture'];
+    $img = $img_row['ProfilePicture']; 
+    if($img == null){
+        $img = "null_profile.png";
+    }
+    return $img;
 }
 
 function get_all_followed($username, $mysqli){
@@ -130,9 +134,16 @@ function get_all_post_ids_of_user($username, $mysqli){
 
 function get_post_image($username, $postId, $mysqli){
     $stmt = $mysqli->prepare("SELECT Images FROM image WHERE Username=? AND IdPost=?");
-    $stmt->bind_param("si",$username, $postId);
+    $stmt->bind_param("si", $username, $postId);
     $stmt->execute();
-    return $stmt->get_result()->fetch_assoc()['Images'];
+    $result = $stmt->get_result();
+    
+    $images = array();
+    while ($row = $result->fetch_assoc()) {
+        $images[] = $row['Images'];
+    }
+    
+    return $images;
 }
 
 function update_profile($con, $username, $type, $new_element) {
