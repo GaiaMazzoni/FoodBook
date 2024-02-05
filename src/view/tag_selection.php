@@ -4,7 +4,7 @@
     include_once("../includes/functions.php");
 
     if (isset($_POST['back'])) {
-        echo "<script>window.open('new_post.php','_self')</script>";
+        echo "<script>window.open('../new_post.php','_self')</script>";
     }
 ?>
 <!DOCTYPE html>

@@ -2,6 +2,8 @@ $(document).ready(function(){
     $('#tag_form').load('../view/tags.php');
 });
 
+document.getElementById("publish").addEventListener('click', publish_post());
+
 function publish_post() {
     let cat = document.getElementsByClassName("select");
     let formData = new FormData();
@@ -11,7 +13,6 @@ function publish_post() {
     }
     formData.forEach((value, key) => { console.log(key, value); });
     axios.post('../api/category.php', formData).then(response => {
-        //console.log(response.data);
     })
     .catch(error => {
         console.error(error);
