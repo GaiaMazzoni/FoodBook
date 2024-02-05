@@ -9,11 +9,12 @@ function check_login($usernameOrEmail, $password, $mysqli){
     error_log($row['Password'] . PHP_EOL, 3, "log.txt");
     error_log($password . PHP_EOL, 3, "log.txt");
 
-    if($row['Password'] == NULL /*|| !(password_verify($password, $row['Password']))*/){
-        return false;
-    } else {
+
+    if(password_verify($password, $row['Password']) == true){
         $_SESSION['Username'] = $row['Username'];
         return true;
+    }else{
+        return false;
     }
 }
 

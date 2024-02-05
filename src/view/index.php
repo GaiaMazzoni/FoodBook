@@ -1,6 +1,6 @@
 <?php
 include_once("../includes/connection.php");
-include_once("../functions.php");
+include_once("../includes/functions.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,7 +40,8 @@ include_once("../functions.php");
             height="200px" id = "logo">
             <h1>FoodBook</h1>
             <p>Join us</p>
-            <form method="post" action="">
+            <form method="post" action="../api/index_logics.php">
+                <button id="login_button" class="btn btn-info btn-lg" name="login_button"> Log in </button></br></br>
                 <button id="signup_button" class="btn btn-info btn-lg" name="signup_button">Sign up</button></br></br>
             </form>
        </div> 
