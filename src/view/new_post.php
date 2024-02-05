@@ -68,10 +68,9 @@ include_once("../includes/database.php");
                 <form method="post">
                     <button id="close" class="close_button" name="close">X</button>
                     <h1>New Post</h1>
-                    <button id="next" class="next_button" name="next">Next</button>
-                    <input type="file" id="imageSelection" class="form-control" name="image" accept="image/*" multiple>
+                    <button type="button" id="next" onclick="handleImageUpload()" class="next_button" name="next">Next</button>
+                    <input type="file" data-post=<?php echo get_last_post_id($_SESSION['Username'], $con)?>  id="imageSelection" class="form-control" name="image[]" multiple>
                     <textarea id="description" class="form-control" name="description" placeholder="Enter your post description"></textarea>
-
                 </form>
             </div>
                 
@@ -82,8 +81,6 @@ include_once("../includes/database.php");
                 }
 
                 if(isset($_POST['next']) && isset($_POST['description']) && $_POST['description']!='' && isset($_POST['image'])){
-                    add_post($username,$_POST['description'],$con);
-                    insert_post_image(get_last_post_id($username, $con),$_POST['image'], $con);
                     echo "<script>window.open('tag_selection.php','_self')</script>";
                 }
             ?>
@@ -91,4 +88,28 @@ include_once("../includes/database.php");
         </div>
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+function handleImageUpload(postId) {
+    const fileInput = document.getElementById("imageSelection");
+
+    if (fileInput.files.length > 0) {
+        const uploadPromises = [];
+        const formDataImage = new FormData();
+        let postId = fileInput.getAttribute('data-post');
+        formDataImage.append("length", fileInput.files.length);
+        formDataImage.append("description", document.getElementById("description").value);
+        for (let i = 0; i < fileInput.files.length; i++) {
+            formDataImage.append(i, fileInput.files[i].name);
+            console.log(fileInput.files[i].name);
+        }
+        const uploadPromise = axios.post('../api/upload_image.php', formDataImage)
+        .then(response => {
+            window.open('./tag_selection.php','_self');
+        });
+    }
+}
+
+
+</script>
 </html>

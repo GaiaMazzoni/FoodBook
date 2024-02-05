@@ -15,10 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     foreach($result as $post) {
         $print .= print_base_post($post['Username'],$post['IdPost'],$con);
-        $print .= ";";
+        //$print .= ";";
     }
 
     $print .= "?>";
+
+    error_log($print . PHP_EOL, 3, "log.txt");
+
     header('Content-Type: application/json');
-    echo json_encode($print);
+    echo json_encode("$print");
 } 
