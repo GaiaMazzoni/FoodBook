@@ -2,10 +2,8 @@
     session_start();
     include_once("../includes/connection.php");
     include_once("../includes/functions.php");
+    include_once("../css/tag_selection_css.php");
 
-    if (isset($_POST['back'])) {
-        echo "<script>window.open('../new_post.php','_self')</script>";
-    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,47 +18,6 @@
     <script src="../js/tag_selection.js" defer></script>
 </head>
 <style>
-    h1{
-        margin: 0;
-    }
-    body {
-        position: relative;
-        padding-top: 50px;
-    }
-    button{
-        background-color: #fccf00;
-    }
-    #top_banner {
-        box-sizing: border-box;
-        background-color: #4f0484;
-        position: sticky;
-        top: 0;
-        width: 100%;
-        padding: 10px;
-        text-align: center;
-        color: white;
-    }
-    #bottom_banner {
-        box-sizing: border-box;
-        background-color: #4f0484;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        height: 5%;
-        text-align: center;
-        padding: 10px;
-    }
-    #description {
-        width: 100%; 
-        height: 100px;
-    }
-    #imageSelection {
-        width: 100%; 
-        margin-bottom: 10px;
-    }
-    .select{
-        background-color: #fccf00;
-    }
 </style>
 <body>
     <div class="row">
@@ -69,7 +26,7 @@
                 <form method="post">
                     <button id="back" class="back_button" name="back">Back</button>
                     <h1>New Post</h1>
-                    <button id="publish" type="button" onclick="publish_post()" class="publish_button" name="publish">Publish</button>
+                    <button id="publish" type="button" class="publish_button" name="publish">Publish</button>
                 </form>
             </div>
             <div id="tag_form"></div>     

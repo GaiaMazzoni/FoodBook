@@ -3,6 +3,7 @@ include_once("../includes/header.php");
 include_once("../includes/footer.php");
 include_once("../includes/connection.php");
 include_once("comment_form.php");
+include_once("../css/search_css.php");
 
 if (!isset($_SESSION['Username'])) {
     header("Location: login.php");
@@ -28,130 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
     }
 }
 ?>
-<style>
-    #p_profile{
-        width: 50px;
-        height: 50px;
-    }
-    #friend_search {
-        width: 70%;
-        margin: 10px;
-        
-    }
-    #s_button {
-        margin-bottom: 5px;
-    }
-    .alert {
-        width: 70%;
-    }
-    .select{
-        background-color: #000;
-    }
-</style>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        margin: 0;
-        padding: 0;
-    }
-
-    .post-container {
-        max-width: 600px;
-        margin: 20px auto;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        overflow: hidden;
-    }
-
-    .profile-section {
-        display: flex;
-        align-items: center;
-        padding: 10px;
-        border-bottom: 1px solid #eee;
-    }
-
-    .profile-image {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        margin-right: 10px;
-    }
-
-    .username {
-        font-weight: bold;
-    }
-
-    .post-image {
-        width: 100%;
-        height: auto;
-    }
-
-    .interaction-icons {
-        padding: 10px;
-        display: flex;
-        justify-content: space-between;
-        border-top: 1px solid #eee;
-    }
-
-    .icon {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-    }
-
-    .icon img {
-        width: 20px;
-        height: 20px;
-        margin-right: 5px;
-    }
-
-    .profile-section a {
-        display: flex; 
-        align-items: center; 
-        text-decoration: none;
-        color: inherit;
-    }
-
-    .post-description{
-        padding: 10px;
-    }
-
-    .collapsible-tags-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px;
-        border-top: 1px solid #eee;
-    }
-
-    .tags-button {
-        background-color: transparent;
-        border: none;
-        color: #4f0484;
-        cursor: pointer;
-    }
-
-    .tags-button:focus {
-        outline: none;
-    }
-
-    .tags-collapse {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .tag-pill {
-        margin-right: 5px;
-        margin-bottom: 5px;
-        padding: 5px 10px;
-        background-color: #4f0484;
-        color: #fff;
-        border-radius: 20px;
-        cursor: pointer;
-    }
-</style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -160,18 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Search</title>
 </head>
-<style>
-.btn-group {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px; /* Aggiunge uno spazio tra i bottoni */
-}
 
-.btn-group button {
-    margin-bottom: 10px; /* Spazio aggiuntivo sotto ciascun bottone, se necessario */
-}
-</style>
 <body>
 <div class="container">
     <div class="row">
@@ -194,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
                 <?php foreach($search_results as $user): 
                     $profile_pic = get_img_profile($con, $user); ?>
                     <center><div class="alert alert-info">
-                        <a href="profile.php?user=<?php echo urlencode($user); ?>" style="text-decoration: none; color: inherit;">
+                        <a href="profile.php?user=<?php echo urlencode($user); ?>">
                             <img src="../images/<?php echo $profile_pic; ?>" class="img-fluid rounded-circle mb-3" id="p_profile" alt="Profile Image">
                             <?php echo htmlspecialchars($user); ?>
                         </a>
@@ -202,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
                 <?php endforeach; ?>
                 </div>
 
-            <div id="post_form" style="display: none;">
+            <div id="post_form">
             <div class="text-center">
                     <button type="" class="btn btn-primary" id="category_s_button" name="category_s_button">Search</button>
                 </div>

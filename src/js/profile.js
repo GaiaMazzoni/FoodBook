@@ -1,12 +1,15 @@
-let user = "<?php echo addslashes($user); ?>";
-window.addEventListener('load', check_follow());
+document.addEventListener('DOMContentLoaded', functio(){
+    let horizontalButton = 
+})
+
+window.addEventListener('load', check_follow);
 function check_follow() {
     var button = document.getElementById("followButton");
     var username = document.getElementById("username").textContent;
     let formData = new FormData();
     formData.append('following', username);
     axios.post('../api/check_follow.php',formData).then(response => {
-        console.log(response.data);
+        //console.log(response.data);
         if(response.data == 1) {
             if(!button.classList.contains("Follow")) {
                 button.classList.add("Follow");
@@ -29,7 +32,7 @@ function follow() {
         formData.append('remove', 0);
     }
     axios.post('../api/follow_handler.php',formData).then(response => {
-        console.log(response.data);
+        //console.log(response.data);
     });  
     location.reload();
 }
@@ -83,5 +86,3 @@ function uploadImage() {
     });
 
 };
-
-document.getElementById('followButton').addEventListener('click', follow());

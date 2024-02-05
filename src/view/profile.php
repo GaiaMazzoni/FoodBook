@@ -3,6 +3,7 @@ include_once("../includes/header.php");
 include_once("../includes/footer.php");
 include_once("../includes/connection.php");
 include_once("../includes/functions.php");
+include_once("../css/profile_css.php");
 
 if (!isset($_SESSION['Username'])) {
     header("Location: login.php");
@@ -46,165 +47,6 @@ $num_following = mysqli_num_rows($run_following);
 <script src="../js/profile.js" defer></script>
     <title><?php echo "$user Profile"; ?></title>
 </head>
-<style>
-    .collapsible-tags-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px;
-        border-top: 1px solid #eee;
-    }
-
-    .tags-button {
-        background-color: transparent;
-        border: none;
-        color: #4f0484;
-        cursor: pointer;
-    }
-
-    .tags-button:focus {
-        outline: none;
-    }
-
-    .tags-collapse {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .tag-pill {
-        margin-right: 5px;
-        margin-bottom: 5px;
-        padding: 5px 10px;
-        background-color: #4f0484;
-        color: #fff;
-        border-radius: 20px;
-        cursor: pointer;
-    }
-.position-relative {
-    position: relative;
-}
-.container_form {
-    position: relative;
-    display: flex;
-    justify-content: center;
-}
-.container_form > * {
-    background-color: red;
-    position: absolute;
-    z-index: 1001;
-    padding: 10px;
-}
-.close-btn {
-    position: absolute;
-    top: 1px;
-    right: 10px;
-    font-size: 20px;
-    color: #000;
-    text-decoration: none;
-}
-#followerButton, #followingButton {
-    background-color: transparent; 
-    border: none; 
-    box-shadow: none;
-    color: black;
-}
-#followerButton::after, #followingButton::after {
-    display: none;
-}
-.dropdown-menu {
-    max-height: 200px;
-    overflow-y: auto;
-    max-width: 200px;
-}
-
-.image-container {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.button-container button {
-    margin: 0 10px;
-}
-
-.image-container img {
-    width: calc(33.33% - 10px);
-    margin-bottom: 10px;
-    box-sizing: border-box;
-}
-
-.select{
-    background-color: #4f0484;
-}
-
-.post-container {
-    max-width: 600px;
-    margin: 20px auto;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.profile-section {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-}
-
-.profile-image {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.username {
-    font-weight: bold;
-}
-
-.post-image {
-    width: 100%;
-    height: auto;
-}
-
-.interaction-icons {
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    border-top: 1px solid #eee;
-}
-
-.icon {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-.icon img {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-}
-
-.profile-section a {
-    display: flex; 
-    align-items: center; 
-    text-decoration: none;
-    color: inherit;
-}
-
-.post-description{
-    padding: 10px;
-}
-
-</style>
 <body>
 <?php if($is_own_profile): ?>
     <div class="dropdown">
@@ -228,7 +70,7 @@ $num_following = mysqli_num_rows($run_following);
         echo generateModalForm('birthdate', 'BirthDate');
         echo generateModalForm('image', 'Image'); 
     ?>
-    <form method='post' action=''  enctype='multipart/form-data'>
+    <form method='post' enctype='multipart/form-data'>
         <input type='hidden' name='update_type' value='ema'>
         <input type='file' name='new_data' id="image" required>
         <input type='submit' value='Invia' onclick="uploadImage()" name='submit' id="image_form">
@@ -276,7 +118,7 @@ $num_following = mysqli_num_rows($run_following);
 <div class="container">
     <div class="row">
         <div class="col-12 col-md-3 text-center">
-            <img src="../images/<?php echo $profile_picture; ?>" class="img-fluid rounded-circle mb-3" id="p_profile" alt="Immagine Profilo" style="width: 200px; height: 200px; object-fit: cover;">
+            <img src="../images/<?php echo $profile_picture; ?>" class="img-fluid rounded-circle mb-3" id="p_profile" alt="Immagine Profilo">
         </div>
         <div class="col-12 col-md-3 text-center">
             <h3 class="card-title"><?php echo $first_name . " " . $surname; ?></h3>
@@ -322,13 +164,13 @@ $num_following = mysqli_num_rows($run_following);
     <?php endif; ?>
 </div>
 <div class="button-container">
-    <button type="button" class="post-view hor select" onclick="select(this)">
+    <button id="horizontal_post_button" type="button" class="post-view hor select" onclick="select(this)">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid-3x2" viewBox="0 0 16 16">
             <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h13A1.5 1.5 0 0 1 16 3.5v8a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5zM1.5 3a.5.5 0 0 0-.5.5V7h4V3zM5 8H1v3.5a.5.5 0 0 0 .5.5H5zm1 0v4h4V8zm4-1V3H6v4zm1 1v4h3.5a.5.5 0 0 0 .5-.5V8zm0-1h4V3.5a.5.5 0 0 0-.5-.5H11z"/>
         </svg>
     </button>
     
-    <button type="button" class="post-view ver" onclick="select(this)">
+    <button id="" type="button" class="post-view ver" onclick="select(this)">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-vertical" viewBox="0 0 16 16">
             <path d="M8.354 14.854a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 13.293V2.707L6.354 3.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 2.707v10.586l1.146-1.147a.5.5 0 0 1 .708.708z"/>
         </svg>

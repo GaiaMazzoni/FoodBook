@@ -5,7 +5,6 @@ include_once("../includes/functions.php");
 include_once("../includes/database.php");
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_SESSION['Username'];
     $remove = $_POST['remove'];
     $username = $_POST['following'];
 

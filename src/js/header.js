@@ -1,4 +1,4 @@
-let notificationsButton;
+let notificationsButton; 
 let notificationicon;
 let notificationPath;
 let usernameTo;
@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function(){
     let checkNewNotifFormData = new FormData();
     checkNewNotifFormData.append('usernameTo', usernameTo);
     axios.post("../api/check_new_notification.php", checkNewNotifFormData).then(response => {
-        console.log(response.data);
         if(response.data == true){
             if(!notificationsButton.classList.contains('newNotification')){
                 notificationsButton.classList.add('newNotification');
@@ -33,7 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function(event) {
+    event.preventDefault();
     notificationsButton = document.getElementById('notification-button');
     notificationicon = document.getElementById('notificationIcon');
     notificationPath = document.getElementById('notificationPath');

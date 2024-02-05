@@ -240,7 +240,7 @@ function printCommentNotification($usernameFrom, $usernameTo, $idPost, $commentT
     return "<div class='rectangle'>
                 <div class='content'>
                     <p>$notificationMessage</p>
-                    <img src='../images/$postImg' alt=''>
+                    <img src='../images/$postImg[0]' alt=''>
                 </div>
             </div>";
 }
@@ -251,7 +251,7 @@ function printLikeNotification($usernameTo, $usernameFrom, $idPost, $mysqli){
     return "<div class='rectangle'>
                 <div class='content'>
                     <p>$notificationMessage</p>
-                    <img src='../images/$postImg' alt=''>
+                    <img src='../images/$postImg[0]' alt=''>
                 </div>
             </div>";
 }
