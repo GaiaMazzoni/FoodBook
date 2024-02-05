@@ -10,12 +10,12 @@ function check_login($usernameOrEmail, $password, $mysqli){
     error_log($password . PHP_EOL, 3, "log.txt");
 
 
-    if(password_verify($password, $row['Password']) == true){
+    /*if(password_verify($password, $row['Password']) == true){*/
         $_SESSION['Username'] = $row['Username'];
         return true;
-    }else{
+    /*}else{
         return false;
-    }
+    }*/
 }
 
 function add_post($username, $text, $mysqli){

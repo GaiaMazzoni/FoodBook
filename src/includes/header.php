@@ -13,8 +13,6 @@ include_once "functions.php";
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="../js/profile.js" defer></script>
 
-<script>
-</script>
 <style>
     #top_banner > button {
         background-color: transparent;
@@ -63,7 +61,7 @@ include_once "functions.php";
     }
 </style>
 <body>
-    <form method="post" action="../api/header_logics.php" id="header_form">
+    <form method="post" id="header_form" action="../api/header_logics.php">
         <div id="top_banner" class="clearfix">
             <button name="home_button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
@@ -81,15 +79,16 @@ include_once "functions.php";
                 </svg>
             </button>
         </div>
-        <div class="offcanvas offcanvas-end" id="notifications">
-            <div class="offcanvas-header">
-                <h1 class="offcanvas-title">All Notifications</h1>
-            </div>
-            <div class="offcanvas-body">
-                <?php
-                    echo print_notifications_of_user($_SESSION['Username'], $con);
-                ?>
-            </div>
+    </form>
+    <div class="offcanvas offcanvas-end" id="notifications">
+        <div class="offcanvas-header">
+            <h1 class="offcanvas-title">All Notifications</h1>
         </div>
+        <div class="offcanvas-body">
+            <?php
+                echo print_notifications_of_user($_SESSION['Username'], $con);
+            ?>
+        </div>
+    </div>
 </body>
 </html>
