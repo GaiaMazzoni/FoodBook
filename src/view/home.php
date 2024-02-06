@@ -123,7 +123,7 @@ include_once("comment_form.php");
 <body>
     <?php
         $username = $_SESSION['Username'];
-        $followers = get_all_followed($username, $con);
+        $followers = get_all_follower($username, $con);
         $posts = get_all_posts_from_followers($followers, $con);
         foreach($posts as $post){
             echo print_post($post['Username'], $post['IdPost'], $con, 1);

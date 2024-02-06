@@ -1,3 +1,4 @@
+<?php include_once "../css/tags_selection_css.php";?>
 <script src="../js/tags.js" defer></script>
 
 <form method="post">

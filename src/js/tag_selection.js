@@ -1,8 +1,15 @@
+
 $(document).ready(function(){
     $('#tag_form').load('../view/tags.php');
 });
 
-document.getElementById("publish").addEventListener('click', publish_post());
+document.getElementById("publish").addEventListener('click', function(){
+    publish_post();
+});
+
+document.getElementById("back").addEventListener('click', function() {
+    window.open('../view/new_post.php','_self');
+});
 
 function publish_post() {
     let cat = document.getElementsByClassName("select");

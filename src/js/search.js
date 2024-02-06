@@ -19,7 +19,7 @@ function search_category() {
     });
 }
 
-document.getElementById(category_s_button).addEventListener("click",function() {
+document.getElementById("category_s_button").addEventListener("click",function() {
     search_category();
 })
 

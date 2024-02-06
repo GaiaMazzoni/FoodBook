@@ -3,7 +3,7 @@ session_start();
 include_once("../includes/connection.php");
 include_once("../includes/functions.php");
 include_once("../includes/database.php");
-
+ 
 function insert_post_image($postId, $image, $mysqli){
     $username = $_SESSION['Username'];
     $stmt = $mysqli->prepare("INSERT INTO image (`Username`, `IdPost`, `Images`) VALUES (?, ?, ?);");

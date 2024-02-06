@@ -97,7 +97,7 @@ function get_all_posts_from_followers($followedList, $mysqli){
     $allPosts = [];
     foreach($followedList as $followed){
         $stmt = $mysqli->prepare("SELECT * FROM post WHERE Username=?");
-        $stmt->bind_param("s", $followed['Username']);
+        $stmt->bind_param("s", $followed);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         $allPosts = array_merge($allPosts, $result);
@@ -187,7 +187,7 @@ function get_all_notifications_for_user($usernameTo, $mysqli){
     $allNotifications = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
     usort($allNotifications, function($notif1, $notif2){
-        return strtotime($notif1['DateAndTime']) - strtotime($notif2['DateAndTime']);
+        return strtotime($notif2['DateAndTime']) - strtotime($notif1['DateAndTime']);
     });
 
     return $allNotifications;

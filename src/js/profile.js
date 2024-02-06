@@ -1,6 +1,13 @@
-document.addEventListener('DOMContentLoaded', functio(){
-    let horizontalButton = 
-})
+document.addEventListener('DOMContentLoaded', function(){
+    let horButton = document.getElementById("horizontal_post_button");
+    let verButton = document.getElementById("vertical_post_button");
+    horButton.addEventListener('click', function() {
+        select(horButton);
+    });
+    verButton.addEventListener('click', function() {
+        select(verButton);
+    });
+});
 
 window.addEventListener('load', check_follow);
 function check_follow() {
