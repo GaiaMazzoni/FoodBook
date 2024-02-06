@@ -45,7 +45,9 @@ $num_following = mysqli_num_rows($run_following);
 <head>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/profile.css">
-<script src="../js/profile.js" defer></script>
+<script src="../js/profile.js"></script>
+<script src="../js/home.js"></script>
+
     <title><?php echo "$user Profile"; ?></title>
 </head>
 <body>
@@ -176,17 +178,22 @@ $num_following = mysqli_num_rows($run_following);
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-vertical" viewBox="0 0 16 16">
         <path d="M8.354 14.854a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 13.293V2.707L6.354 3.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 2.707v10.586l1.146-1.147a.5.5 0 0 1 .708.708z"/>
     </svg></button>
+</div>
 
     <div id="horizontal">
+        <div class="image-container">
         <div id="horizontal-posts"></div>
+        </div>
     </div>
     <div id="vertical">
         <div id="vertical-posts"></div>
     </div>
-</div>
 
-    <div class="image-container">
-        
-    </div>
 </body>
+
+<script>
+
+
+
+    </script>
 </html>

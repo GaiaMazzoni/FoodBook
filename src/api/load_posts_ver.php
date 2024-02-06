@@ -7,8 +7,8 @@ include_once("../view/comment_form.php");
 
 $username = $_SESSION['Username'];
 
-if(isset($_GET['user'])){
-    $user = $_GET['user'];
+if(isset($_POST['user'])){
+    $user = $_POST['user'];
     $idList = get_all_post_ids_of_user($user, $con);
     $idList = array_reverse($idList);
     $result='';

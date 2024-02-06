@@ -1,11 +1,42 @@
-document.addEventListener('DOMContentLoaded', function(){
-    
+document.addEventListener('DOMContentLoaded', function() {
+    loadPosts(addEventListeners);
+    check_follow()
 });
 
-window.addEventListener('load', check_follow);
+
+function loadPosts(callback) {
+    let username = document.getElementById("username").textContent;
+    console.log(username);
+    let formData = new FormData();
+    formData.append('user', username);
+    axios.post('../api/load_posts_ver.php',formData).then(response => {
+        const commentsContainer = document.getElementById("vertical-posts");
+        commentsContainer.innerHTML = response.data;
+        if (callback) callback();
+    });
+    axios.post('../api/load_posts_hor.php',formData).then(response => {
+        const commentsContainer = document.getElementById("horizontal-posts");
+        commentsContainer.innerHTML = response.data;
+    }); 
+
+
+    document.getElementById("horizontal").style.display = "block";
+    document.getElementById("vertical").style.display = "none";
+
+    document.getElementById("horizontal_post_button").addEventListener("click", function() {
+        document.getElementById("horizontal").style.display = "block";
+        document.getElementById("vertical").style.display = "none";
+    });
+    
+    document.getElementById("vertical_post_button").addEventListener("click", function() {
+        document.getElementById("horizontal").style.display = "none";
+        document.getElementById("vertical").style.display = "block";
+    });    
+} 
+
 function check_follow() {
-    var button = document.getElementById("followButton");
-    var username = document.getElementById("username").textContent;
+    let button = document.getElementById("followButton");
+    let username = document.getElementById("username").textContent;
     let formData = new FormData();
     formData.append('following', username);
     axios.post('../api/check_follow.php',formData).then(response => {
@@ -26,8 +57,8 @@ if(followButton) {
 }
 
 function follow() {
-    var button = document.getElementById("followButton");
-    var username = document.getElementById("username").textContent;
+    let button = document.getElementById("followButton");
+    let username = document.getElementById("username").textContent;
     let formData = new FormData();
     formData.append('following', username);
     if (button.classList.contains("Follow")) {
@@ -42,57 +73,4 @@ function follow() {
     location.reload();
 }
 
-function select(button){
-    let user = document.getElementById("username").textContent;
-    if(!button.classList.contains('select')){
-        Array.from(document.getElementsByClassName('select')).forEach(element => {
-            element.classList.remove('select');
-        });
-        button.classList.add('select');
-    }
-    let hor = document.getElementsByClassName('hor')[0];
-    if(!hor.classList.contains('select')){
-        let imageContainer = document.querySelector('.image-container');
-        let xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                imageContainer.innerHTML = xhr.responseText;
-            }
-        };
-        xhr.open("GET", `../api/load_posts_ver.php?user=${user}`, true);
-        xhr.send();
-    }else{
-        let imageContainer = document.querySelector('.image-container');
-        while (imageContainer.firstChild) {
-            imageContainer.removeChild(imageContainer.firstChild);
-        }
 
-        let xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                imageContainer.innerHTML = xhr.responseText;
-            }
-        };
-        xhr.open("GET", `../api/load_posts_hor.php?user=${user}`, true);
-        xhr.send();
-    }
-}
-
-function uploadImage() {
-    const formDataImage = new FormData();
-    formDataImage.append("image", document.querySelector("image").files[0]);
-    axios.post('../api/edit_image.php', formDataImage).then(response => {
-        console.log(response.data);
-    });
-
-};
-
-document.getElementById("horizontal_post_button").addEventListener("click", function() {
-    document.getElementById("horizontal").style.display = "block";
-    document.getElementById("vertical").style.display = "none";
-});
-
-document.getElementById("vertical_post_button").addEventListener("click", function() {
-    document.getElementById("horizontal").style.display = "none";
-    document.getElementById("vertical").style.display = "block";
-});
