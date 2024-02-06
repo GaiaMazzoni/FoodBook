@@ -13,16 +13,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $result = get_posts_from_category($cat_list, $num_cat, $con);
     
-    $res = "";
+    $res = "<?php";
 
     foreach($result as $post) {
-        $res .= print_base_post($post['Username'],$post['IdPost'],$con);
-        error_log("stampo_post", 3, './log.txt');
+        $res .= print_post($post['Username'],$post['IdPost'],$con, 1);
+        
     }
 
-    $res .= "";
-    
-    error_log("mando", 3, './log.txt');
-    header('Content-Type: application/json');
-    echo json_encode($res);
+    $res .= "?>";
+    echo $res;
 } 
