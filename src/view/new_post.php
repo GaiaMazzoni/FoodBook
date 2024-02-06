@@ -7,6 +7,8 @@ include_once("../includes/database.php");
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <title>FoodBook login and signup</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,11 +26,12 @@ include_once("../includes/database.php");
                 <form method="post">
                     <button id="close" type="button" class="close_button" name="close">X</button>
                     <h1>New Post</h1>
-                    <button type="button" id="next" class="next_button" name="next">Next</button>
+                    <button id="publish" type="button" class="publish_button" name="publish">Publish</button>
                     <input type="file" id="imageSelection" class="form-control" name="image[]" multiple>
                     <textarea id="description" class="form-control" name="description" placeholder="Enter your post description"></textarea>
-                </form>
+                </form> 
             </div>
+            <div id="tag_form"></div>
         </div>
     </div>
 </body>

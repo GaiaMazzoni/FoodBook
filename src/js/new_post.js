@@ -1,26 +1,37 @@
+$(document).ready(function(){
+    $('#tag_form').load('../view/tags.php');
+});
+
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('next').addEventListener('click', function() {
-        handleImageUpload();
+    document.getElementById("publish").addEventListener('click', function(){
+        publish_post();
     });
     document.getElementById('close').addEventListener('click', function() {
         window.open('./home.php','_self');
     });
 });
 
-function handleImageUpload() {
+function publish_post() {
     const fileInput = document.getElementById("imageSelection");
-
+    let cat = document.getElementsByClassName("select");
+    let formData = new FormData();
     if (fileInput.files.length > 0) {
-        const formDataImage = new FormData();
-        formDataImage.append("length", fileInput.files.length);
-        formDataImage.append("description", document.getElementById("description").value);
+        formData.append("length", fileInput.files.length);
+        formData.append("description", document.getElementById("description").value);
         for (let i = 0; i < fileInput.files.length; i++) {
-            formDataImage.append(i, fileInput.files[i].name);
+            formData.append(i, fileInput.files[i].name);
         }
-        axios.post('../api/upload_image.php', formDataImage).then(response => {
-            window.open('./tag_selection.php','_self');
+        formData.append('num_cat', cat.length);
+        for (let i = 0; i < cat.length; i++) {
+            formData.append(i+1, cat[i].id);
+        }
+        axios.post('../api/upload_post.php', formData).then(response => {
+        })
+        .catch(error => {
+            console.error(error);
         });
     }
+    window.open('../view/home.php','_self');
 }
 
 
