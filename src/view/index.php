@@ -3,7 +3,7 @@ include_once("../includes/connection.php");
 include_once("../includes/functions.php");
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>FoodBook login and signup</title>
     <meta charset="utf-8">
@@ -15,13 +15,13 @@ include_once("../includes/functions.php");
 <body>
     <div class="row">
        <div class="col-sm-12 text-center">
-            <img src="../images/logo.png" alt="FoodBook" class="img-rounded" title="FoodBook logo" width="200px" 
-            height="200px" id = "logo">
+            <img src="../images/logo.png" alt="FoodBook" class="img-rounded" title="FoodBook logo" width="200" 
+            height="200" id="logo">
             <h1>FoodBook</h1>
             <p>Join us</p>
             <form method="post" action="../api/index_logics.php">
-                <button id="login_button" class="btn btn-info btn-lg" name="login_button"> Log in </button></br></br>
-                <button id="signup_button" class="btn btn-info btn-lg" name="signup_button">Sign up</button></br></br>
+                <button id="login_button" class="btn btn-info btn-lg" name="login_button"> Log in </button>
+                <button id="signup_button" class="btn btn-info btn-lg" name="signup_button">Sign up</button>
             </form>
        </div> 
     </div>

@@ -5,7 +5,7 @@ include_once("../includes/functions.php");
 include_once("../includes/database.php");
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>FoodBook login and signup</title>
     <meta charset="utf-8">
@@ -16,7 +16,6 @@ include_once("../includes/database.php");
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../js/new_post.js" defer></script>
 </head>
-<title>New Post Creation</title>
 <body> 
     <div class="row">
         <div class="col-sm-12 text-center">
@@ -25,7 +24,9 @@ include_once("../includes/database.php");
                     <button id="close" type="button" class="close_button" name="close">X</button>
                     <h1>New Post</h1>
                     <button type="button" id="next" class="next_button" name="next">Next</button>
+                    <label for="imageSelection">Image Selection:</label>
                     <input type="file" id="imageSelection" class="form-control" name="image[]" multiple>
+                    <label for="description">Description:</label>
                     <textarea id="description" class="form-control" name="description" placeholder="Enter your post description"></textarea>
                 </form>
             </div>
