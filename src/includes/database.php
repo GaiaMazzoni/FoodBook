@@ -57,14 +57,6 @@ function get_img_profile($con, $username) {
     return $img;
 }
 
-function get_all_followed($username, $mysqli){
-    $stmt = $mysqli->prepare("SELECT Username FROM follow WHERE Follower_Username=?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $toreturn = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    return $toreturn;
-}
-
 function get_all_follower($username, $mysqli){
     $stmt = $mysqli->prepare("SELECT * FROM follow WHERE Follower_Username = ?");
     $stmt->bind_param("s", $username);
@@ -173,13 +165,6 @@ function checkFollower($username, $follower_username, $con) {
     $query->execute();
     return $query->get_result()->num_rows;
 }
-
-function addNotification($usernameTo, $usernameFrom, $idPost, $type, $dateAndTime, $mysqli){
-    $stmt = $mysqli->prepare("INSERT INTO notification(UsernameTo, UsernameFrom, Type, DateAndTime, IdPost) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssisi", $usernameTo, $usernameFrom, $type, $dateAndTime, $idPost);
-    $stmt->execute();
-}
-
 function get_all_notifications_for_user($usernameTo, $mysqli){
     $stmt = $mysqli->prepare("SELECT * FROM notification WHERE UsernameTo=?");
     $stmt->bind_param("s", $usernameTo);
@@ -228,20 +213,20 @@ function check_likes($post_publisher, $post_id, $user_who_liked, $mysqli) {
     return $query->get_result()->num_rows;
 }
 
-function follow($username, $follower_username, $con) {
+function follow($followed_username, $follower_username, $con) {
     $current_date_time = date("Y-m-d H:i:s");
     $queryNotify = $con->prepare("INSERT INTO notification(UsernameTo, UsernameFrom, Type, DateAndTime) VALUES (?, ?, ?, ?)");
     $notificationType = 3;
-    $queryNotify -> bind_param("ssis", $follower_username, $username, $notificationType, $current_date_time);
+    $queryNotify -> bind_param("ssis", $followed_username, $follower_username, $notificationType, $current_date_time);
     $queryNotify -> execute();
     $query = $con->prepare("INSERT INTO follow(Follower_Username, Username) VALUES (?, ?)");
-    $query->bind_param("ss", $follower_username, $username);
+    $query->bind_param("ss", $follower_username, $followed_username);
     $query->execute();
 }
 
-function unfollow($username, $follower_username, $con) {
+function unfollow($followed_username, $follower_username, $con) {
     $query = $con->prepare("DELETE FROM follow WHERE Follower_Username = ? AND Username = ?");
-    $query->bind_param("ss", $follower_username, $username);
+    $query->bind_param("ss", $follower_username, $followed_username);
     $query->execute();
 }
 

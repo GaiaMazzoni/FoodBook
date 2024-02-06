@@ -73,7 +73,7 @@
         $result = $stmt->get_result();
         $followers = [];
         while ($row = $result->fetch_assoc()) {
-            $followers[] = $row['Username'];
+            $followers[] = $row;
         }
         return $followers;
     }
