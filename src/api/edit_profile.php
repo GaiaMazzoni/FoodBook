@@ -39,6 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
     }
 
-    echo "<script>window.open('profile.php?user=$username','_self');</script>";
+    echo "<script>window.open('../view/profile.php?user=$username','_self');</script>";
 }
 

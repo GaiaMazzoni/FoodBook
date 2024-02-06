@@ -1,6 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
     loadPosts(addEventListeners);
     check_follow()
+
+    followButton = document.getElementById("followButton");
+    if(followButton) {
+        document.getElementById("followButton").addEventListener("click",function() {
+            follow();
+        });
+    }
 });
 
 
@@ -49,12 +56,6 @@ function check_follow() {
     });                 
 }
 
-followButton = document.getElementById("followButton");
-if(followButton) {
-    document.getElementById("followButton").addEventListener("click",function() {
-        follow();
-    });
-}
 
 function follow() {
     let button = document.getElementById("followButton");
@@ -68,8 +69,7 @@ function follow() {
         button.classList.add("Follow");
         formData.append('remove', 0);
     }
-    axios.post('../api/follow_handler.php',formData).then(response => {
-    });  
+    axios.post('../api/follow_handler.php',formData);  
     location.reload();
 }
 

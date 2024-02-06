@@ -33,8 +33,5 @@ function search_category(callback) {
         const postContainer = document.getElementById("print_result");
         postContainer.innerHTML = response.data;
         if(callback) callback();
-    })
-    .catch(error => {
-        console.error(error);
     });
 }

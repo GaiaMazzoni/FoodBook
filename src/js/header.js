@@ -36,9 +36,7 @@ document.addEventListener('DOMContentLoaded', function(){
         }
         let formData = new FormData();
         formData.append("type", "read");
-        axios.post("../api/notification_logics.php", formData).then(response => {
-        });
-        
+        axios.post("../api/notification_logics.php", formData); 
     });
 });
 

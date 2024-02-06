@@ -19,9 +19,7 @@ function addEventListeners() {
             } else {
                 formData.append('remove', 0);
             }
-            axios.post("../api/likes.php", formData).then(response => {
-                console.log(response.data);
-            });
+            axios.post("../api/likes.php", formData);
             location.reload(true);
         });
     });
@@ -49,9 +47,7 @@ function addEventListeners() {
         formData.append('post_publisher', post_publisher_comment);
         formData.append('post_id', post_id_comment);
         formData.append('text', comment);
-        axios.post("../api/comment.php", formData).then(response => {
-            console.log(response.data);
-        });
+        axios.post("../api/comment.php", formData);
         location.reload(true);
     });
 
