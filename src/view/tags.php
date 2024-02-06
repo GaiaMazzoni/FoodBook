@@ -1,6 +1,5 @@
-<?php include_once "../css/tags_selection_css.php";?>
 <script src="../js/tags.js" defer></script>
-
+<link rel="stylesheet" type="text/css" href="../css/tags_selection_css.css">
 <form method="post">
     <div id="FoodTypes" class="btn-group">
         <button type=button class="btn btn-primary tags" name="tags" id="Appetizer">Appetizer</button>

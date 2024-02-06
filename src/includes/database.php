@@ -152,11 +152,23 @@ function update_profile($con, $username, $type, $new_element) {
 
 //Returns an array of all the images from the posts made by the user
 function print_post_image($username, $mysqli){
-    $stmt = $mysqli->prepare("SELECT Images FROM image WHERE Username=?");
+    $stmt = $mysqli->prepare("SELECT IdPost FROM post WHERE Username=?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
-    $images = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    return $images;
+    $postIds = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $allImages = array();
+    foreach($postIds as $id){
+        $allImages[] = get_post_image($username, $id, $mysqli);
+    }
+    return $allImages;
+}
+
+function get_all_first_images_of_post($username, $mysqli){
+    $stmt = $mysqli->prepare("SELECT IdPost, Images FROM image WHERE Username=? GROUP BY IdPost");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $allImages = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    return $allImages;
 }
 
 function checkFollower($username, $follower_username, $con) {

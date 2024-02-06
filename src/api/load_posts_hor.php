@@ -6,11 +6,12 @@ include_once("../includes/database.php");
 
 if(isset($_GET['user'])){
     $user = $_GET['user'];
-    $images = print_post_image($user,$con); 
+    $images =  get_all_first_images_of_post($user, $con);
+    $result = "";
     foreach ($images as $img){
-        $img = $img['Images'];
-        $result = "<img class='img' src='images/$img' alt=''>";
+        $i = $img['Images'];
+        $result .= "<img class='img' src='../images/$i' alt=''>";
     }
-    header('Content-Type: application/json');
-    echo json_encode($result);
+    echo $result;
 }
+

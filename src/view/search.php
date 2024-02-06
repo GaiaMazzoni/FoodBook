@@ -3,7 +3,6 @@ include_once("../includes/header.php");
 include_once("../includes/footer.php");
 include_once("../includes/connection.php");
 include_once("comment_form.php");
-include_once("../css/search_css.php");
 
 if (!isset($_SESSION['Username'])) {
     header("Location: login.php");
@@ -36,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
     <script src="../js/search.js" defer></script>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/search.css">
     <title>Search</title>
 </head>
 

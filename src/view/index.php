@@ -9,30 +9,9 @@ include_once("../includes/functions.php");
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../css/index.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<style>
-    body{
-        overflow-x: hidden;
-    }
-    #signup_button{
-        width: 200px;
-        border-radius: 30px;
-        background-color: #fccf00;
-        border: 1px solid #4f0484;
-        color: #4f0484;
-    }
-    #login_button{
-        width: 200px;
-        border-radius: 30px;
-        background-color: #4f0484;
-        border: 1px solid #fccf00;
-        color: #fccf00;
-    }
-    form {
-        padding: 2%;
-    }
-</style>
 <body>
     <div class="row">
        <div class="col-sm-12 text-center">

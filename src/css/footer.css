@@ -1,0 +1,16 @@
+#bottom_banner > button{
+    background-color: transparent;
+    border: none;
+    color: #fccf00;
+}
+#bottom_banner{
+    box-sizing: border-box;
+    background-color: #4f0484;
+    position: fixed;
+    bottom: 0;
+    width: 99.8%;
+    z-index: 1000;
+    height: 30px;
+    padding: 0.2%;
+    margin: 0.1%;
+}

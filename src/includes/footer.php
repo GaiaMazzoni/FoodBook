@@ -4,28 +4,11 @@
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../css/footer.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   
 </head>
-<style>
-    #bottom_banner > button{
-        background-color: transparent;
-        border: none;
-        color: #fccf00;
-    }
-    #bottom_banner{
-        box-sizing: border-box;
-        background-color: #4f0484;
-        position: fixed;
-        bottom: 0;
-        width: 99.8%;
-        z-index: 1000;
-        height: 30px;
-        padding: 0.2%;
-        margin: 0.1%;
-    }
-</style>
 <body>
     <form method="post" id="footer_form" action="../api/footer_logics.php">
         <div id="bottom_banner" class="clearfix">
