@@ -26,7 +26,7 @@
                     <button id="publish" type="button" class="publish_button" name="publish">Publish</button>
                 </form>
             </div>
-            <div id="tag_form"></div>     
+                
         </div>
     </div>
 </body>
