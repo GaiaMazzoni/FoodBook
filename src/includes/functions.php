@@ -93,7 +93,7 @@ function print_post($username, $postId, $mysqli, $type){
             </button>
             </div>";
 
-    if($type != 1) {
+    if($type == 1) {
         $result .= "<div class='icon'>
         <div class='icon'>
             <button class='like' id='$username' value='$postId'>

@@ -1,12 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
-    let horButton = document.getElementById("horizontal_post_button");
-    let verButton = document.getElementById("vertical_post_button");
-    horButton.addEventListener('click', function() {
-        select(horButton);
-    });
-    verButton.addEventListener('click', function() {
-        select(verButton);
-    });
+    
 });
 
 window.addEventListener('load', check_follow);
@@ -16,7 +9,6 @@ function check_follow() {
     let formData = new FormData();
     formData.append('following', username);
     axios.post('../api/check_follow.php',formData).then(response => {
-        //console.log(response.data);
         if(response.data == 1) {
             if(!button.classList.contains("Follow")) {
                 button.classList.add("Follow");
@@ -26,9 +18,12 @@ function check_follow() {
     });                 
 }
 
-document.getElementById("followButton").addEventListener("click",function() {
-    follow();
-});
+followButton = document.getElementById("followButton");
+if(followButton) {
+    document.getElementById("followButton").addEventListener("click",function() {
+        follow();
+    });
+}
 
 function follow() {
     var button = document.getElementById("followButton");
@@ -58,10 +53,6 @@ function select(button){
     let hor = document.getElementsByClassName('hor')[0];
     if(!hor.classList.contains('select')){
         let imageContainer = document.querySelector('.image-container');
-        while (imageContainer.firstChild) {
-            imageContainer.removeChild(imageContainer.firstChild);
-        }
-
         let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
@@ -97,3 +88,13 @@ function uploadImage() {
     });
 
 };
+
+document.getElementById("horizontal_post_button").addEventListener("click", function() {
+    document.getElementById("horizontal").style.display = "block";
+    document.getElementById("vertical").style.display = "none";
+});
+
+document.getElementById("vertical_post_button").addEventListener("click", function() {
+    document.getElementById("horizontal").style.display = "none";
+    document.getElementById("vertical").style.display = "block";
+});

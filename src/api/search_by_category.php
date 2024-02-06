@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $res = "<?php";
 
     foreach($result as $post) {
-        $res .= print_post($post['Username'],$post['IdPost'],$con, 1);
+        $res .= print_post($post['Username'], $post['IdPost'], $con, 0);
         
     }
 
