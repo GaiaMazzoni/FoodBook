@@ -4,7 +4,6 @@ include_once("../includes/functions.php");
 include_once("../includes/database.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    error_log("ciao". PHP_EOL, 3, 'log.txt');
     $num_cat = $_POST['num_cat'];
     $cat_list = [];
     for($i = 1; $i < $num_cat+1; $i++) {

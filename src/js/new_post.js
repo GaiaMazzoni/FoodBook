@@ -16,7 +16,6 @@ function handleImageUpload() {
         formDataImage.append("description", document.getElementById("description").value);
         for (let i = 0; i < fileInput.files.length; i++) {
             formDataImage.append(i, fileInput.files[i].name);
-            console.log(fileInput.files[i].name);
         }
         axios.post('../api/upload_image.php', formDataImage).then(response => {
             window.open('./tag_selection.php','_self');

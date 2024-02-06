@@ -2,6 +2,9 @@
 head + body {
     border: 2px solid black;
 }
+form label {
+    display: none;
+}
 body {
     padding: 0% 7%;
     margin: 3%;
@@ -31,4 +34,7 @@ form {
 }
 #login a:hover {
     text-decoration: underline; 
+}
+.signupB {
+    text-align: center;
 }

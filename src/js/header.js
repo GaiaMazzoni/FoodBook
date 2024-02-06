@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
     let checkNewNotifFormData = new FormData();
     axios.post("../api/check_new_notification.php", checkNewNotifFormData).then(response => {
-        console.log(response.data);
         if(response.data == "true"){
             if(!notificationsButton.classList.contains('newNotification')){
                 
@@ -30,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 
     notificationsButton.addEventListener('click', function() {
-        console.log(notificationsButton.classList);
         if (notificationsButton.classList.contains('newNotification')) {
             notificationsButton.classList.remove('newNotification');
             notificationicon.setAttribute('fill', 'currentColor');
@@ -38,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function(){
         }
         let formData = new FormData();
         axios.post("../api/read_notifications.php", formData).then(response => {
-            console.log(response.data);
         });
         
     });

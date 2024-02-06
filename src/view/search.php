@@ -43,16 +43,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <center><div class="btn-group">
+            <div class="btn-group text-center">
                 <button type="button" id="show_friends_form" class="btn btn-primary">friends</button>
                 <button type="button" id="show_post_form" class="btn btn-primary">post</button>
-            </div></center>
+            </div>
 
             <div id="friends_form">
                 <h3 class="text-center" id="search_text" name="search_text">Search some friend</h3>
                 <form method="POST">
-                    <div class="form-group">
-                        <center><input type="text" class="form-control" id="friend_search" name="friend_search" placeholder="..."></center>
+                    <div class="form-group text-center">
+                        <label for="friend_search">Friend Search:</label>
+                        <input type="text" class="form-control" id="friend_search" name="friend_search" placeholder="...">
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary" id="s_button" name="s_button">Search</button>
@@ -60,18 +61,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
                 </form>
                 <?php foreach($search_results as $user): 
                     $profile_pic = get_img_profile($con, $user); ?>
-                    <center><div class="alert alert-info">
+                    <div class="alert alert-info text-center">
                         <a href="profile.php?user=<?php echo urlencode($user); ?>">
                             <img src="../images/<?php echo $profile_pic; ?>" class="img-fluid rounded-circle mb-3" id="p_profile" alt="Profile Image">
                             <?php echo htmlspecialchars($user); ?>
                         </a>
-                    </div></center>
+                    </div>
                 <?php endforeach; ?>
                 </div>
 
             <div id="post_form">
             <div class="text-center">
-                    <button type="" class="btn btn-primary" id="category_s_button" name="category_s_button">Search</button>
+                    <button class="btn btn-primary" id="category_s_button" name="category_s_button">Search</button>
                 </div>
                 <div id="tag_form"></div>
                 <div id="print_result"></div>

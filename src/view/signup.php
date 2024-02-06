@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Sign Up</title>
     <meta charset="utf-8">
@@ -13,48 +13,60 @@
 <body>
     <div class="row">
         <div class="col-12 text-center">
-            <img src="../images/logo.png" alt="FoodBook" class="img-rounded" title="FoodBook logo" width="100px" 
-                height="100px" id = "logo">
-            <h1>FoodBook</h1>
-            <h4>SignUp</h4>
+            <header>
+                <img src="../images/logo.png" alt="FoodBook" class="img-rounded" title="FoodBook logo" width="100" 
+                height="100" id = "logo">
+                <h1>FoodBook</h1>
+                <h2>SignUp</h2>
+            </header>
+            
         </div>
     </div>
     <div class="main-content">
-        <form action="" method="post" class="row">
+        <form method="post" class="row">
             <div class="col-sm-12 col-md-6">
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <span class="input-group-addon"><em class="glyphicon glyphicon-pencil"></em></span>
+                    <label for="first_name">First Name:</label>
                     <input type="text" class="form-control" placeholder="First Name" name="first_name" id="first_name" maxlength="20" required>
                 </div>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <span class="input-group-addon"><em class="glyphicon glyphicon-user"></em></span>
+                    <label for="surname">Surname:</label>
                     <input type="text" class="form-control" placeholder="Surname" name="surname" id="surname" maxlength="20" required>
                 </div>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <span class="input-group-addon"><em class="glyphicon glyphicon-user"></em></span>
+                    <label for="username">Username:</label>
                     <input type="text" class="form-control" placeholder="Username" name="username" id="username" maxlength="20" required>
                 </div>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    <span class="input-group-addon"><em class="glyphicon glyphicon-envelope"></em></span>
+                    <label for="email">E-Mail:</label>
                     <input type="email" class="form-control" placeholder="Email" name="email" id="email" maxlength="30" required>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6">
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                    <span class="input-group-addon"><em class="glyphicon glyphicon-calendar"></em></span>
+                    <label for="birth_date">Birth date:</label>
                     <input type="date" class="form-control" name="birth_date" id="birth_date" required>
                 </div>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <span class="input-group-addon"><em class="glyphicon glyphicon-lock"></em></span>
+                    <label for="password">Password:</label>
                     <input type="password" id="password" class="form-control" placeholder="Password" name="password" minlength="8" maxlength="20" required>
                 </div>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <span class="input-group-addon"><em class="glyphicon glyphicon-lock"></em></span>
+                    <label for="confirm_password">Confirm password:</label>
                     <input type="password" id="confirm_password" class="form-control" placeholder="Confirm Password" minlength="8" maxlength="20" name="confirm_password" required>
                 </div>
                 <p id=login_button><a href="login.php">Already have an account?</a></p>
             </div>
-            <center><button type="submit" class="btn btn-info w-50" name="signup" id="signup">Sign Up</button></center>
+            <div class="signupB">
+                <button type="submit" class="btn btn-info w-50" name="signup" id="signup">Sign Up</button>
+            </div>
         
         </form>
     </div>

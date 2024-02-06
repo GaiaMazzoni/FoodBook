@@ -23,7 +23,6 @@ document.getElementById("signup").addEventListener("click", function() {
         userData.append("birth_date", birth_date);
         userData.append("password", password);
         axios.post("../api/insert_user.php", userData).then(response => {
-            console.log(response.data);
             if(response.data == "OK") {
                 window.open('./login.php','_self');
             } else if(response.data == "USER") {

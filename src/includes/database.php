@@ -6,9 +6,6 @@ function check_login($usernameOrEmail, $password, $mysqli){
     $stmt->bind_param("ss", $usernameOrEmail, $usernameOrEmail);
     $stmt->execute();
     $row = $stmt->get_result()->fetch_assoc();
-    error_log($row['Password'] . PHP_EOL, 3, "log.txt");
-    error_log($password . PHP_EOL, 3, "log.txt");
-
 
     if(password_verify($password, $row['Password']) == true){
         $_SESSION['Username'] = $row['Username'];
@@ -150,7 +147,6 @@ function update_profile($con, $username, $type, $new_element) {
     }
 }
 
-//Returns an array of all the images from the posts made by the user
 function print_post_image($username, $mysqli){
     $stmt = $mysqli->prepare("SELECT IdPost FROM post WHERE Username=?");
     $stmt->bind_param("s", $username);

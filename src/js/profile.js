@@ -38,14 +38,12 @@ function follow() {
         formData.append('remove', 0);
     }
     axios.post('../api/follow_handler.php',formData).then(response => {
-        console.log(response.data);
     });  
     location.reload();
 }
 
 function select(button){
     let user = document.getElementById("username").textContent;
-    console.log(user);
     if(!button.classList.contains('select')){
         Array.from(document.getElementsByClassName('select')).forEach(element => {
             element.classList.remove('select');
@@ -57,7 +55,6 @@ function select(button){
         let imageContainer = document.querySelector('.image-container');
         let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
-            console.log(xhr.responseText);
             if (xhr.readyState == 4 && xhr.status == 200) {
                 imageContainer.innerHTML = xhr.responseText;
             }
@@ -83,9 +80,7 @@ function select(button){
 
 function uploadImage() {
     const formDataImage = new FormData();
-    console.log("ciao");
     formDataImage.append("image", document.querySelector("image").files[0]);
-    console.log(document.querySelector("#image").files[0]);
     axios.post('../api/edit_image.php', formDataImage).then(response => {
         console.log(response.data);
     });

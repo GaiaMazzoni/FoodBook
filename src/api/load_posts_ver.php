@@ -13,7 +13,7 @@ if(isset($_GET['user'])){
     $idList = array_reverse($idList);
     $result='';
     foreach ($idList as $id) {
-        $result = print_post($user, $id['IdPost'], $con, 0);
+        $result .= print_post($user, $id['IdPost'], $con, 1);
     }
     echo $result;
 }

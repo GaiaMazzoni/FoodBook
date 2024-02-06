@@ -40,7 +40,6 @@ $run_following = mysqli_query($con,$user_following);
 $num_following = mysqli_num_rows($run_following);
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,6 +72,7 @@ $num_following = mysqli_num_rows($run_following);
     ?>
     <form method='post' enctype='multipart/form-data'>
         <input type='hidden' name='update_type' value='ema'>
+        <label for="image">New Data:</label>
         <input type='file' name='new_data' id="image" required>
         <input type='submit' value='Invia' name='submit' id="image_form">
     </form>
@@ -86,8 +86,10 @@ $num_following = mysqli_num_rows($run_following);
                 <div class='modal-body'>
                     <form method='post' action='../api/edit_profile.php'>
                         <input type='hidden' name='update_type' value='name'>
-                        <input type=text name='new_data' 20 required>
-                        <input type=text name='second_data' 20 required>
+                        <label for="new_data">New Data:</label>
+                        <input type='text' id='new_data' name='new_data' maxlength="20" required>
+                        <label for="second_data">Second Data:</label>
+                        <input type='text' id="second_data" name='second_data' maxlength="20" required>
                         <input type='submit' value='Invia' name='submit'>
                     </form>
                 </div>
@@ -105,9 +107,11 @@ $num_following = mysqli_num_rows($run_following);
                     <form method='post' action='../api/edit_profile.php'>
                         <input type='hidden' name='update_type' value='password'>
                         Old Password:
-                        <input type=text name='new_data' 20 required>
-                        </br>New Password:
-                        <input type=text name='second_data' 20 required>
+                        <label for="new_datap">New Data:</label>
+                        <input type='text' id="new_datap" name='new_data' maxlength="20" required></br>
+                        New Password:
+                        <label for="second_datap">Second Data:</label>
+                        <input type='text' id="second_datap" name='second_data' maxlength="20" required>
                         <input type='submit' value='Invia' name='submit'>
                     </form>
                 </div>
@@ -136,7 +140,7 @@ $num_following = mysqli_num_rows($run_following);
                 <div class="dropdown col-4 text-center">
                     <button type="button" id="followerButton" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
                         <?php echo $num_follower; ?>
-                        <p>follower</p>
+                        <span>follower</span>
                     </button>
                     <ul class="dropdown-menu">
                         <?php print_followed($user, $con); ?>
@@ -145,7 +149,7 @@ $num_following = mysqli_num_rows($run_following);
                 <div class="dropdown col-4 text-center">
                     <button type="button" id="followingButton" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
                         <?php echo $num_following; ?>
-                        <p>following</p>
+                        <span>following</span>
                     </button>
                     <ul class="dropdown-menu">
                         <?php print_following($user, $con); ?>

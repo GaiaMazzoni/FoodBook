@@ -1,14 +1,6 @@
 <?php
 include_once ("connection.php");
 include_once ("database.php");
-
-
-
-//returns all users followed. 
-
-
-
-
 function print_followed($username, $mysqli) {
     $followed_users = get_all_follower($username, $mysqli);
 
@@ -41,7 +33,7 @@ function print_following($username, $mysqli) {
             echo "</div>";
         }
     } else {
-        echo "Non stai seguendo nessuno.";
+        echo "Empty";
     }
 }
 
@@ -128,7 +120,6 @@ function print_post($username, $postId, $mysqli, $type){
 function print_tags_of_post($tags, $mysqli){
     $tagPills = "";
     foreach($tags as $tag){
-        echo $tag['IdCategory'];
         $stmt = $mysqli->prepare("SELECT CategoryName FROM category WHERE IdCategory=?");
         $stmt->bind_param("i", $tag['IdCategory']);
         $stmt->execute();

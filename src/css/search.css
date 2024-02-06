@@ -121,22 +121,41 @@ body {
 }
 
 .btn-group {
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-gap: 10px; /* Aggiunge uno spazio tra i bottoni */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px; /* Aggiunge uno spazio tra i bottoni */
 }
 
 .btn-group button {
-    margin-bottom: 10px; /* Spazio aggiuntivo sotto ciascun bottone, se necessario */
+    margin-bottom: 10px;
 }
 
 .alert-info a {
     text-decoration: none; 
-    color: inherit;"
+    color: inherit;
 }
 
 #post_form {
+    display: none;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.btn-group.text-center {
+    display: flex;
+    justify-content: center;
+}
+
+.alert.text-center {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%; /* Adjust as needed */
+}
+
+form label {
     display: none;
 }
 

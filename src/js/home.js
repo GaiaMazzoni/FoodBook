@@ -32,13 +32,10 @@ like_bottons.forEach(function(button) {
         if (button.classList.contains("OK")) {
             formData.append('remove', 1);
             button.classList.remove("OK");
-            console.log("ciao sono in remove");
         } else {
             formData.append('remove', 0);
-            console.log("ciao sono in add");
         }
         axios.post("../api/likes.php", formData).then(response => {
-            console.log(response.data);
         });
         location.reload(true);
     });
@@ -58,7 +55,6 @@ if(comment_buttons){comment_buttons.forEach(function(button) {
             const commentsContainer = document.getElementById("print_comments");
             commentsContainer.innerHTML = response.data;
         });
-        console.log("il post value è: ", post_publisher_comment);
     });
 });}
 
@@ -69,7 +65,6 @@ document.getElementById('comment_form').addEventListener('submit', function(even
     formData.append('post_id', post_id_comment);
     formData.append('text', comment);
     axios.post("../api/comment.php", formData).then(response => {
-        console.log(response.data);
     });
     location.reload(true);
 });
