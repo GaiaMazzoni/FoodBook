@@ -45,59 +45,7 @@ function print_following($username, $mysqli) {
     }
 }
 
-function print_base_post($username, $postId, $mysqli) {
-        $profilePicture = get_img_profile($mysqli, $username);
-        $imagePost = get_post_image($username, $postId, $mysqli);
-        $postDescription = get_post_description($username, $postId, $mysqli);
-        $tags = get_tags_of_post($username, $postId, $mysqli);
-        $tagPills = print_tags_of_post($tags, $mysqli);
-       
-        $result = "<div class='post-container'><div class='profile-section'><a href='profile.php?user=$username' style='text-decoration: none; color: inherit;'><img class='profile-image' src='../images/$profilePicture' alt=''><div class='username'>$username</div></a></div>";
-        if($imagePost != NULL){
-                $result .= "<div id='images_$username$postId' class='carousel slide' data-bs-ride='carousel'>
-                <div class='carousel-indicators'>";
-                $active = "class='active'";
-                for($i = 0; $i < count($imagePost); $i++) {
-                    $result .= "<button type='button' data-bs-target='#images_$username$postId' data-bs-slide-to='$i' $active</button>";
-                    $active = '';
-                }
-                $result .= "
-                        </div>
-                        <div class='carousel-inner'>";
-                        $active = "active";
-                        foreach($imagePost as $image) {
-                            $result .= "
-                                <div class='carousel-item $active'>
-                                    <img src='../images/$image' alt='' class='d-block' style='width:100%'>
-                                </div>";
-                            $active = '';
-                        }
-                $result .= "
-                        </div>
-                        <button class='carousel-control-prev' type='button' data-bs-target='#images_$username$postId' data-bs-slide='prev'>
-                            <span class='carousel-control-prev-icon'></span>
-                        </button>
-                        <button class='carousel-control-next' type='button' data-bs-target='#images_$username$postId' data-bs-slide='next'>
-                            <span class='carousel-control-next-icon'></span>
-                        </button>
-                        </div>";
-        }
-    
-        $result .= "
-            <div class='collapsible-tags-container'>
-                <button class='tags-button' role='button' data-bs-toggle='collapse' data-bs-target='#tagsCollapse_$username$postId' aria-expanded='true' aria-controls='tagsCollapse_$username$postId' disable>
-                    Show Tags
-                </button>
-                <div class='collapse' id='tagsCollapse_$username$postId'>
-                    $tagPills
-                </div>
-            </div>
-            <div class='post-description'>$postDescription</div>
-        </div>";
-    
-        return $result;
-    }
-    
+
 
 function print_post($username, $postId, $mysqli, $type){
     $profilePicture = get_img_profile($mysqli, $username);
@@ -114,38 +62,38 @@ function print_post($username, $postId, $mysqli, $type){
                     <div class='username'>$username</div>
                 </a>
             </div>";
-    if($imagePost != NULL){
-            $result .= "<div id='images_$username$postId' class='carousel slide' data-bs-ride='carousel'>
-                            <div class='carousel-indicators'>";
-            $active = "class='active'";
-            for($i = 0; $i < count($imagePost); $i++) {
-                $result .= "<button type='button' data-bs-target='#images_$username$postId' data-bs-slide-to='$i' $active</button>";
-                $active = '';
-            }
-            $result .= "
-                    </div>
-                    <div class='carousel-inner'>";
-                    $active = "active";
-                    foreach($imagePost as $image) {
-                        $result .= "
-                            <div class='carousel-item $active'>
-                                <img src='../images/$image' alt='' class='d-block' style='width:100%'>
-                            </div>
-                        ";
-                        $active = '';
-                    }
-            $result .= "
-                    </div>
-                    <button class='carousel-control-prev' type='button' data-bs-target='#images_$username$postId' data-bs-slide='prev'>
-                        <span class='carousel-control-prev-icon'></span>
-                    </button>
-                    <button class='carousel-control-next' type='button' data-bs-target='#images_$username$postId' data-bs-slide='next'>
-                        <span class='carousel-control-next-icon'></span>
-                    </button>
-                    </div>";
+    $result .= "<div id='images_$username$postId' class='carousel slide' data-bs-ride='carousel'>
+                    <div class='carousel-indicators'>";
+    $active = "class='active'";
+
+    for($i = 0; $i < count($imagePost); $i++) {
+        $result .= "<button type='button' data-bs-target='#images_$username$postId' data-bs-slide-to='$i' $active</button>";
+        $active = '';
     }
 
-    if($type != "base") {
+    $result .= "
+            </div>
+            <div class='carousel-inner'>";
+            $active = "active";
+            foreach($imagePost as $image) {
+                $result .= "
+                    <div class='carousel-item $active'>
+                        <img src='../images/$image' alt='' class='d-block' style='width:100%'>
+                    </div>
+                ";
+                $active = '';
+            }
+    $result .= "
+            </div>
+            <button class='carousel-control-prev' type='button' data-bs-target='#images_$username$postId' data-bs-slide='prev'>
+                <span class='carousel-control-prev-icon'></span>
+            </button>
+            <button class='carousel-control-next' type='button' data-bs-target='#images_$username$postId' data-bs-slide='next'>
+                <span class='carousel-control-next-icon'></span>
+            </button>
+            </div>";
+
+    if($type != 1) {
         $result .= "<div class='icon'>
         <div class='icon'>
             <button class='like' id='$username' value='$postId'>
@@ -159,8 +107,7 @@ function print_post($username, $postId, $mysqli, $type){
             </svg>
         </div>
         </div>";
-        $aria_expanded = "false";
-        $disable = '';
+
     } 
 
     $result .= "

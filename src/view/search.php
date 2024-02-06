@@ -33,6 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
 <head>
 <meta charset="utf-8">
     <script src="../js/search.js" defer></script>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/search.css">
     <title>Search</title>
