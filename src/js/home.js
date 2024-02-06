@@ -47,7 +47,7 @@ like_bottons.forEach(function(button) {
 var post_publisher_comment = null;
 var post_id_comment = null;
 var comment_buttons = document.querySelectorAll('.comment');
-comment_buttons.forEach(function(button) {
+if(comment_buttons){comment_buttons.forEach(function(button) {
     button.addEventListener('click', function() {
         post_publisher_comment = button.getAttribute('data-username');
         post_id_comment = button.id;
@@ -60,7 +60,7 @@ comment_buttons.forEach(function(button) {
         });
         console.log("il post value è: ", post_publisher_comment);
     });
-});
+});}
 
 document.getElementById('comment_form').addEventListener('submit', function(event) {
     let comment = document.getElementById('commentText').value;

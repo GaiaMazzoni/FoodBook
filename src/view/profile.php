@@ -3,7 +3,7 @@ include_once("../includes/header.php");
 include_once("../includes/footer.php");
 include_once("../includes/connection.php");
 include_once("../includes/functions.php");
-include_once("../css/profile_css.php");
+include_once("comment_form.php");
 
 if (!isset($_SESSION['Username'])) {
     header("Location: login.php");
@@ -44,8 +44,9 @@ $num_following = mysqli_num_rows($run_following);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script src="../js/profile.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/profile.css">
+<script src="../js/profile.js" defer></script>
     <title><?php echo "$user Profile"; ?></title>
 </head>
 <body>
@@ -64,7 +65,6 @@ $num_following = mysqli_num_rows($run_following);
         </ul>
     </div>
 
-
     <?php 
         echo generateModalForm('bio', 'Bio', 150);
         echo generateModalForm('email', 'Email', 30);
@@ -74,7 +74,7 @@ $num_following = mysqli_num_rows($run_following);
     <form method='post' enctype='multipart/form-data'>
         <input type='hidden' name='update_type' value='ema'>
         <input type='file' name='new_data' id="image" required>
-        <input type='submit' value='Invia' onclick="uploadImage()" name='submit' id="image_form">
+        <input type='submit' value='Invia' name='submit' id="image_form">
     </form>
     <div class='modal' id='change_name_form'>
         <div class='modal-dialog'>
@@ -164,7 +164,7 @@ $num_following = mysqli_num_rows($run_following);
     <?php endif; ?>
 </div>
 <div class="button-container">
-    <button id="horizontal_post_button" type="button" class="post-view hor select">
+    <button id="horizontal_post_button" type="button" class="post-view hor">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid-3x2" viewBox="0 0 16 16">
             <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h13A1.5 1.5 0 0 1 16 3.5v8a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5zM1.5 3a.5.5 0 0 0-.5.5V7h4V3zM5 8H1v3.5a.5.5 0 0 0 .5.5H5zm1 0v4h4V8zm4-1V3H6v4zm1 1v4h3.5a.5.5 0 0 0 .5-.5V8zm0-1h4V3.5a.5.5 0 0 0-.5-.5H11z"/>
         </svg>
@@ -179,13 +179,7 @@ $num_following = mysqli_num_rows($run_following);
 </div>
 
     <div class="image-container">
-        <?php
-            $images = print_post_image($user,$con); 
-            foreach ($images as $img){
-                $img = $img['Images'];
-                echo "<img class='img' src='../images/$img' alt=''>";
-            }
-        ?>
+        
     </div>
 </body>
 </html>

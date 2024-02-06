@@ -3,6 +3,7 @@ session_start();
 include_once("../includes/connection.php");
 include_once("../includes/functions.php");
 include_once("../includes/database.php");
+include_once("../view/comment_form.php");
 
 $username = $_SESSION['Username'];
 
@@ -12,9 +13,8 @@ if(isset($_GET['user'])){
     $idList = array_reverse($idList);
     $result='';
     foreach ($idList as $id) {
-        $result = print_base_post($user, $id['IdPost'], $con);
+        $result .= print_post($user, $id['IdPost'], $con, "");
     }
-    header('Content-Type: application/json');
-    echo json_encode($result);
+    echo $result;
 }
 

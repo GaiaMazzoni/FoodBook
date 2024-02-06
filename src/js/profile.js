@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', function(){
     verButton.addEventListener('click', function() {
         select(verButton);
     });
+    select(horButton);
+    let uploadButton = document.getElementById("image_form").addEventListener('click', function() {
+        uploadImage();
+    });
 });
 
 window.addEventListener('load', check_follow);
@@ -49,6 +53,8 @@ function follow() {
 }
 
 function select(button){
+    let user = document.getElementById("username").textContent;
+    console.log(user);
     if(!button.classList.contains('select')){
         Array.from(document.getElementsByClassName('select')).forEach(element => {
             element.classList.remove('select');
@@ -64,6 +70,7 @@ function select(button){
 
         let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
+            console.log(xhr.responseText);
             if (xhr.readyState == 4 && xhr.status == 200) {
                 imageContainer.innerHTML = xhr.responseText;
             }

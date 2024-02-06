@@ -1,7 +1,6 @@
 <?php
 session_start();
 include_once "functions.php";
-include_once "../css/header_css.php";
 ?>
 
 <!DOCTYPE html>
@@ -9,6 +8,7 @@ include_once "../css/header_css.php";
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../css/header.css">
 </head>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

@@ -21,8 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $res .= "";
+
+    echo $res;
     
     error_log("mando", 3, './log.txt');
     header('Content-Type: application/json');
-    echo json_encode($res);
+    echo $res;
 } 
