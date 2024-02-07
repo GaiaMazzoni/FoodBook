@@ -8,8 +8,6 @@
     <script src="../js/tags.js" defer></script>
     <link rel="stylesheet" type="text/css" href="../css/tags.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/tags.js" defer></script>
-    <link rel="stylesheet" type="text/css" href="../css/tags.css">
 </head> 
 <body>
     <form method="post">
