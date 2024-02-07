@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     });
 
+    //changes the notification icon based on whether there are any unread notifications
     notificationsButton.addEventListener('click', function() {
         if (notificationsButton.classList.contains('newNotification')) {
             notificationsButton.classList.remove('newNotification');

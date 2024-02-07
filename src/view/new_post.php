@@ -5,7 +5,7 @@ include_once("../includes/functions.php");
 include_once("../includes/database.php");
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -18,7 +18,6 @@ include_once("../includes/database.php");
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../js/new_post.js" defer></script>
 </head>
-<title>New Post Creation</title>
 <body> 
     <div class="row">
         <div class="col-sm-12 text-center">
@@ -28,6 +27,7 @@ include_once("../includes/database.php");
                     <h1>New Post</h1>
                     <button id="publish" type="button" class="publish_button" name="publish">Publish</button>
                     <input type="file" id="imageSelection" class="form-control" name="image[]" multiple>
+                    <label for="description">Description:</label>
                     <textarea id="description" class="form-control" name="description" placeholder="Enter your post description"></textarea>
                 </form> 
             </div>

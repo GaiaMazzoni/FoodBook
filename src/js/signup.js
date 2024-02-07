@@ -1,3 +1,6 @@
+/**
+ * Function that confirms that the password, and the confirm password are the same
+ */
 function validatePassword(password, confirm_password){
     if(password != confirm_password) {
         return 1;

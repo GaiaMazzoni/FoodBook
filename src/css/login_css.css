@@ -18,7 +18,7 @@
         border-radius: 30px;
         border: 1px solid #4f0484;
         color: #4f0484;
-        padding: 1 1.5%;
+        padding: 1% 1.5%;
     }
     #signup_button {
         text-align: right;
@@ -31,4 +31,12 @@
     }
     #signup a:hover {
         text-decoration: underline; 
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    form label {
+        display: none;
     }

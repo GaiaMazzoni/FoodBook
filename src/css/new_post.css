@@ -44,3 +44,7 @@ button {
     margin-bottom: 10px;
 }
 
+form label {
+    display: none;
+}
+

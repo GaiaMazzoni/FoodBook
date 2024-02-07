@@ -1,6 +1,10 @@
 <?php
 include_once ("connection.php");
 include_once ("database.php");
+
+/**
+ * Prints the icons of the users followed by username.
+ */
 function print_followed($username, $mysqli) {
     $followed_users = get_all_follower($username, $mysqli);
 
@@ -19,6 +23,9 @@ function print_followed($username, $mysqli) {
     }
 }
 
+/**
+ * Prints the icons of the users who follow the username given. 
+ */
 function print_following($username, $mysqli) {
     $followed_users = get_all_following($username, $mysqli);
 
@@ -37,8 +44,9 @@ function print_following($username, $mysqli) {
     }
 }
 
-
-
+/**
+ * Shows the post. 
+ */
 function print_post($username, $postId, $mysqli, $type){
     $profilePicture = get_img_profile($mysqli, $username);
     $imagePost = get_post_image($username, $postId, $mysqli);
@@ -114,6 +122,9 @@ function print_post($username, $postId, $mysqli, $type){
     return $result;
 }
 
+/**
+ * Prints the tags given.
+ */
 function print_tags_of_post($tags, $mysqli){
     $tagPills = "";
     foreach($tags as $tag){
@@ -125,8 +136,6 @@ function print_tags_of_post($tags, $mysqli){
     }
     return $tagPills;
 }
-
-
 
 // Close connection
 function close_connection($con) {
@@ -207,6 +216,9 @@ function print_notifications_of_user($usernameTo, $mysqli){
     return $notificationsMessage;
 }
 
+/**
+ * Shows the comments of a post. 
+ */
 function print_comments($username, $post_id, $mysqli) {
     $comments = get_all_comments($username, $post_id, $mysqli);
     $output = "";
