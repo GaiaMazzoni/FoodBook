@@ -26,12 +26,14 @@ function search_category(callback) {
     let cat = document.getElementsByClassName("select");
     let formData = new FormData();
     formData.append('num_cat', cat.length);
-    for (let i = 0; i < cat.length; i++) {
-        formData.append(i+1, cat[i].id);
+    if(cat.length > 0) {
+        for (let i = 0; i < cat.length; i++) {
+            formData.append(i+1, cat[i].id);
+        }
+        axios.post('../api/search_by_category.php', formData).then(response => {
+            const postContainer = document.getElementById("print_result");
+            postContainer.innerHTML = response.data;
+            if(callback) callback();
+        });
     }
-    axios.post('../api/search_by_category.php', formData).then(response => {
-        const postContainer = document.getElementById("print_result");
-        postContainer.innerHTML = response.data;
-        if(callback) callback();
-    });
 }
