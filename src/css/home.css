@@ -86,12 +86,24 @@ body {
     outline: none;
 }
 
+#tags_container {
+    width: 100%;
+}
+
 .tags-collapse {
     display: flex;
     flex-wrap: wrap;
 }
 
+.tags-collapse.show {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+}
+
 .tag-pill {
+    box-sizing: border-box;
+    word-wrap: break-word;
     margin-right: 5px;
     margin-bottom: 5px;
     padding: 5px 10px;
@@ -100,3 +112,4 @@ body {
     border-radius: 20px;
     cursor: pointer;
 }
+

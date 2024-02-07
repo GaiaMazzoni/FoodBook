@@ -13,7 +13,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../css/login_css.css">
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
@@ -38,10 +38,10 @@
                     <label for="password">Password:</label>
                     <input type="password" id="password" class="form-control" placeholder="Password" name="password" required>
                 </div>
-                <p id="signup_button"><a href="signup.php">Don't have an account?</a></p>
+                <p id="login_to_signup_button"><a href="signup.php">Don't have an account?</a></p>
             </div>
             <div class="text-center">
-                <button type="submit" class="btn btn-info w-50" name="login" id="login">Log In</button>
+                <button type="submit" class="btn btn-info w-50" name="login_to_signup" id="login">Log In</button>
             </div>
         </form>
     </div>

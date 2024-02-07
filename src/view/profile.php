@@ -117,7 +117,7 @@ $num_following = mysqli_num_rows($run_following);
 <div class="container">
     <div class="row">
         <div class="col-12 col-md-3 text-center">
-            <img src="../images/<?php echo $profile_picture; ?>" class="img-fluid rounded-circle mb-3" id="p_profile" alt="Immagine Profilo">
+            <img src="../images/<?php echo $profile_picture; ?>" class="rounded-circle mb-3" id="p_profile" alt="Immagine Profilo">
         </div>
         <div class="col-12 col-md-3 text-center">
             <h3 class="card-title"><?php echo $first_name . " " . $surname; ?></h3>
@@ -173,7 +173,7 @@ $num_following = mysqli_num_rows($run_following);
 </div>
 
     <div id="horizontal">
-        <div class="image-container">
+        <div class="image-container img-centered">
         <div id="horizontal-posts"></div>
         </div>
     </div>
