@@ -4,7 +4,6 @@
     <title>Tags</title>
     <meta charset="utf-8">
     <script src="../js/tags.js" defer></script>
-    <link rel="stylesheet" type="text/css" href="../css/tags.css">
 </head> 
 <body>
 <form method="post" class="tags_button">

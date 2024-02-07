@@ -140,9 +140,14 @@ form label {
     display: none;
 }
 
-#edit_profile{
+#horizontal_post_button {
+    background-color: #4f0484;
+    color: #fff;
+}
+
+#vertical_post_button {
     background-color: #fccf00;
-    color: #4f0484;
+    color: #000;
 }
 
 #horizontal_post_button {
