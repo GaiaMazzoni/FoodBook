@@ -35,7 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
     <script src="../js/search.js" defer></script>
     <script src="../js/home.js" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../css/home.css">
     <link rel="stylesheet" type="text/css" href="../css/search.css">
+
     <title>Search</title>
 </head>
 
@@ -71,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_search'])) {
                 </div>
 
             <div id="post_form">
-            <div class="text-center">
+                <div class="text-center">
                     <button class="btn btn-primary" id="category_s_button" name="category_s_button">Search</button>
                 </div>
                 <div id="tag_form"></div>

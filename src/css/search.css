@@ -1,4 +1,6 @@
-
+body {
+    margin-top: 50px;
+}
 #p_profile{
     width: 50px;
     height: 50px;
@@ -6,7 +8,6 @@
 #friend_search {
     width: 70%;
     margin: 10px;
-    
 }
 #s_button {
     margin-bottom: 5px;
@@ -14,86 +15,6 @@
 .alert {
     width: 70%;
 }
-.select{
-    background-color: #000;
-}
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-}
-
-.post-container {
-    max-width: 600px;
-    margin: 20px auto;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.profile-section {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-}
-
-.profile-image {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.username {
-    font-weight: bold;
-}
-
-.post-image {
-    width: 100%;
-    height: auto;
-}
-
-.interaction-icons {
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    border-top: 1px solid #eee;
-}
-
-.icon {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-.icon img {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-}
-
-.profile-section a {
-    display: flex; 
-    align-items: center; 
-    text-decoration: none;
-    color: inherit;
-}
-
-.post-description{
-    padding: 10px;
-}
-
-.collapsible-tags-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border-top: 1px solid #eee;
-}
-
-
-
 .btn-group {
     display: flex;
     flex-wrap: wrap;
@@ -115,7 +36,9 @@ body {
 }
 
 .text-center {
-    text-align: center;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
 }
 
 .btn-group.text-center {
@@ -126,7 +49,7 @@ body {
 .alert.text-center {
     margin-left: auto;
     margin-right: auto;
-    width: 50%; /* Adjust as needed */
+    width: 50%;
 }
 
 form label {

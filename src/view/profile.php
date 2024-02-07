@@ -45,8 +45,8 @@ $num_following = mysqli_num_rows($run_following);
 <head>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/profile.css">
-<script src="../js/profile.js"></script>
 <script src="../js/home.js"></script>
+<script src="../js/profile.js"></script>
 
     <title><?php echo "$user Profile"; ?></title>
 </head>

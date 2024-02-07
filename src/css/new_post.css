@@ -23,17 +23,6 @@ button {
     color: white;
 }
 
-#bottom_banner {
-    box-sizing: border-box;
-    background-color: #4f0484;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 5%;
-    text-align: center;
-    padding: 10px; 
-}
-
 #description {
     width: 100%;
     height: 100px;
