@@ -12,13 +12,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $result = get_posts_from_category($cat_list, $num_cat, $con);
     
-    $res = "<?php";
+    $res = "";
 
     foreach($result as $post) {
         $res .= print_post($post['Username'], $post['IdPost'], $con, 0);
         
     }
 
-    $res .= "?>";
+    $res .= "";
     echo $res;
 } 

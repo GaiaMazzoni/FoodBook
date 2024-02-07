@@ -31,6 +31,7 @@ function search_category(callback) {
             formData.append(i+1, cat[i].id);
         }
         axios.post('../api/search_by_category.php', formData).then(response => {
+            console.log(response.data);
             const postContainer = document.getElementById("print_result");
             postContainer.innerHTML = response.data;
             if(callback) callback();

@@ -92,31 +92,7 @@ body {
     border-top: 1px solid #eee;
 }
 
-.tags-button {
-    background-color: transparent;
-    border: none;
-    color: #4f0484;
-    cursor: pointer;
-}
 
-.tags-button:focus {
-    outline: none;
-}
-
-.tags-collapse {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.tag-pill {
-    margin-right: 5px;
-    margin-bottom: 5px;
-    padding: 5px 10px;
-    background-color: #4f0484;
-    color: #fff;
-    border-radius: 20px;
-    cursor: pointer;
-}
 
 .btn-group {
     display: flex;
