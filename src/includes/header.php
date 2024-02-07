@@ -35,6 +35,7 @@ include_once "functions.php";
     </form>
     <div class="offcanvas offcanvas-end" id="notifications">
         <div class="offcanvas-header">
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
             <h1 class="offcanvas-title">All Notifications</h1>
         </div>
         <div class="offcanvas-body">

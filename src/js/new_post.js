@@ -14,8 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
 async function publish_post() {
     const fileInput = document.getElementById("imageSelection");
     
-    let axiosRequests = []; 
-
     let imageformData = new FormData();
     let postformData = new FormData();
     if (fileInput.files.length > 0) {
@@ -27,7 +25,7 @@ async function publish_post() {
             postformData.append((i+1), cat[i].id);
         }
 
-        axiosRequests.push(axios.post('../api/upload_post.php', postformData));
+        await axios.post('../api/upload_post.php', postformData);
 
         imageformData.append("length", fileInput.files.length);
         console.log(fileInput.files.length);
@@ -35,10 +33,8 @@ async function publish_post() {
             imageformData.append(i+1, fileInput.files[i].name);
         }
 
-        axiosRequests.push(axios.post('../api/upload_image.php', imageformData));
-
-        response = await Promise.all(axiosRequests);
-        
+        await axios.post('../api/upload_image.php', imageformData);
+ 
     }
     window.open('../view/home.php','_self');
 }
