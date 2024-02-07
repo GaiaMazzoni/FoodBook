@@ -44,6 +44,7 @@ $num_following = mysqli_num_rows($run_following);
 <html lang="en">
 <head>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/home.css">
 <link rel="stylesheet" type="text/css" href="../css/profile.css">
 <script src="../js/home.js"></script>
 <script src="../js/profile.js"></script>

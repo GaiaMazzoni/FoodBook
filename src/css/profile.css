@@ -1,12 +1,6 @@
 
-.tag-pill {
-    margin-right: 5px;
-    margin-bottom: 5px;
-    padding: 5px 10px;
-    background-color: #4f0484;
-    color: #fff;
-    border-radius: 20px;
-    cursor: pointer;
+body {
+    margin-top: 50px;
 }
 .position-relative {
     position: relative;

@@ -3,6 +3,7 @@
 <head>
     <title>Tags</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../css/tags.css">
     <script src="../js/tags.js" defer></script>
 </head> 
 <body>
