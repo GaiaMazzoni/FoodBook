@@ -5,17 +5,13 @@
 }
 #friend_search {
     width: 70%;
-    margin: 10px;
-    
 }
-#s_button {
-    margin-bottom: 5px;
-}
+
 .alert {
     width: 70%;
 }
 .select{
-    background-color: #000;
+    background-color: #fccf00;
 }
 body {
     font-family: Arial, sans-serif;
@@ -90,15 +86,6 @@ body {
     align-items: center;
     padding: 10px;
     border-top: 1px solid #eee;
-}
-
-
-
-.btn-group {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
 }
 
 .btn-group button {

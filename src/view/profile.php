@@ -158,7 +158,7 @@ $num_following = mysqli_num_rows($run_following);
         </div>
     </div>
     <?php if (!$is_own_profile): ?>
-        <button type="button" id="followButton">Follow</button>
+        <button type="button" class="btn btn-primary" id="followButton" style="background-color: #fccf00; color: #4f0484">Follow</button>
     <?php endif; ?>
 </div>
 <div class="button-container">
