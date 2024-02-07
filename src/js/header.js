@@ -19,10 +19,10 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     });
 
-    var logoutLink = document.getElementById('logout');
+    let logoutLink = document.getElementById('logout');
     logoutLink.addEventListener('click', function(event) {
         event.preventDefault();
-        var confirmLogout = confirm("Are you sure you want to log out?");
+        let confirmLogout = confirm("Are you sure you want to log out?");
         if (confirmLogout) {
             window.location.href = '../api/logout.php';
         }

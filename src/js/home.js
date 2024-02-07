@@ -52,7 +52,7 @@ function addEventListeners() {
     });
 
     function check_like() {
-        var buttons = document.getElementsByClassName("like");
+        let buttons = document.getElementsByClassName("like");
         if(buttons.length > 0) {
             Array.from(buttons).forEach(element => {
                 let post_publisher = element.id;
