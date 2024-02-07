@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Comment form:</title>
+    <title>Comment form</title>
     <meta charset="UTF-8">
 </head>
 <body>
