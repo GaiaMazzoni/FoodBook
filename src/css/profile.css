@@ -84,9 +84,7 @@
 }
 
 .image-container img {
-    width: calc(33.33% - 10px);
-    margin-bottom: 10px;
-    box-sizing: border-box;
+    width: 33.33%;
 }
 
 .select{
@@ -163,4 +161,9 @@
 
 form label {
     display: none;
+}
+
+#edit_profile{
+    background-color: #fccf00;
+    color: #4f0484;
 }

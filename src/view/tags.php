@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="../js/tags.js" defer></script>
-    <link rel="stylesheet" type="text/css" href="../css/tags_selection.css">
+    <link rel="stylesheet" type="text/css" href="../css/tags.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head> 
 <body>
@@ -17,7 +17,7 @@
         <button type=button class="btn btn-primary tags" name="tags" id="Dessert">Dessert</button>
         <button type=button class="btn btn-primary tags" name="tags" id="Drink">Drink</button>
         <button type=button class="btn btn-primary tags" name="tags" id="Fish">Fish</button>
-        <button type=button class="btn btn-primary tags" name="tags" id="Main_course">Main course</button>
+        <button type=button class="btn btn-primary tags" name="tags" id="Main_Course">Main course</button>
         <button type=button class="btn btn-primary tags" name="tags" id="Meat">Meat</button>
         <button type=button class="btn btn-primary tags" name="tags" id="Salad">Salad</button>
         <button type=button class="btn btn-primary tags" name="tags" id="Snack">Snack</button>
