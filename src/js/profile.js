@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function loadPosts(callback) {
     let username = document.getElementById("username").textContent;
-    console.log(username);
     let formData = new FormData();
     formData.append('user', username);
     axios.post('../api/load_posts_ver.php',formData).then(response => {

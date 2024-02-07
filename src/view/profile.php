@@ -22,7 +22,7 @@ $first_name = $row['Name'];
 $email = $row['E_mail'];
 $surname = $row['Surname'];
 $birth_date = $row['BirthDate'];
-$profile_picture = $row['ProfilePicture'];
+$profile_picture = get_img_profile($con, $user);
 $bio = $row['Bio'];
 $password = $row['Password'];
 
@@ -158,7 +158,7 @@ $num_following = mysqli_num_rows($run_following);
         </div>
     </div>
     <?php if (!$is_own_profile): ?>
-        <button type="button" id="followButton" class="" >Follow</button>
+        <button type="button" id="followButton">Follow</button>
     <?php endif; ?>
 </div>
 <div class="button-container">

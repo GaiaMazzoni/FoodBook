@@ -9,9 +9,9 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 
 $check_username_query = "select Username from users where Username='$username'";
-$run_username = mysqli_query($con,$check_username_query);
+$run_username = mysqli_query($con, $check_username_query);
 $check_email_query = "select username from users where E_mail='$email'";
-$run_email = mysqli_query($con,$check_email_query);
+$run_email = mysqli_query($con, $check_email_query);
 
 $check = mysqli_num_rows($run_username);
 

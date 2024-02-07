@@ -7,7 +7,11 @@ $username = urlencode($_SESSION['Username']);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $update_type = $_POST['update_type'];
-    $new_data = $_POST['new_data'];
+    if ($update_type == 'image') {
+        $new_data = $_FILES['new_data']['name'];
+    } else {
+        $new_data = $_POST['new_data'];
+    }
     if ($update_type=='name' || $update_type=='password') {
         $second_data = $_POST['second_data'];
     }

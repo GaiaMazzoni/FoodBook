@@ -152,7 +152,7 @@ function generateModalForm($type, $label, $maxLength = null) {
                 <div class='modal-body'>
                     <form method='post' action='../api/edit_profile.php'  enctype='multipart/form-data'>
                         <input type='hidden' name='update_type' value='$type'>
-                        <input type='$inputType' name='new_data' $maxLengthAttr required>
+                        <input type='$inputType' name='new_data' class='form-control' $maxLengthAttr required>
                         <input type='submit' value='Invia' name='submit'>
                     </form>
                 </div>
