@@ -178,12 +178,7 @@ function get_post_image($username, $postId, $mysqli){
 function update_profile($con, $username, $type, $new_element) {
     $query = $con->prepare("UPDATE users SET $type = ? WHERE Username = ?");
     $query->bind_param("ss", $new_element, $username);
-    $run_query = $query->execute();
-    if($run_query){
-        echo "Profile updated successfully.";
-    } else {
-        echo "Error updating profile: " . $con->error;
-    }
+    $query->execute();
 }
 
 /**

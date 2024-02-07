@@ -25,11 +25,7 @@ function publish_post() {
         for (let i = 0; i < cat.length; i++) {
             formData.append(i+1, cat[i].id);
         }
-        axios.post('../api/upload_post.php', formData).then(response => {
-        })
-        .catch(error => {
-            console.error(error);
-        });
+        axios.post('../api/upload_post.php', formData);
     }
     window.open('../view/home.php','_self');
 }

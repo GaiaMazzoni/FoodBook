@@ -35,9 +35,6 @@ document.getElementById("signup").addEventListener("click", function() {
             } else if(response.data == "FAIL") {
                 alert("Something gone wrong");
             } 
-        })
-        .catch(error => {
-            console.error(error);
         });
     } else {
         alert("Passwords doesn't match");
