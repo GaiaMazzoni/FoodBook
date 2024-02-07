@@ -51,6 +51,7 @@ function print_post($username, $postId, $mysqli, $type){
     $profilePicture = get_img_profile($mysqli, $username);
     $imagePost = get_post_image($username, $postId, $mysqli);
     $postDescription = get_post_description($username, $postId, $mysqli);
+    $postDescription = nl2br(htmlspecialchars($postDescription, ENT_QUOTES, 'UTF-8'));
     $tags = get_tags_of_post($username, $postId, $mysqli);
     $tagPills = print_tags_of_post($tags, $mysqli);
    
