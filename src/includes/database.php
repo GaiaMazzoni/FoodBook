@@ -1,6 +1,9 @@
 <?php
 include_once ("connection.php");
 
+/**
+ * Returns true, if the password given matches the user. 
+ */
 function check_login($usernameOrEmail, $password, $mysqli){
     $stmt = $mysqli->prepare("SELECT Username, E_mail, Password FROM users WHERE (Username=? OR E_mail=?)");
     $stmt->bind_param("ss", $usernameOrEmail, $usernameOrEmail);
@@ -15,6 +18,9 @@ function check_login($usernameOrEmail, $password, $mysqli){
     }
 }
 
+/**
+ * Adds a new post to the db. 
+ */
 function add_post($username, $text, $mysqli){
     $stmt = $mysqli->prepare("SELECT max(IdPost) FROM post WHERE Username=?");
     $stmt->bind_param("s",$username);
@@ -26,6 +32,9 @@ function add_post($username, $text, $mysqli){
     $stmt->execute();
 }
 
+/**
+ * Returns the id of the last post made by a specific user.
+ */
 function get_last_post_id($username, $mysqli){
     $stmt = $mysqli->prepare("SELECT max(IdPost) FROM post WHERE Username=?");
     $stmt->bind_param("s",$username);
@@ -33,6 +42,9 @@ function get_last_post_id($username, $mysqli){
     return $stmt->get_result()->fetch_assoc()["max(IdPost)"];
 }
 
+/**
+ * Adds a tag (category) to a post. 
+ */
 function add_tag($categoryName, $idPost, $username, $mysqli){
     $stmt = $mysqli->prepare("SELECT IdCategory FROM category WHERE CategoryName=?");
     $stmt->bind_param("s",$categoryName);
@@ -43,6 +55,9 @@ function add_tag($categoryName, $idPost, $username, $mysqli){
     $stmt->execute();
 }
 
+/**
+ * Returns the profile picture of a given user.
+ */
 function get_img_profile($con, $username) {
     $img_query = "SELECT ProfilePicture FROM users WHERE Username='$username'";
     $img_result = mysqli_query($con, $img_query);
@@ -54,6 +69,9 @@ function get_img_profile($con, $username) {
     return $img;
 }
 
+/**
+ * Returns all users followed by the username given.
+ */
 function get_all_follower($username, $mysqli){
     $stmt = $mysqli->prepare("SELECT * FROM follow WHERE Follower_Username = ?");
     $stmt->bind_param("s", $username);
@@ -68,6 +86,9 @@ function get_all_follower($username, $mysqli){
     return $followers;
 }
 
+/**
+ * Returns all users who follow the username given. 
+ */
 function get_all_following($username, $mysqli) {
     $stmt = $mysqli->prepare("SELECT * FROM follow WHERE Username = ?");
     $stmt->bind_param("s", $username);
@@ -82,6 +103,9 @@ function get_all_following($username, $mysqli) {
     return $followers;
 }
 
+/**
+ * Returns all the posts of all the people given. 
+ */
 function get_all_posts_from_followers($followedList, $mysqli){
     $allPosts = [];
     foreach($followedList as $followed){
@@ -100,6 +124,9 @@ function get_all_posts_from_followers($followedList, $mysqli){
     return $allPosts;
 }
 
+/**
+ * Returns the description of a post. 
+ */
 function get_post_description($username, $postId, $mysqli){
     $stmt = $mysqli->prepare("SELECT Text FROM post WHERE Username=? AND IdPost=?");
     $stmt->bind_param("si",$username, $postId);
@@ -107,6 +134,9 @@ function get_post_description($username, $postId, $mysqli){
     return $stmt->get_result()->fetch_assoc()['Text'];
 }
 
+/**
+ * Returns the tags (categories) of a post. 
+ */
 function get_tags_of_post($username, $postId, $mysqli){
     $stmt = $mysqli->prepare("SELECT IdCategory FROM belong WHERE Username=? AND IdPost=?");
     $stmt->bind_param("si", $username, $postId);
@@ -115,6 +145,9 @@ function get_tags_of_post($username, $postId, $mysqli){
     return $tags;
 }
 
+/**
+ * Returns all the ids of all the posts made by a user.
+ */
 function get_all_post_ids_of_user($username, $mysqli){
     $stmt = $mysqli->prepare("SELECT IdPost FROM post WHERE Username=?");
     $stmt->bind_param("s", $username);
@@ -122,6 +155,9 @@ function get_all_post_ids_of_user($username, $mysqli){
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
+/**
+ * Returns all the images of a post. 
+ */
 function get_post_image($username, $postId, $mysqli){
     $stmt = $mysqli->prepare("SELECT Images FROM image WHERE Username=? AND IdPost=?");
     $stmt->bind_param("si", $username, $postId);
@@ -136,6 +172,9 @@ function get_post_image($username, $postId, $mysqli){
     return $images;
 }
 
+/**
+ * Updates the user profile, changing its information.
+ */
 function update_profile($con, $username, $type, $new_element) {
     $query = $con->prepare("UPDATE users SET $type = ? WHERE Username = ?");
     $query->bind_param("ss", $new_element, $username);
@@ -147,18 +186,9 @@ function update_profile($con, $username, $type, $new_element) {
     }
 }
 
-function print_post_image($username, $mysqli){
-    $stmt = $mysqli->prepare("SELECT IdPost FROM post WHERE Username=?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $postIds = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    $allImages = array();
-    foreach($postIds as $id){
-        $allImages[] = get_post_image($username, $id, $mysqli);
-    }
-    return $allImages;
-}
-
+/**
+ * Returns all the first images of all posts made by the username passed. 
+ */
 function get_all_first_images_of_post($username, $mysqli){
     $stmt = $mysqli->prepare("SELECT IdPost, Images FROM image WHERE Username=? GROUP BY IdPost");
     $stmt->bind_param("s", $username);
@@ -167,12 +197,19 @@ function get_all_first_images_of_post($username, $mysqli){
     return $allImages;
 }
 
+/**
+ * Checks whether username is followed by follower_username.
+ */
 function checkFollower($username, $follower_username, $con) {
     $query = $con->prepare("SELECT * FROM follow WHERE Username = ? AND Follower_Username = ?");
     $query->bind_param("ss", $username, $follower_username);
     $query->execute();
     return $query->get_result()->num_rows;
 }
+
+/**
+ * Returns all notifications received by the user. 
+ */
 function get_all_notifications_for_user($usernameTo, $mysqli){
     $stmt = $mysqli->prepare("SELECT * FROM notification WHERE UsernameTo=?");
     $stmt->bind_param("s", $usernameTo);
@@ -186,6 +223,9 @@ function get_all_notifications_for_user($usernameTo, $mysqli){
     return $allNotifications;
 }
 
+/**
+ * Returns the Comment_text of the notification.
+ */
 function get_comment_text_from_notification($notification, $mysqli){
     $usernameTo = $notification['UsernameTo'];
     $usernameFrom = $notification['UsernameFrom'];
@@ -197,6 +237,9 @@ function get_comment_text_from_notification($notification, $mysqli){
     return $stmt->get_result()->fetch_assoc()['Comment_Text']; 
 }
 
+/**
+ * Returns all the notifications not yet read by the user.
+ */
 function get_all_unread_notifications($usernameTo, $mysqli){
     $isNotRead = 0;
     $stmt = $mysqli->prepare("SELECT * FROM notification WHERE UsernameTo=? AND IsRead=?");
@@ -206,6 +249,9 @@ function get_all_unread_notifications($usernameTo, $mysqli){
     return $allUnread;
 }
 
+/**
+ * Changes all unread notifications from unread to read. 
+ */
 function read_notification($notification, $mysqli){
     $isRead = 1;
     $stmt = $mysqli->prepare("UPDATE notification SET IsRead=? WHERE UsernameTo=? AND UsernameFrom=? AND DateAndTime=?");
@@ -214,6 +260,9 @@ function read_notification($notification, $mysqli){
     $stmt->get_result();
 }
 
+/**
+ * Checks whether the post has been liked by the user. 
+ */
 function check_likes($post_publisher, $post_id, $user_who_liked, $mysqli) {
     $query = $mysqli->prepare("SELECT * FROM likes WHERE Post_Publisher=? AND IdPost = ? AND Username_Who_Liked = ?");
     $query->bind_param("sis", $post_publisher, $post_id, $user_who_liked);
@@ -270,6 +319,9 @@ function get_all_comments($username, $id_post, $mysqli) {
     return $comments;
 }
 
+/**
+ * Returns posts having all the given categories.
+ */
 function get_posts_from_category($cat_list, $num_cat, $mysqli) {
     $placeholders = implode(',', array_fill(0, $num_cat, '?'));
     $stmt = $mysqli->prepare("SELECT Username, IdPost FROM belong WHERE IdCategory IN ($placeholders) GROUP BY Username, IdPost HAVING COUNT(DISTINCT IdCategory) = ?");
@@ -282,6 +334,9 @@ function get_posts_from_category($cat_list, $num_cat, $mysqli) {
     return $post;
 }
 
+/**
+ * Returns the id of the category (tag).
+ */
 function get_id_category($category_name, $mysqli) {
     $stmt = $mysqli->prepare("SELECT IdCategory FROM category WHERE CategoryName=?");
     $stmt -> bind_param('s', $category_name);
