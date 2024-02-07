@@ -65,7 +65,7 @@
                 <p id=login_button><a href="login.php">Already have an account?</a></p>
             </div>
             <div class="signupB">
-                <button type="submit" class="btn btn-info w-50" name="signup" id="signup">Sign Up</button>
+                <button type="button" class="btn btn-info w-50" name="signup" id="signup">Sign Up</button>
             </div>
         
         </form>
